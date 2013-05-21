@@ -1,0 +1,25 @@
+<theme extends="webstandard">
+	<!-- 
+		Use this pattern to include resources (such as style sheets
+		and JavaScript files that are used by this theme.
+	-->
+	<!--
+	<resource>
+		<content-type>text/css</content-type>
+		<href>mystylesheet.css</href>
+	</resource>
+	-->
+
+	<!--
+		Use this pattern to define property name/value pairs for controls
+	-->
+	<!--
+	<control>
+		<name>[Control Name]</name>
+		<property>
+			<name>[property Name]</name>
+			<value>[property Value]</value>
+		</property>
+	</control>
+	-->
+</theme>

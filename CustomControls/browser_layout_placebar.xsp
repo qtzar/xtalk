@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+
+	<xp:panel styleClass="lotusPlaceBar">
+		<xp:panel styleClass="lotusInner">
+			<xp:panel styleClass="lotusRightCorner">
+				<xp:panel id="crumbs" styleClass="crumbs">
+
+					<!-- Breadcrumb 1 : Always point to the main workflow database-->
+					<xp:image url="theme_browser_breadcrumb_house.png"
+						id="image1" styleClass="house">
+						<xp:this.rendered><![CDATA[#{javascript:if
+(sessionScope.bcrumb1on == true && sessionScope.bcrumb1link == false )
+{
+      return true;
+} else
+{
+      return false;
+}}]]></xp:this.rendered>
+					</xp:image>
+					<xp:link escape="true" id="link_home"
+						value="/Home.xsp">
+						<xp:this.rendered><![CDATA[#{javascript:if
+(sessionScope.bcrumb1on == true && sessionScope.bcrumb1link == true )
+{
+      return true;
+} else
+{
+      return false;
+}}]]></xp:this.rendered>
+						<xp:image id="image2"
+							url="theme_browser_breadcrumb_house.png" />
+					</xp:link>
+
+					<!-- Breadcrumb 2-->
+					<xp:link escape="true" id="link3"
+						text="#{javascript:sessionScope.bcrumb2text}" value="#{javascript:sessionScope.bcrumb2url}">
+
+						<xp:this.rendered><![CDATA[#{javascript:if
+(sessionScope.bcrumb2on == true && sessionScope.bcrumb2link == true )
+{
+      return true;
+} else
+{
+      return false;
+}}]]></xp:this.rendered>
+					</xp:link>
+					<xp:text escape="true" id="computedField1"
+						value="#{javascript:sessionScope.bcrumb2text}"
+						styleClass="house">
+						<xp:this.rendered><![CDATA[#{javascript:if
+(sessionScope.bcrumb2on == true && sessionScope.bcrumb2link == false )
+{
+      return true;
+} else
+{
+      return false;
+}}]]></xp:this.rendered>
+					</xp:text>
+
+					<!-- Breadcrumb 3-->
+
+					<xp:link escape="true" id="link2"
+						text="#{javascript:sessionScope.bcrumb3text}"
+						value="#{javascript:sessionScope.bcrumb3url}">
+
+						<xp:this.rendered><![CDATA[#{javascript:if
+(sessionScope.bcrumb3on == true && sessionScope.bcrumb3link == true )
+{
+      return true;
+} else
+{
+      return false;
+}}]]></xp:this.rendered>
+					</xp:link>
+					<xp:text escape="true" id="computedField2"
+						value="#{javascript:sessionScope.bcrumb3text}"
+						styleClass="house">
+						<xp:this.rendered><![CDATA[#{javascript:if
+(sessionScope.bcrumb3on == true && sessionScope.bcrumb3link == false )
+{
+      return true;
+} else
+{
+      return false;
+}}]]></xp:this.rendered>
+					</xp:text>
+
+					<!-- Breadcrumb 4-->
+
+					<xp:link escape="true" id="link4"
+						text="#{javascript:sessionScope.bcrumb4text}"
+						value="#{javascript:sessionScope.bcrumb4url}">
+
+						<xp:this.rendered><![CDATA[#{javascript:if
+(sessionScope.bcrumb4on == true && sessionScope.bcrumb4link == true )
+{
+      return true;
+} else
+{
+      return false;
+}}]]></xp:this.rendered>
+					</xp:link>
+					<xp:text escape="true" id="computedField3"
+						value="#{javascript:sessionScope.bcrumb4text}"
+						styleClass="house">
+						<xp:this.rendered><![CDATA[#{javascript:if
+(sessionScope.bcrumb4on == true && sessionScope.bcrumb4link == false )
+{
+      return true;
+} else
+{
+      return false;
+}}]]></xp:this.rendered>
+					</xp:text>
+
+					<!-- Breadcrumb 5-->
+
+					<xp:link escape="true" id="link1"
+						text="#{javascript:sessionScope.bcrumb5text}"
+						value="#{javascript:sessionScope.bcrumb5url}">
+
+						<xp:this.rendered><![CDATA[#{javascript:if
+(sessionScope.bcrumb5on == true && sessionScope.bcrumb5link == true )
+{
+      return true;
+} else
+{
+      return false;
+}}]]></xp:this.rendered>
+					</xp:link>
+					<xp:text escape="true" id="computedField4"
+						value="#{javascript:sessionScope.bcrumb5text}"
+						styleClass="house">
+						<xp:this.rendered><![CDATA[#{javascript:if
+(sessionScope.bcrumb5on == true && sessionScope.bcrumb5link == false )
+{
+      return true;
+} else
+{
+      return false;
+}}]]></xp:this.rendered>
+					</xp:text>
+				</xp:panel>
+				
+			</xp:panel>
+		</xp:panel>
+	</xp:panel>
+
+	
+</xp:view>

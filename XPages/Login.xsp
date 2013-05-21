@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" pageTitle="#{javascript:applicationScope.blogName}">
+	<xp:this.beforePageLoad><![CDATA[#{javascript:if (applicationScope.containsKey("init") == false ){
+	initApplication();
+}
+
+if (sessionScope.containsKey("init") == false ){
+	initSession();
+}
+
+checkBrowser();
+checkTheme(sessionScope.get("browserType"));
+
+sessionScope.currentPage = "login";
+// Remove the SessionScope.init to force reload
+// of sessionScope on whatever page the user ends back on.
+sessionScope.remove("init");}]]></xp:this.beforePageLoad>
+	<xp:this.resources>
+		<xp:script src="/global.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+	<xp:include>
+		<xp:this.pageName><![CDATA[${javascript:return sessionScope.get("browserType") + "_Login.xsp"}]]></xp:this.pageName>
+	</xp:include>
+</xp:view>

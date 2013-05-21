@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:panel styleClass="lotusFrame">
+		<xc:browser_layout_banner />
+		<xc:browser_layout_title />
+		<xc:browser_layout_placebar />
+		<xp:panel styleClass="lotusMain">
+			<xc:browser_viewTopic_Content />
+		</xp:panel>
+		<xc:browser_layout_footer />
+	</xp:panel>
+</xp:view>

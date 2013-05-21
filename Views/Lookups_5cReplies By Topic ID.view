@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='852575D1004E0DF0'>
+<noteinfo noteid='1e32' unid='AB56D1B5065F33CF852577B9007EAA99' sequence='3'>
+<created><datetime dst='true'>20101011T190332,09-04</datetime></created>
+<modified><datetime dst='true'>20101011T193521,99-04</datetime></modified>
+<revised><datetime dst='true'>20101011T193521,98-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20130521T091732,10-04</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20101011T190333,77-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Declan Sciolla-Lynch/O=Imagination</name></updatedby>
+<wassignedby><name>CN=Declan Sciolla-Lynch/O=Imagination</name></wassignedby>
+<item name='$FormatNote' summary='true' sign='true'>
+<rawitemdata type='4'>
+AQDhNlDUIpo1WBUgaQDRdSWF
+</rawitemdata></item>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$Index' sign='true'><text/></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
+bgAFADQALwADAA4ADgAJAHRvcGljX1RvcGljVUlEdG9waWNfcmVwbHlVSUQkQ29uZmxpY3QABAAE
+AAAAJgAFAAQAZm9ybQEAEgBjb250ZW50X1RvcGljUmVwbHkKAgMABwAOAAgACUwxUzJTM1M=
+</formula></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+GwABAABECGYHAAAOAHRvcGljX1RvcGljVUlE
+</rawitemdata></item>
+<item name='$ViewFormat' summary='true' sign='true'>
+<rawitemdata type='5'>
+AQACAA4ACgAAAFZDAwAOAA4AAAAAAFgAAQAACgABAAAAAAAAAAICAAAAVkMAAA4ADgAAAAAAUAAB
+AAAKAAAAAAAAAAAAAgIAAAB0b3BpY19Ub3BpY1VJRHRvcGljX1RvcGljVUlEdG9waWNfcmVwbHlV
+SUR0b3BpY19SZXBseVVJRCYAAQAAAAEBAAkBAAAKAQEOCgAAAQCtKwEAAQABAAAAAAAAAAAAV0MB
+AQAJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQEACQAAAAAAAAAA
+AAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABCAAAAAAABAP///wAFAP///wABAAAAAAAA
+AAAAAAAAAAEA////AAEA////AAAAAQAAAAAAAQAAAAAAAQAAAAAAAAAIAAAAAAABAA==
+</rawitemdata></item>
+<item name='$Comment' sign='true'><text>xTalk V1.1.01</text></item>
+<item name='$Flags'><text>Y</text></item>
+<item name='$TITLE' sign='true'><text>Lookups\Replies By Topic ID|lkp_RepliesUID</text></item>
+<item name='$DesignerVersion' sign='true'><text>8.5.2</text></item></note>
+

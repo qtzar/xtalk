@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.beforePageLoad><![CDATA[#{javascript:sessionScope.registerResult = 0;
+sessionScope.updateResult = 0;}]]></xp:this.beforePageLoad>
+	<xp:link escape="true" id="link11" value="##{id:#}" />
+	<xe:keepSessionAlive id="keepSessionAlive1" />
+	<xp:panel styleClass="lotusBanner" role="banner">
+		<xp:panel styleClass="lotusRightCorner">
+			<xp:panel styleClass="lotusInner">
+				<xp:link escape="true" text="Link" id="link1"
+					value="##{id:lotusMainContent}" accesskey="S" styleClass="lotusAccess" />
+				<xp:image url="/button_OpenNTF.jpg" id="image1" alt="OpenNTF.org" />
+				<ul class="lotusInlinelist lotusUtility">
+
+					<!-- Username / Profile Link -->
+					<xp:panel>
+						<li class="lotusFirst">
+							<span class="lotusUtility lotusUser">
+								<xp:text escape="true" id="computedField2">
+									<xp:this.value><![CDATA[#{javascript:var userName:NotesName = session.createName(@UserName());
+return(userName.getCommon());}]]></xp:this.value>
+									<xp:this.rendered><![CDATA[#{javascript:if (context.getUser().getCommonName() == "Anonymous"){
+	return true;
+}
+
+var userName:NotesName = session.createName(@UserName());
+if (userName.getCanonical().substring(0,3) == "CN="){
+	return true;
+}
+
+
+if (applicationScope.AppProfileEdit == "false"){
+	return true;
+} else {
+	return false;
+}}]]></xp:this.rendered>
+								</xp:text>
+								<xp:link id="link8">
+									<xp:this.text><![CDATA[#{javascript:var userName:NotesName = session.createName(@UserName());
+return(userName.getCommon());}]]></xp:this.text>
+									<xp:this.rendered><![CDATA[#{javascript:if (context.getUser().getCommonName() == "Anonymous"){
+	return false;
+}
+
+var userName:NotesName = session.createName(@UserName());
+if (userName.getCanonical().substring(0,3) == "CN="){
+	return false;
+}
+
+if (applicationScope.AppProfileEdit == "true"){
+	return true;
+}
+
+return false;}]]></xp:this.rendered>
+									<xp:eventHandler event="onclick" submit="false">
+										<xp:this.script><![CDATA[XSP.openDialog('#{id:editProfileDialog}')]]></xp:this.script>
+									</xp:eventHandler>
+								</xp:link>
+							</span>
+						</li>
+					</xp:panel>
+
+					<!-- Configuration Link -->
+					<xp:panel rendered="#{javascript:sessionScope.forumOwner}">
+						<li>
+							<xp:link escape="true" text="Configuration" id="link3">
+								<xp:eventHandler event="onclick" submit="false">
+									<xp:this.script><![CDATA[XSP.openDialog('#{id:forumConfigDialog}')]]></xp:this.script>
+								</xp:eventHandler>
+							</xp:link>
+						</li>
+					</xp:panel>
+
+					<!-- Registration Link -->
+					<xp:panel>
+						<xp:this.rendered><![CDATA[#{javascript:var userName:NotesName = session.createName(@UserName());
+if (userName.getCommon()=="Anonymous")
+{
+	if (applicationScope.AppAllowReg == "true"){
+		return true;
+	}
+}
+}]]></xp:this.rendered>
+						<li>
+							<xp:link id="lnk_Register" text="Register">
+								<xp:eventHandler event="onclick" submit="false">
+									<xp:this.script><![CDATA[XSP.openDialog('#{id:registerDialog}')]]></xp:this.script>
+								</xp:eventHandler>
+							</xp:link>
+						</li>
+					</xp:panel>
+
+					<!-- Log In Link -->
+					<xp:panel>
+						<xp:this.rendered><![CDATA[#{javascript:if (sessionScope.commonName == "Anonymous"){
+	return true;
+} else {
+	return false;
+}}]]></xp:this.rendered>
+						<li>
+							<xp:link escape="true" text="Log In" id="link4">
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="complete" immediate="true">
+									<xp:this.action><![CDATA[#{javascript:checkAuth();}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
+						</li>
+					</xp:panel>
+
+					<!-- Log Out Link -->
+					<xp:panel>
+						<xp:this.rendered><![CDATA[#{javascript:if (sessionScope.commonName != "Anonymous"){
+	return true;
+} else {
+	return false;
+}}]]></xp:this.rendered>
+						<li>
+							<xp:link escape="true" text="Log Out" id="link5">
+								<xp:this.value><![CDATA[#{javascript:facesContext.getExternalContext().getRequestContextPath() + "?logout"}]]></xp:this.value>
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="complete" immediate="true" />
+							</xp:link>
+						</li>
+					</xp:panel>
+				</ul>
+			</xp:panel>
+		</xp:panel>
+	</xp:panel>
+	<xe:dialog id="forumConfigDialog" title="Forum Configuration">
+		<xp:panel styleClass="xTalkForm" id="xTalkForm">
+			<xp:this.data>
+				<xp:dominoDocument var="configDoc" formName="prof_AppConfig"
+					action="editDocument" documentId="#{javascript:applicationScope.configUNID}" />
+			</xp:this.data>
+			<fieldset>
+				<legend>Application Configuration</legend>
+				<xp:label styleClass="required" value="Application Name:"
+					id="lbl_AppName" for="fld_AppName" />
+				<xp:inputText value="#{configDoc.cfg_Basic_ForumName}"
+					id="fld_AppName" required="true" />
+				<small>This is the name of the application as it will display in
+					the title bar.</small>
+				<xp:label styleClass="required" value="Short Name:" id="lbl_AppShortName"
+					for="fld_AppName" />
+				<xp:inputText value="#{configDoc.cfg_Basic_ForumShortName}"
+					id="fld_AppShortName" required="true" />
+				<small>This is the name of the application as it will display in
+					the browser window title.</small>
+			</fieldset>
+			<fieldset>
+				<legend>Registration And Profiles</legend>
+				<xp:label styleClass="required" value="Enable Registration:"
+					id="label1" for="fld_AppAllowReg" />
+				<xp:checkBox id="fld_AppAllowReg" value="#{configDoc.cfg_reg_enabled}" />
+				<small>Allow people to register to use the forums.</small>
+				<xp:label styleClass="required" value="External Directory"
+					id="label2" for="fld_AppRegDB" />
+				<xp:inputText value="#{configDoc.cfg_reg_directory}"
+					id="fld_AppRegDB" />
+				<small>The filename of the Domino Directory to register people
+					in.</small>
+				<xp:label styleClass="required" value="Enable Profile:" id="label3"
+					for="fld_AppAllowProfile" />
+				<xp:checkBox id="fld_AppAllowProfile" value="#{configDoc.cfg_profiles_enabled}" />
+				<small>Allow people to edit their profiles.</small>
+				<xp:label styleClass="required" value="Enable P/W Changes:"
+					id="label4" for="fld_AppAllowPassword" />
+				<xp:checkBox id="fld_AppAllowPassword"
+					value="#{configDoc.cfg_profiles_passwordChange}" />
+				<small>Allow people to change their passwords.</small>
+			</fieldset>
+			<fieldset>
+				<legend>Look And Feel</legend>
+				<xp:label styleClass="required" value="Theme:" id="label13"
+					for="fld_theme" />
+				<xp:comboBox id="fld_theme" value="#{configDoc.cfg_basic_blogTheme}">
+					<xp:selectItem itemLabel="blue" />
+					<xp:selectItem itemLabel="red" />
+					<xp:selectItem itemLabel="green" />
+					<xp:selectItem itemLabel="gold" />
+					<xp:selectItem itemLabel="metal" />
+				</xp:comboBox>
+				<small>Which variant of the oneUI theme should be used.</small>
+			</fieldset>
+			<xp:panel styleClass="lotusActionBar lotusBtnContainer" id="lotusActionBar">
+				<xp:link escape="true" text="Update Configuration" id="btnSave"
+					outerStyleClass="lotusBtn lotusBtnSpecial lotusRight">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete" id="eventHandler1">
+						<xp:this.action id="this.action1"><![CDATA[#{javascript:var cfgDoc:NotesDocument = configDoc.getDocument(true);
+cfgDoc.save(true,true);
+
+// Basics
+applicationScope.forumName = cfgDoc.getItemValueString("cfg_Basic_ForumName");
+applicationScope.forumShortName = cfgDoc.getItemValueString("cfg_Basic_ForumShortName");
+applicationScope.blogFooter = cfgDoc.getItemValueString("cfg_basic_blogFooter");
+// Layout
+applicationScope.blogTheme = cfgDoc.getItemValueString("cfg_basic_blogTheme");
+// Login
+applicationScope.loginMarketTitle = cfgDoc.getItemValueString("cfg_login_market_title");
+applicationScope.loginMarketText = cfgDoc.getItemValueString("cfg_login_market_text");
+applicationScope.loginLegal1 = cfgDoc.getItemValueString("cfg_login_legal1");
+applicationScope.loginLegal2 = cfgDoc.getItemValueString("cfg_login_legal2");
+// Registration
+applicationScope.AppAllowReg = cfgDoc.getItemValueString("cfg_reg_enabled");
+applicationScope.AppRegDB = cfgDoc.getItemValueString("cfg_reg_directory");
+// Profiles
+applicationScope.AppProfileEdit = cfgDoc.getItemValueString("cfg_profiles_enabled");
+applicationScope.AppProfilePassword = cfgDoc.getItemValueString("cfg_profiles_passwordChange");
+	
+
+var c = getComponent("forumConfigDialog");
+c.hide();
+context.reloadPage();}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:link>
+				<xp:link escape="true" text="Cancel" id="link2"
+					outerStyleClass="lotusBtn lotusRight">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete" immediate="true">
+						<xp:this.action><![CDATA[#{javascript:var c = getComponent("forumConfigDialog");
+c.hide();}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:link>
+			</xp:panel>
+		</xp:panel>
+	</xe:dialog>
+	<xe:dialog id="editProfileDialog" title="Edit Profile">
+		<xp:panel id="updateRefresh">
+			<xp:panel styleClass="xTalkForm" id="updateProfileStage1">
+			<xp:this.style><![CDATA[#{javascript:if (sessionScope.updateResult != 0){
+	return "display:none";
+} else {
+	return "";
+}}]]></xp:this.style>
+				<xp:this.data>
+					<xp:dominoDocument var="profileDoc" action="editDocument"
+						documentId="#{javascript:sessionScope.userProfileUNID}" formName="content_UserProfile" />
+				</xp:this.data>
+				<fieldset>
+					<legend>Your Details</legend>
+					<xp:label styleClass="required" value="User Name:" id="label5"
+						for="fld_RegUserName" />
+					<xp:inputText id="fld_RegUserName" value="#{profileDoc.user_Username}"
+						disabled="true" />
+					<small>Your user name cannot be changed.</small>
+					<xp:label styleClass="required" value="First Name:" id="lbl_RegFirstName"
+						for="fld_RegFirstName" />
+					<xp:inputText value="#{profileDoc.user_Firstname}" id="fld_RegFirstName"
+						required="true" />
+					<small>Please enter your first name.</small>
+					<xp:label styleClass="required" value="Last Name:" id="lbl_RegLastName"
+						for="fld_RegLastName" />
+					<xp:inputText value="#{profileDoc.user_LastName}" id="fld_RegLastName"
+						required="true" />
+					<small>Please Enter Your Last Name.</small>
+					<xp:label styleClass="required" value="eMail Address:" id="label6"
+						for="fld_RegEMail" />
+					<xp:inputText value="#{profileDoc.user_eMail}" id="fld_RegEmail"
+						required="true" />
+					<small>Please Enter Your eMail Address.</small>
+				</fieldset>
+				<fieldset>
+					<legend>Change Password</legend>
+					<xp:label value="Password:" id="label7" for="fld_NewPassword1" />
+					<xp:inputText value="#{sessionScope.NewPassword1}" id="fld_NewPassword1"
+						password="true" />
+					<small>Please enter a new password.</small>
+					<xp:label value="Confirm Password:" id="label8" for="fld_NewPassword2" />
+					<xp:inputText value="#{sessionScope.NewPassword2}" id="fld_NewPassword2"
+						password="true" />
+					<small>Please re-enter your new password.</small>
+				</fieldset>
+				<xp:panel styleClass="lotusActionBar">
+					<xp:link escape="true" text="Update Profile" id="link6"
+						outerStyleClass="lotusBtn lotusBtnSpecial lotusRight">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" refreshId="updateRefresh">
+
+							<xp:this.script><![CDATA[if(dojo.byId("#{id:fld_NewPassword1}").value != dojo.byId("#{id:fld_NewPassword2}").value) {
+	alert('Your passwords do not match. Please type more carefully.');
+	return false;
+} else {
+	dojo.style("#{id:updateProfileStage1}","display","none");
+	dojo.style("#{id:updateProfileStage2}","display","block");
+	return true;
+}]]></xp:this.script>
+							<xp:this.action><![CDATA[#{javascript:sessionScope.updateResult = 99;
+// Get and save the profile document
+var profDoc:NotesDocument = profileDoc.getDocument(true);
+profDoc.save(true,true);
+
+// Get Access To Directory Databases with sessionAsSigner
+var nabDB:NotesDatabase = sessionAsSigner.getDatabase(session.getServerName(),"names.nsf");
+if (applicationScope.AppRegDB != ""){
+	var extDB:NotesDatabase = sessionAsSigner.getDatabase(session.getServerName(),applicationScope.AppRegDB);
+}
+
+// Find The Person Document With This User Address
+if (applicationScope.AppRegDB != ""){
+	var extDBView:NotesView = extDB.getView("($Users)");
+	var extDBPersonDoc:NotesDocument = extDBView.getDocumentByKey(profDoc.getItemValueString("user_Name"));
+}
+var nabDBView:NotesView = nabDB.getView("($Users)");
+var nabDBPersonDoc:NotesDocument = nabDBView.getDocumentByKey(profDoc.getItemValueString("user_Name"));
+
+if (extDBPersonDoc == null && nabDBPersonDoc == null){
+	// the person document was not found.
+	sessionScope.updateResult = 3;
+	return;
+}
+
+// Only update the NAB document if it's in the secondary NAB
+if (extDBPersonDoc != null){
+	sessionScope.updateResult = 1;
+	extDBPersonDoc.replaceItemValue("FirstName",profDoc.getItemValueString("user_FirstName"));
+	extDBPersonDoc.replaceItemValue("LastName",profDoc.getItemValueString("user_LastName"));
+	extDBPersonDoc.replaceItemValue("InternetAddress",profDoc.getItemValueString("user_eMail"));
+	if (sessionScope.NewPassword1 != ""){
+		extDBPersonDoc.replaceItemValue("HTTPPassword",sessionScope.newPassword1);
+		sessionScope.updateResult = 2;
+	}
+	extDBPersonDoc.save(true,false);
+} else {
+	sessionScope.updateResult = 1;
+	if (sessionScope.NewPassword1 != ""){
+		nabDBPersonDoc.replaceItemValue("HTTPPassword",sessionScope.newPassword1);
+		nabDBPersonDoc.save(true,false);
+		sessionScope.updateResult = 2;
+	}
+}}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+					<xp:link escape="true" text="Cancel" id="link7"
+						outerStyleClass="lotusBtn lotusRight">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete" immediate="true">
+							<xp:this.action><![CDATA[#{javascript:var c = getComponent("editProfileDialog");
+c.hide();}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+				</xp:panel>
+			</xp:panel>
+			<xp:panel styleClass="xTalkForm" id="updateProfileStage2"
+				style="display:none">
+				<fieldset>
+					<legend>Update Profile</legend>
+					<xp:div> Please Wait : Update In Progress</xp:div>
+				</fieldset>
+			</xp:panel>
+			<xp:panel styleClass="xTalkForm" id="updateProfileStage3">
+				<xp:this.style><![CDATA[#{javascript:if (sessionScope.updateResult == 0){
+	return "display:none";
+} else {
+	return "";
+}}]]></xp:this.style>
+				<fieldset>
+					<legend>Update Profile</legend>
+					<xp:text escape="true" id="computedField3" style="text-align:center">
+						<xp:this.value><![CDATA[#{javascript:switch(sessionScope.updateResult){
+	case 1:
+		var msg = "Your profile has been updated."
+		break;
+	case 2:
+		var msg = "Your profile has been updated and your password changed."
+		break;
+	case 3:
+		var msg = "Your profile has been updated but your person document couldn't be found."
+		break;
+	default:
+		var msg = "An unknown error has occured. Please contact the system administrator."
+}
+
+return msg;}]]></xp:this.value>
+					</xp:text>
+				</fieldset>
+				<xp:panel styleClass="lotusActionBar">
+					
+					
+					<xp:link escape="true" text="Done" id="link17"
+						outerStyleClass="lotusBtn lotusBtnSpecial lotusRight" rendered="#{javascript:sessionScope.updateResult != 0;}">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete" immediate="true">
+							<xp:this.action><![CDATA[#{javascript:sessionScope.updateResult = 0;
+sessionScope.remove("NewPassword1");
+sessionScope.remove("NewPassword2");
+getComponent("editProfileDialog").hide();
+context.redirectToPage("/home.xsp");}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+				</xp:panel>
+			</xp:panel>
+		</xp:panel>
+	</xe:dialog>
+	<xe:dialog id="registerDialog" title="Registration">
+		<xp:panel id="registerRefresh">
+			<xp:panel styleClass="xTalkForm" id="registerStage1">
+
+				<xp:this.style><![CDATA[#{javascript:if (sessionScope.registerResult != 0){
+	return "display:none";
+} else {
+	return "";
+}}]]></xp:this.style>
+				<fieldset>
+					<legend>Registration</legend>
+					<xp:label styleClass="required" value="User Name:" id="label9"
+						for="fld_RegUserName" />
+					<xp:inputText value="#{sessionScope.registerUserName}"
+						id="inputText1" required="true" />
+					<small>Please enter the user name you'd like to use. This
+						cannot be changed once set.</small>
+					<xp:label styleClass="required" value="First Name:" id="label10"
+						for="fld_RegFirstName" />
+					<xp:inputText value="#{sessionScope.registerFirstName}"
+						id="inputText2" required="true" />
+					<small>Please enter your first name.</small>
+					<xp:label styleClass="required" value="Last Name:" id="label11"
+						for="fld_RegLastName" />
+					<xp:inputText value="#{sessionScope.registerLastName}"
+						id="inputText3" required="true" />
+					<small>Please Enter Your Last Name.</small>
+					<xp:label styleClass="required" value="eMail Address:" id="label12"
+						for="fld_RegEMail" />
+					<xp:inputText value="#{sessionScope.registerEMail}"
+						id="inputText4" required="true" />
+					<small>Please Enter Your eMail Address.</small>
+				</fieldset>
+				<xp:panel styleClass="lotusActionBar">
+					<xp:link escape="true" text="Register Now" id="link9"
+						outerStyleClass="lotusBtn lotusBtnSpecial lotusRight">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" refreshId="registerRefresh">
+							<xp:this.action><![CDATA[#{javascript:// Get Access To Databases with sessionAsSigner
+var thisDB:NotesDatabase = sessionAsSigner.getDatabase(session.getServerName(),session.getCurrentDatabase().getFilePath());
+var nabDB:NotesDatabase = sessionAsSigner.getDatabase(session.getServerName(),"names.nsf");
+if (applicationScope.AppRegDB != ""){
+	var extDB:NotesDatabase = sessionAsSigner.getDatabase(session.getServerName(),applicationScope.AppRegDB);
+}
+
+// Check For Conflicting Names In Directories.
+if (applicationScope.AppRegDB != ""){
+	var extDBView:NotesView = extDB.getView("($Users)");
+	var extDBPersonDoc:NotesDocument = extDBView.getDocumentByKey(sessionScope.registerUserName);
+}
+var nabDBView:NotesView = nabDB.getView("($Users)");
+var nabDBPersonDoc:NotesDocument = nabDBView.getDocumentByKey(sessionScope.registerUserName);
+
+if (extDBPersonDoc != null || nabDBPersonDoc != null){
+	// the person document was not found.
+	sessionScope.registerResult = 1;
+	return;
+}
+
+// Check For Conflicting EMail Addresses In Directories.
+if (applicationScope.AppRegDB != ""){
+	var extDBView:NotesView = extDB.getView("($Users)");
+	var extDBPersonDoc:NotesDocument = extDBView.getDocumentByKey(sessionScope.registerEMail);
+}
+var nabDBView:NotesView = nabDB.getView("($Users)");
+var nabDBPersonDoc:NotesDocument = nabDBView.getDocumentByKey(sessionScope.registerEMail);
+
+if (extDBPersonDoc != null || nabDBPersonDoc != null){
+	// the person document was not found.
+	sessionScope.registerResult = 3;
+	return;
+}
+
+// No Duplicates Were Found So Create The New Person Document
+var newPassword = @Unique();
+var extDBPersonDoc:NotesDocument = extDB.createDocument();
+extDBPersonDoc.replaceItemValue("Form","Person");
+extDBPersonDoc.replaceItemValue("Type","Person");
+extDBPersonDoc.replaceItemValue("FirstName",sessionScope.registerFirstName);
+extDBPersonDoc.replaceItemValue("LastName",sessionScope.registerLastName);
+extDBPersonDoc.replaceItemValue("FullName",sessionScope.registerUserName);
+extDBPersonDoc.replaceItemValue("InternetAddress",sessionScope.registerEMail);
+extDBPersonDoc.replaceItemValue("MailSystem","5");
+extDBPersonDoc.replaceItemValue("AvailableForDirSync","0");
+extDBPersonDoc.replaceItemValue("Comment","Generated By xTalk");
+extDBPersonDoc.replaceItemValue("HTTPPassword",newPassword);
+extDBPersonDoc.replaceItemValue("$SecurePassword","2");
+extDBPersonDoc.save(true,false);
+
+// Create The User Profile Document
+var curDate = session.createDateTime("Today");
+curDate.setNow();
+
+var userProfileDoc:NotesDocument = thisDB.createDocument();
+userProfileDoc.replaceItemValue("form","content_UserProfile");
+userProfileDoc.replaceItemValue("user_UserName",sessionScope.registerUserName);
+var userDocAuthor:NotesItem = userProfileDoc.getFirstItem("user_UserName");
+userDocAuthor.setAuthors(true);
+userProfileDoc.replaceItemValue("user_FirstName",sessionScope.registerFirstName);
+userProfileDoc.replaceItemValue("user_LastName",sessionScope.registerLastName);
+userProfileDoc.replaceItemValue("user_eMail",sessionScope.registerEMail);
+userProfileDoc.replaceItemValue("user_Name",sessionScope.registerUserName);
+userProfileDoc.replaceItemValue("user_Posts",0);
+userProfileDoc.replaceItemValue("user_Replies",0);
+userProfileDoc.replaceItemValue("user_LastDate",curDate);
+userProfileDoc.replaceItemValue("user_JoinDate",curDate);
+userProfileDoc.replaceItemValue("user_External","true");
+userProfileDoc.save(true,true);
+
+// Send Email With New Account Details
+var mailDoc = thisDB.createDocument();
+mailDoc.replaceItemValue("Form","Memo")
+mailDoc.replaceItemValue("Subject",applicationScope.forumName + " : New User Registration Details");
+var bodyItem:NotesRichTextItem = mailDoc.createRichTextItem("Body");
+bodyItem.appendText(sessionScope.registerFirstName + ",");
+bodyItem.addNewLine(2);
+bodyItem.appendText("Thank you for registering an account on " + applicationScope.forumName);
+bodyItem.addNewLine(2);
+bodyItem.addTab(1);
+bodyItem.appendText("User Name :");
+bodyItem.addTab(1);
+bodyItem.appendText(sessionScope.registerUserName);
+bodyItem.addNewLine(1);
+bodyItem.addTab(1);
+bodyItem.appendText("Password :");
+bodyItem.addTab(1);
+bodyItem.appendText(newPassword);
+bodyItem.addNewLine(2);
+bodyItem.appendText("You are advised to change your password once you log in.");
+mailDoc.send(false,sessionScope.registerEMail);
+sessionScope.registerResult = 2;}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+					<xp:link escape="true" text="Cancel" id="link10"
+						outerStyleClass="lotusBtn lotusRight">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete" immediate="true">
+							<xp:this.action><![CDATA[#{javascript:var c = getComponent("registerDialog");
+c.hide();}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+				</xp:panel>
+			</xp:panel>
+			<xp:panel styleClass="xTalkForm" id="registerStage2" style="display:none">
+				<fieldset>
+					<legend>Registration</legend>
+					<xp:div> Please Wait : Registration In Progress</xp:div>
+				</fieldset>
+			</xp:panel>
+			<xp:panel styleClass="xTalkForm" id="registerStage3">
+				<xp:this.style><![CDATA[#{javascript:if (sessionScope.registerResult == 0){
+	return "display:none";
+} else {
+	return "";
+}}]]></xp:this.style>
+				<fieldset>
+					<legend>Registration</legend>
+					<xp:text escape="true" id="computedField1" style="text-align:center">
+						<xp:this.value><![CDATA[#{javascript:switch(sessionScope.registerResult){
+	case 1:
+		var msg = "The selected username already exists on the system."
+		break;
+	case 2:
+		var msg = "Your account has been created and your password has been emailed to you."
+		break;
+	case 3:
+		var msg = "The selected email address already exists on the system."
+		break;
+	default:
+		var msg = "An unknown error has occured. Please contact the system administrator."
+}
+
+return msg;}]]></xp:this.value>
+					</xp:text>
+				</fieldset>
+				<xp:panel styleClass="lotusActionBar">
+					<xp:link escape="true" text="Try Again" id="link12"
+						outerStyleClass="lotusBtn lotusBtnSpecial lotusRight" rendered="#{javascript:sessionScope.registerResult != 2}">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" refreshId="registerRefresh">
+							<xp:this.action><![CDATA[#{javascript:sessionScope.registerResult = 0}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+					<xp:link escape="true" text="Cancel" id="link13"
+						outerStyleClass="lotusBtn lotusRight" rendered="#{javascript:sessionScope.registerResult != 2}">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete" immediate="true">
+							<xp:this.action><![CDATA[#{javascript:sessionScope.registerResult = 0;
+getComponent("registerDialog").hide();
+context.redirectToPage("/home.xsp");}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+					<xp:link escape="true" text="Login" id="link14"
+						outerStyleClass="lotusBtn lotusBtnSpecial lotusRight" rendered="#{javascript:sessionScope.registerResult == 2}">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete" immediate="true">
+							<xp:this.action><![CDATA[#{javascript:sessionScope.remove("registerResult");
+sessionScope.remove("registerUserName");
+sessionScope.remove("registerFirstName");
+sessionScope.remove("registerLastName");
+sessionScope.remove("registerEMail");
+getComponent("registerDialog").hide();
+context.redirectToPage("/login.xsp");}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+				</xp:panel>
+			</xp:panel>
+		</xp:panel>
+	</xe:dialog>
+</xp:view>

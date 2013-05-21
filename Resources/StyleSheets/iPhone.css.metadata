@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="852575D1004E0DF0" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="1d92" sequence="4" unid="3DDFA13609EE4FF5852577B70065BE6B">
+<created><datetime dst="true">20101009T143118,83-04</datetime></created>
+<modified><datetime dst="true">20101009T145545,52-04</datetime></modified>
+<revised><datetime dst="true">20101009T145545,51-04</datetime></revised>
+<lastaccessed><datetime dst="true">20101009T145545,51-04</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20101009T143120,26-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Declan Sciolla-Lynch/O=Imagination</name></updatedby>
+<wassignedby><name>CN=Declan Sciolla-Lynch/O=Imagination</name></wassignedby>
+<item name="$TITLE"><text>iPhone.css</text></item>
+<item name="$MimeType" sign="true"><text>text/css</text></item>
+<item name="$Flags"><text>34C=Q</text></item>
+
+
+<item name="$FileNames" sign="true"><text>iPhone.css</text></item>
+<item name="$MimeCharSet" sign="true"><text>UTF-8</text></item>
+<item name="$Comment" sign="true"><text>xTalk V1.1</text></item>
+<item name="$DesignerVersion" sign="true"><text>8.5.2</text></item></note>

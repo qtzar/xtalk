@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+<xp:panel styleClass="lotusTitleBar">
+	<xp:panel styleClass="lotusRightCorner">
+		<xp:panel styleClass="lotusInner">
+		<h2>
+		<xp:text escape="true" id="computedField1"
+			value="#{javascript:applicationScope.forumName}">
+		</xp:text></h2>
+
+		<xp:panel id="panelSearch" styleClass="lotusSearch">
+			<xp:this.rendered><![CDATA[#{javascript:return database.isFTIndexed();
+}]]></xp:this.rendered>
+			<xp:inputText id="searchText"
+				value="#{viewScope.searchValue}" defaultValue="Search..."
+				styleClass="xspInputFieldEditBoxSearch" style="width:200px">
+				<xp:eventHandler event="onfocus" submit="false">
+					<xp:this.handlers>
+						<xp:handler type="text/javascript">
+							<xp:this.script>
+								<![CDATA[var me = document.getElementById("#{id:searchText}");
+me.value = "";]]>
+							</xp:this.script>
+						</xp:handler>
+					</xp:this.handlers>
+				</xp:eventHandler>
+				<xp:eventHandler event="onkeypress" submit="true">
+					<xp:this.handlers>
+						<xp:handler type="text/javascript">
+							<xp:this.script><![CDATA[if (thisEvent.keyCode != '13') {
+	return false;
+}
+]]></xp:this.script>
+						</xp:handler>
+					</xp:this.handlers>
+					<xp:this.action>
+
+						<xp:actionGroup>
+
+
+
+
+							<xp:openPage>
+								<xp:this.name><![CDATA[#{javascript:return "./search.xsp?s=" + viewScope.searchValue;}]]></xp:this.name>
+							</xp:openPage>
+						</xp:actionGroup>
+					</xp:this.action>
+				</xp:eventHandler>
+			</xp:inputText>
+			<xp:link escape="true" id="linkSubmit" title="Submit Search"
+				style="cursor:pointer;" value="/search.xsp"
+				styleClass="lotusBtnImg">
+				<xp:this.parameters>
+					<xp:parameter name="s">
+						<xp:this.value><![CDATA[#{javascript:getComponent("searchText").getSubmittedValue()}]]></xp:this.value>
+					</xp:parameter>
+				</xp:this.parameters>
+				<xp:image id="imageSearch" alt="Submit Search"
+					url="/blank.gif" styleClass="lotusSearchButton">
+				</xp:image>
+
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete">
+				</xp:eventHandler>
+			</xp:link>
+		</xp:panel>
+		</xp:panel>
+	</xp:panel>
+</xp:panel>
+</xp:view>

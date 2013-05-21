@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="852575D1004E0DF0" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="1c52" sequence="5" unid="4451C35DB077C319852576850056076E">
+<created><datetime>20091207T103939,98-05</datetime></created>
+<modified><datetime dst="true">20101009T145549,50-04</datetime></modified>
+<revised><datetime dst="true">20101009T145549,49-04</datetime></revised>
+<lastaccessed><datetime dst="true">20101009T145549,49-04</datetime></lastaccessed>
+<addedtofile><datetime>20091207T103940,29-05</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Declan Sciolla-Lynch/O=Imagination</name></updatedby>
+<wassignedby><name>CN=Declan Sciolla-Lynch/O=Imagination</name></wassignedby>
+<item name="$TITLE"><text>profileNoPhoto.png</text></item>
+<item name="$Flags"><text>345CgQ</text></item>
+<item name="$FlagsExt" sign="true"><text>D</text></item>
+
+<item name="$FileModDT" sign="true"><datetime>20091207T103904,01-05</datetime></item>
+
+<item name="$FileNames" sign="true"><text>profileNoPhoto.png</text></item>
+<item name="$Comment" sign="true"><text>xTalk V1.1</text></item>
+<item name="$DesignerVersion" sign="true"><text>8.5.2</text></item></note>

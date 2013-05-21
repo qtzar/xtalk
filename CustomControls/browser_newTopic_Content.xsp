@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+<xp:this.data>
+		<xp:dominoDocument var="newTopicDoc" formName="content_Topic"></xp:dominoDocument>
+	</xp:this.data>
+	<xp:panel styleClass="lotusContent">
+		<xp:panel styleClass="xTalkNewTopic">
+			<fieldset>
+				<legend>New Topic</legend>
+				<xp:table style="width:100.0%">
+					<xp:tr>
+						<xp:td style="width:100px" align="right"
+							valign="middle">
+							<xp:label styleClass="required"
+								value="Title" id="label1" for="topic_Title">
+							</xp:label>
+						</xp:td>
+						<xp:td align="left" valign="middle">
+							<xp:inputText id="topic_Title"
+								value="#{newTopicDoc.topic_Title}" required="true"
+								htmlFilter="striptags" style="width:100%">
+								<xp:this.validators>
+									<xp:validateRequired
+										message="You must supply a title for your discussion topic.">
+									</xp:validateRequired>
+								</xp:this.validators>
+							</xp:inputText></xp:td>
+					</xp:tr>
+					<xp:tr>
+						<xp:td align="right" valign="top">
+							<xp:label styleClass="required extraHeight"
+								value="Message" id="label2" for="topic_Body">
+							</xp:label>
+						</xp:td>
+						<xp:td valign="top">
+							<xp:inputRichText id="topic_Body" value="#{newTopicDoc.topic_Body}"></xp:inputRichText>
+						</xp:td>
+					</xp:tr>
+				</xp:table>
+			</fieldset>
+			<xp:panel styleClass="lotusActionBar">
+			<xp:link escape="true" text="Save Topic" id="saveTopicLink"
+				outerStyleClass="lotusBtn lotusBtnSpecial lotusRight">
+
+				<xp:eventHandler event="onclick" submit="true" refreshMode="complete" id="eventHandler1">
+					<xp:this.action id="this.action1"><![CDATA[#{javascript:var thisUID = @Unique();
+var curDate = session.createDateTime("Today");
+curDate.setNow();
+
+var topDoc:NotesDocument = newTopicDoc.getDocument(true);
+var faDoc:NotesDocument = database.getDocumentByUNID(sessionScope.forumAreaUNID);
+
+topDoc.replaceItemValue("form","content_Topic");
+topDoc.replaceItemValue("topic_TopicUID",thisUID);
+topDoc.replaceItemValue("topic_Author",context.getUser().getDistinguishedName());
+topDoc.replaceItemValue("topic_DateTime",curDate);
+topDoc.replaceItemValue("topic_ForumUNID",sessionScope.forumAreaUNID);
+topDoc.replaceItemValue("topic_ForumUID",sessionScope.forumAreaUID);
+topDoc.replaceItemValue("topic_LastTitle",getComponent("topic_Title").getValue());
+topDoc.replaceItemValue("topic_LastAuthor",@UserName());
+topDoc.replaceItemValue("topic_LastDate",curDate);
+topDoc.replaceItemValue("topic_LastTopicUNID",thisUID);
+topDoc.replaceItemValue("topic_Replies",0);
+topDoc.replaceItemValue("topic_Views",0);
+topDoc.replaceItemValue("topic_IsSticky","0");
+topDoc.replaceItemValue("topic_IsRichText","1");
+topDoc.replaceItemValue("topic_IsHot","0");
+topDoc.replaceItemValue("topic_IsLocked","0");
+topDoc.replaceItemValue("CGI_RemoteAddr",facesContext.getExternalContext().getRequest().request.getRemoteAddr());
+topDoc.replaceItemValue("CGI_RemoteHost",facesContext.getExternalContext().getRequest().request.getRemoteHost());
+topDoc.replaceItemValue("HTTP_Referer",facesContext.getExternalContext().getRequest().request.getHeader("Referer"));
+topDoc.replaceItemValue("HTTP_UserAgent",facesContext.getExternalContext().getRequest().request.getHeader("User-Agent"));
+topDoc.save();
+
+// Recreate the topic doc as a response to itself
+var replyDoc:NotesDocument = database.createDocument();
+topDoc.copyAllItems(replyDoc,true);
+replyDoc.replaceItemValue("form","content_TopicReply");
+replyDoc.replaceItemValue("topic_ReplyUID",@Unique());
+replyDoc.makeResponse(topDoc);
+replyDoc.save();
+
+// Update the ForumArea document : 8.5.2 Enhanced For sessionAsSigner
+var curDB = sessionAsSigner.getDatabase(session.getServerName(),session.getCurrentDatabase().getFilePath());
+var faDoc:NotesDocument = curDB.getDocumentByUNID(sessionScope.forumAreaUNID);
+faDoc.replaceItemValue("forum_LastTitle",getComponent("topic_Title").getValue());
+faDoc.replaceItemValue("forum_LastAuthor",@UserName());
+faDoc.replaceItemValue("forum_LastDate",curDate);
+faDoc.replaceItemValue("forum_LastTopicUNID",thisUID);
+var faThreads = faDoc.getItemValueInteger("forum_Threads")
+faDoc.replaceItemValue("forum_Threads",faThreads + 1);
+var faPosts = faDoc.getItemValueInteger("forum_Posts")
+faDoc.replaceItemValue("forum_Posts",faPosts + 1);
+faDoc.save();
+
+// Increase The Posters 'New Topic' count by one.
+var userView:NotesView = database.getView("lkp_UserProfiles");
+var userDoc:NotesDocument = userView.getDocumentByKey(sessionScope.commonName);
+var userPosts = userDoc.getItemValueInteger("user_Posts");
+userDoc.replaceItemValue("user_Posts",userPosts + 1);
+userDoc.save();
+
+// Redirect to the new Topic page.
+context.redirectToPage("/listTopics.xsp?forumID=" + faDoc.getItemValueString("forum_UID"));}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:link>
+			</xp:panel>
+		</xp:panel>
+	</xp:panel>
+</xp:view>

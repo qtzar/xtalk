@@ -1,0 +1,256 @@
+/*** Fix oneUI to allow Title In TitleBar ***/
+.lotusTitleBar h2 {
+	width: 100%;
+	float: none;
+	margin: 0px;
+}
+
+/*** Fix For Lotus Widget H2 ***/
+.lotusWidget2 h2 {
+	background-position: left top;
+	background-repeat: repeat-x;
+	border-style: solid;
+	border-width: 1px 0;
+	cursor: move;
+	overflow: hidden;
+	margin: 0px;
+}
+
+/*** Special version Of lotusWidget for non-owners ***/
+.lotusWidgetViewer {
+	border-color: #E8ECEE;
+	border-width: 0 1px 1px 1px;
+	border-style: solid;
+	margin: 0 0 10px 0;
+}
+
+.lotusWidgetViewer h2 {
+	zoom: 1;
+}
+
+.lotusWidgetViewer h2 {
+	background-position: left top;
+	background-repeat: repeat-x;
+	padding: 4px 3px 4px 10px;
+	overflow: hidden;
+	border-width: 1px 0;
+	border-style: solid;
+	margin: 0px;
+	background-color: #E8ECEE;
+	background-image: url("/.ibmxspres/domino/oneuiv2/images/titleBkgd.png")
+		;
+	border-color: #E8ECEE;
+}
+
+.lotusWidgetViewer .lotusWidgetBody h2 {
+	border-width: 0;
+	background-image: none;
+}
+
+.lotusWidgetViewer h2 img {
+	margin-left: 3px
+}
+
+.lotusWidgetViewer h2 a.lotusIcon {
+	float: right;
+	width: 18px;
+	height: 18px;
+	background-position: center center;
+	background-repeat: no-repeat
+}
+
+.lotusImagesOff .lotusWidgetViewer h2 a.lotusIcon {
+	font-size: .8em;
+	font-weight: normal;
+	width: auto;
+	height: auto
+}
+
+.lotusWidgetViewer h2 .lotusDivider {
+	float: right
+}
+
+.lotusWidgetViewer h3 {
+	padding: 4px 0;
+	overflow: hidden;
+	border-bottom: 1px solid;
+	line-height: 1em;
+	height: 1.3em;
+	font-size: 1em;
+	font-weight: normal;
+	color: #444;
+	border-bottom-color: #e8ecee
+}
+
+.lotusWidgetViewer h3 a.lotusAction {
+	font-size: .9em;
+	padding: 4px 0 5px 0
+}
+
+.lotusWidgetViewer .lotusWidgetBody {
+	clear: both;
+	padding: 3px 10px
+}
+
+.lotusWidgetViewer .lotusWidgetBody .lotusSection {
+	margin-top: 0px;
+}
+
+.lotusWidgetViewer .lotusWidgetBody div.lotusChunk {
+	margin-top: 5px;
+	clear: both;
+	zoom: 1
+}
+
+.lotusWidgetViewer .lotusWidgetFooter {
+	padding: 4px 10px 7px 10px;
+	border-top-width: 1px;
+	border-top-style: solid;
+	height: 1.3em;
+	clear: both;
+	border-top-color: #e8ecee;
+}
+
+.lotusWidgetViewer .lotusWidgetFooter ul.lotusVCard {
+	margin-left: 95px;
+	margin-top: 5px
+}
+
+.lotusWidgetViewer .lotusWidgetFooter img {
+	vertical-align: top
+}
+
+.lotusWidgetViewer h2 a.lotusActionMenu {
+	background-image:
+		url("/.ibmxspres/domino/oneuiv2/images/iconActions.png")
+}
+
+.lotusWidgetViewer h2 a.lotusActionMenu:hover,.lotusWidget h2 a.lotusActionMenu:focus
+	{
+	background-image:
+		url("/.ibmxspres/domino/oneuiv2/images/iconActionsHover.png");
+}
+
+.lotusSpritesOn .lotusWidgetViewer h2 {
+	background-image:
+		url("/.ibmxspres/domino/oneuiv2/DefaultTheme/themeImages/lotusHorzBgSprite-8bit.png")
+		;
+	background-position: 0 -900px;
+}
+
+.lotusSpritesOn .lotusWidgetViewer h2 a.lotusActionMenu {
+	background-image:
+		url("/.ibmxspres/domino/oneuiv2/DefaultTheme/themeImages/lotusSprite-8bit.png")
+		;
+	background-position: 3px -1921px;
+}
+
+.lotusSpritesOn .lotusWidgetViewer h2 a.lotusActionMenu:hover,.lotusSpritesOn .lotusWidgetViewer h2 a.lotusActionMenu:focus
+	{
+	background-image:
+		url("/.ibmxspres/domino/oneuiv2/DefaultTheme/themeImages/lotusSprite-8bit.png")
+		;
+	background-position: 3px -2011px;
+}
+
+/*** Lotus Logo Replacement ***/
+.lotusui .lotusLogo,.lotusLoginLogo {
+	background-image: url("button_OpenNTF.jpg");
+}
+
+/*** Lotus Login Panel Fix For Images ***/
+.lotusLoginForm img {
+	position: relative;
+	top: 0px;
+	left: 0px;
+}
+
+/*** Breadcrumb ***/
+.crumbs {
+	width: auto;
+	float: left;
+	margin: 0 auto;
+	padding: 0;
+	line-height: 3em;
+}
+
+.crumbs a {
+	text-decoration: none;
+	margin: 0 5px 0 0;
+	padding: 10px 15px 10px 6px;
+	background: #fdfdfd url("crumbs.gif") no-repeat right center;
+}
+
+.crumbs span.house {
+	margin: 0 5px 0 0;
+	padding: 10px 15px 10px 6px;
+	background: #fdfdfd url("crumbs.gif") no-repeat right center;
+}
+
+.crumbs img.house {
+	margin: 0 5px 0 0;
+	padding: 10px 15px 10px 6px;
+	background: #fdfdfd url("crumbs.gif") no-repeat right center;
+}
+
+.crumbs img {
+	margin: 0 0px 0 0;
+	padding: 10px 0px 10px 0px;
+}
+
+.configSBLayoutTable {
+	background-color: #CCE7FE;
+	border-collapse: collapse;
+}
+
+.configSBLayoutTable td {
+	text-align: center;
+}
+
+.configSBLayoutTableHeader {
+	border-width: 1px;
+	border-style: solid;
+	border-color: #000000;
+	text-color: #ffffff;
+	padding: 5px;
+	background-color: #567890;
+	text-align: center;
+	font-weight: strong;
+	font-size: 14px;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+.configSBLayoutTableFooter {
+	border-width: 1px;
+	border-style: solid;
+	border-color: #000000;
+	padding: 5px;
+	background-color: #567890;
+	text-align: center;
+	-webkit-border-bottom-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.configSBLayoutTablePanel {
+	border-width: 1px;
+	border-style: solid;
+	border-color: #000000;
+	min-height: 500px;
+}
+
+.sbDragPanel {
+border-color:#E8ECEE;
+border-style:solid;
+border-width:0 1px 1px;
+margin:10px;
+
+}

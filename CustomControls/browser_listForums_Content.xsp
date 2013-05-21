@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+		<xp:this.data>
+		<xp:dominoDocument var="forumDoc" formName="content_Forum" action="openDocument"
+			documentId="#{javascript:sessionScope.forumUNID}">
+		</xp:dominoDocument>
+		<xp:dominoView var="lkp_ForumAreas" viewName="lkp_ForumAreasByForumUID" categoryFilter="#{javascript:sessionScope.forumUID}" />
+		</xp:this.data>
+	<xp:panel styleClass="lotusContent">
+		<xp:table styleClass="forumTable">
+			<tbody>
+				<xp:tr>
+					<xp:td styleClass="forumCategory">
+						<xp:panel>
+							<xp:this.rendered><![CDATA[#{javascript:if ( sessionScope.forumOwner == true || sessionScope.commonName == forumDoc.getDocument().getItemValueString("forum_Owner")){
+	return true;
+} else {
+	return false;
+}}]]></xp:this.rendered>
+							<xp:link escape="true"
+								title="Delete Category" id="link3"
+								rendered="#{javascript:sessionScope.forumOwner}"
+								outerStyleClass="lotusBtn lotusBtnRight lotusRight">
+								
+								<xp:image id="image5" url="/delete.png"
+									alt="Delete Category" />
+								<xp:eventHandler event="onclick"
+									submit="false">
+									<xp:this.script><![CDATA[XSP.openDialog('#{id:forumCategoryDeleteDialog}')]]></xp:this.script>
+								</xp:eventHandler></xp:link>
+							<xp:link escape="true" title="Edit Category"
+								id="link1" outerStyleClass="lotusBtn lotusBtnRight lotusRight">
+								<xp:this.parameters>
+									<xp:parameter name="forumID">
+										<xp:this.value><![CDATA[#{javascript:forumDoc.getDocument().getItemValueString("forum_UID");}]]></xp:this.value>
+									</xp:parameter>
+								</xp:this.parameters>
+								<xp:image id="image3" url="/edit.png"
+									alt="Edit Category" />
+								<xp:eventHandler event="onclick"
+									submit="false">
+									<xp:this.script><![CDATA[XSP.openDialog('#{id:forumCategoryEditDialog}')]]></xp:this.script>
+								</xp:eventHandler></xp:link>
+							<xp:link escape="true"
+								title="Create Forum Area" id="link2"
+								outerStyleClass="lotusBtn lotusBtnRight lotusRight">
+								<xp:this.parameters>
+									<xp:parameter name="forumID">
+										<xp:this.value><![CDATA[#{javascript:forumDoc.getDocument().getItemValueString("forum_UID");}]]></xp:this.value>
+									</xp:parameter>
+								</xp:this.parameters>
+								<xp:image id="image4" url="/add.png"
+									alt="Create Forum Area" />
+								<xp:eventHandler event="onclick"
+									submit="false">
+									<xp:this.script><![CDATA[XSP.openDialog('#{id:forumAreaCreateDialog}')]]></xp:this.script>
+								</xp:eventHandler>
+							</xp:link>
+						</xp:panel>
+						<xp:span styleClass="forumAreaTitle">
+							Sub-Forums &#160; : &#160;
+							<xp:text escape="true" id="computedField1"
+								value="#{forumDoc.forum_Name}" />
+						</xp:span>
+						<xp:panel styleClass="forumDesc">
+							<xp:text escape="true" id="computedField4"
+								value="#{forumDoc.forum_Desc}" />
+						</xp:panel>
+					</xp:td>
+				</xp:tr>
+			</tbody>
+		</xp:table>
+
+
+		<xc:content_HomePage_ForumAreas forumUID="#{javascript:sessionScope.forumUID}"></xc:content_HomePage_ForumAreas>
+	</xp:panel>
+	
+	<xe:dialog id="forumAreaCreateDialog" title="Create Forum Area">
+		<xp:panel>
+			<xp:this.data>
+				<xp:dominoDocument var="forumAreaDoc"
+					formName="content_ForumAreas" ignoreRequestParams="true" />
+			</xp:this.data>
+			<xp:panel styleClass="xTalkForm" id="panel5">
+				<fieldset>
+					<legend>Forum Details</legend>
+					<xp:label styleClass="required" value="Forum Name:"
+						id="label7" for="fld_ForumName" />
+					<xp:inputText value="#{forumAreaDoc.forumAreaName}"
+						id="inputText3" required="true">
+						<xp:this.validators>
+							<xp:validateRequired
+								message="The forum name is a required field." />
+
+						</xp:this.validators>
+					</xp:inputText>
+					<small>
+						This is the name of the forum that will display
+						in all views and breadcrumbs
+					</small>
+
+					<xp:label value="Forum Description:" id="label8"
+						for="fld_ForumDesc" />
+					<xp:inputText value="#{forumAreaDoc.forumAreaDesc}"
+						id="inputText4" />
+					<small>
+						This is the description of the forum that will
+						display in all views.
+					</small>
+				</fieldset>
+				<fieldset>
+					<legend>Forum Security</legend>
+					<xp:label styleClass="required" value="Forum Owner:"
+						id="label9" for="djextNameTextBox3" />
+					<xe:djextNameTextBox id="djextNameTextBox3"
+						value="#{forumAreaDoc.forum_Owner}">
+					</xe:djextNameTextBox>
+					<xe:namePicker id="namePicker5"
+						for="djextNameTextBox3" dialogTitle="Forum Area Owner">
+								<xe:this.dataProvider>
+									<xe:namePickerAggregator>
+										<xe:this.dataProviders>
+											<xe:dominoNABNamePicker addressBookSel="all"></xe:dominoNABNamePicker>
+											
+										
+										</xe:this.dataProviders>
+									</xe:namePickerAggregator>
+								</xe:this.dataProvider>
+					</xe:namePicker>
+
+					<small>
+						The forum owner will be able to moderate all
+						topics within the forum
+					</small>
+
+					<xp:label value="Forum Readers:" id="label10"
+						for="djextNameTextBox4" />
+					<xe:djextNameTextBox id="djextNameTextBox4"
+						value="#{forumAreaDoc.forum_Readers}" multipleSeparator="," />
+					<xe:namePicker id="namePicker6"
+						for="djextNameTextBox4" dialogTitle="Forum Area Readers">
+						<xe:this.dataProvider>
+									<xe:namePickerAggregator>
+										<xe:this.dataProviders>
+											<xe:dominoNABNamePicker addressBookSel="all"></xe:dominoNABNamePicker>
+											<xe:dominoViewNamePicker label="Extended Access" labelColumn="Name"
+												viewName="lkp_ExtendedAccess">
+											</xe:dominoViewNamePicker>
+										</xe:this.dataProviders>
+									</xe:namePickerAggregator>
+								</xe:this.dataProvider>
+					</xe:namePicker>
+					<small>
+						Leave blank to block this forum area from all
+						users.
+					</small>
+					<small>
+						Use a '*' to grant access to this forum area to
+						all users.
+					</small>
+					<small>
+						Or select Names/Groups from the addressbook to
+						restrict access to select people.
+					</small>
+					<xp:label value="Create Topics:" id="label11"
+						for="fld_ForumCreateTopics" />
+					<xe:djextNameTextBox id="fld_ForumCreateTopics"
+						multipleSeparator="," value="#{forumAreaDoc.forum_allowNewTopic}" />
+					<xe:namePicker id="namePicker7"
+						for="fld_ForumCreateTopics"
+						dialogTitle="Forum Area Topic Creators">
+								<xe:this.dataProvider>
+									<xe:namePickerAggregator>
+										<xe:this.dataProviders>
+											<xe:dominoNABNamePicker addressBookSel="all"></xe:dominoNABNamePicker>
+											
+											
+										</xe:this.dataProviders>
+									</xe:namePickerAggregator>
+								</xe:this.dataProvider>
+					</xe:namePicker>
+					<small>
+						Leave blank to allow all users to create new
+						topics within the forum
+					</small>
+					<xp:label value="Allowed Reply:" id="label12"
+						for="fld_ForumReplies" />
+					<xe:djextNameTextBox id="fld_ForumReplies"
+						value="#{forumAreaDoc.forum_allowReply}" multipleSeparator="," />
+					<xe:namePicker id="namePicker8"
+						for="fld_ForumReplies" dialogTitle="Forum Area Allow Replies">
+								<xe:this.dataProvider>
+									<xe:namePickerAggregator>
+										<xe:this.dataProviders>
+											<xe:dominoNABNamePicker addressBookSel="all"></xe:dominoNABNamePicker>
+											
+											
+										</xe:this.dataProviders>
+									</xe:namePickerAggregator>
+								</xe:this.dataProvider>
+					</xe:namePicker>
+					<small>
+						Leave blank to allow all users to reply to
+						topics
+					</small>
+				</fieldset>
+				<xp:panel styleClass="lotusActionBar lotusBtnContainer"
+					id="panel6">
+					<xp:link escape="true" text="Create Forum Area"
+						id="newForumLink"
+						outerStyleClass="lotusBtn lotusBtnSpecial lotusRight">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete" id="eventHandler16">
+							<xp:this.action id="this.action6"><![CDATA[#{javascript:var faDoc:NotesDocument = forumAreaDoc.getDocument(true);
+
+var forumOwner:NotesItem = faDoc.getFirstItem("forum_Owner");
+forumOwner.setReaders(true);
+
+var forumReaders:NotesItem = faDoc.getFirstItem("forum_Readers");
+forumReaders.setReaders(true);
+
+var forumDefaultReader:NotesItem = faDoc.replaceItemValue("Default_Reader","[ForumOwner]");
+forumDefaultReader.setReaders(true);
+
+var forumAllowNew:NotesItem = faDoc.getFirstItem("forum_allowNewTopic");
+forumAllowNew.setNames(true);
+
+var forumAllowReply:NotesItem = faDoc.getFirstItem("forum_allowReply");
+forumAllowReply.setNames(true);
+
+faDoc.replaceItemValue("forum_IsLocked","0");
+faDoc.replaceItemValue("forum_LastAuthor","");
+faDoc.replaceItemValue("forum_Lastdate","");
+faDoc.replaceItemValue("forum_LastTitle","");
+faDoc.replaceItemValue("forum_Posts",0);
+faDoc.replaceItemValue("forum_Threads",0);
+faDoc.replaceItemValue("forum_ParentUID",forumDoc.getDocument().getItemValueString("forum_UID"));
+faDoc.replaceItemValue("forum_ParentUNID",forumDoc.getDocument().getUniversalID());
+faDoc.replaceItemValue("forum_UID",@Unique());
+faDoc.replaceItemValue("forumParent",forumDoc.getDocument().getItemValueString("forum_Name"));
+
+faDoc.save();
+context.redirectToPage("/listForums.xsp?forumID=" + forumDoc.getDocument().getItemValueString("forum_UID"))}]]></xp:this.action>
+
+						</xp:eventHandler>
+					</xp:link>
+					<xp:link escape="true" text="Cancel" id="link7"
+						outerStyleClass="lotusBtn lotusRight">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete" immediate="true">
+							<xp:this.action><![CDATA[#{javascript:var c = getComponent("fld_ForumOwner");
+c.hide();}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+
+				</xp:panel>
+			</xp:panel>
+		</xp:panel>
+	</xe:dialog>
+	<xe:dialog id="forumCategoryDeleteDialog" title="Delete Forum Category" keepComponents="false">
+				<xp:panel styleClass="xTalkForm">
+				
+			<fieldset>
+				<legend>Delete Category</legend>
+				<xp:panel style="text-align:center">
+					You have requested to delete the category
+					<xp:br></xp:br>
+					<xp:br></xp:br>
+					<xp:text escape="true" id="computedField3" value="#{forumDoc.forum_Name}" style="font-size:14pt;font-weight:bold"></xp:text>
+					<xp:br></xp:br>
+					<xp:br></xp:br>
+					THIS ACTION IS WILL REMOVE ALL FORUM AREAS AND
+					TOPICS
+					<xp:br></xp:br>
+					AND IS UNRECOVERABLE. ARE YOU SURE?
+					<xp:br></xp:br>
+					<xp:br></xp:br>
+				</xp:panel>
+			</fieldset>
+			<xp:panel styleClass="lotusActionBar lotusBtnContainer" id="panel4">
+			<xp:link escape="true" text="Delete Category"
+				id="link5" outerStyleClass="lotusBtn lotusBtnSpecial lotusRight">
+				
+			<xp:eventHandler event="onclick" submit="true" refreshMode="complete" id="eventHandler4">
+				<xp:this.action id="this.action4">
+
+					<xp:actionGroup>
+						<xp:confirm message="Are You Really Sure"></xp:confirm>
+						<xp:executeScript>
+							<xp:this.script><![CDATA[#{javascript:var fDoc:NotesDocument = forumDoc.getDocument();
+var faView:NotesView = database.getView("lkp_ForumAreasByForumUID");
+var topicsView:NotesView = database.getView("lkp_TopicsByForumAreaUID");
+var faVEColl:NotesViewEntryCollection = faView.getAllEntriesByKey(fDoc.getItemValueString("forum_UID"));
+if (faVEColl.getCount() > 0){
+	var faEntry:NotesViewEntry = faVEColl.getFirstEntry();
+	while (faEntry != null){
+		var faDoc:NotesDocument = faEntry.getDocument();
+		var topicVEColl:NotesViewEntryCollection = topicsView.getAllEntriesByKey(faDoc.getItemValueString("forum_UID"));
+		if (topicVEColl.getCount() > 0){
+			var topEntry:NotesViewEntry = topicVEColl.getFirstEntry();
+			while (topEntry != null){
+				var topDoc:NotesDocument = topEntry.getDocument();
+				var topReplyColl:NotesDocumentCollection = topDoc.getResponses();
+				topReplyColl.removeAll(true);
+				var topEntry:NotesViewEntry = topicVEColl.getNextEntry();
+			}
+			topicVEColl.removeAll(true);
+		}
+		var faEntry:NotesViewEntry = faVEColl.getNextEntry();
+	}
+	faVEColl.removeAll(true);
+}
+
+fDoc.removePermanently(true);
+context.redirectToPage("/home.xsp")
+}]]></xp:this.script>
+						</xp:executeScript>
+					</xp:actionGroup>
+				</xp:this.action></xp:eventHandler></xp:link>
+			<xp:link escape="true" id="link6"
+				outerStyleClass="lotusBtn lotusRight" text="Cancel">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete" immediate="true">
+				<xp:this.action><![CDATA[#{javascript:var c = getComponent("forumCategoryDeleteDialog");
+c.hide();}]]></xp:this.action>
+			</xp:eventHandler></xp:link></xp:panel>
+		</xp:panel>
+				</xe:dialog>
+				<xe:dialog id="forumCategoryEditDialog" title="Edit Forum Category" keepComponents="true">
+					<xp:panel styleClass="xTalkForm" id="panel2">
+
+						<xp:this.data>
+							<xp:dominoDocument var="forumDocEdit"
+								formName="content_Forum" action="editDocument"
+								documentId="#{javascript:forumDoc.getNoteID()}">
+							</xp:dominoDocument>
+						</xp:this.data>
+						<fieldset>
+							<legend>Category Information</legend>
+							<xp:label styleClass="required"
+								value="Category Name:" id="label3" for="fld_ForumName" />
+							<xp:inputText value="#{forumDocEdit.forum_Name}"
+								id="inputText1" required="true">
+							</xp:inputText>
+							<small>
+								This is the name of the category that
+								will display in all views and
+								breadcrumbs
+							</small>
+							<xp:label value="Category Desc:" id="label4"
+								for="fld_ForumDesc" />
+							<xp:inputText value="#{forumDocEdit.forum_Desc}"
+								id="inputText2" />
+							<small>
+								This is the description of the category
+								that will display in all views.
+							</small>
+						</fieldset>
+						<fieldset>
+							<legend>Category Security</legend>
+							<xp:label styleClass="required"
+								value="Category Owner:" id="label5" for="fld_ForumOwner" />
+							<xe:djextNameTextBox id="djextNameTextBox1"
+								value="#{forumDocEdit.forum_Owner}">
+							</xe:djextNameTextBox>
+							<xe:namePicker id="namePicker3"
+								for="djextNameTextBox1" dialogTitle="Category Owner">
+								<xe:this.dataProvider>
+									<xe:namePickerAggregator>
+										<xe:this.dataProviders>
+											<xe:dominoNABNamePicker addressBookSel="all"></xe:dominoNABNamePicker>
+											
+										</xe:this.dataProviders>
+									</xe:namePickerAggregator>
+								</xe:this.dataProvider>
+							</xe:namePicker>
+							<small>
+								The category owner will be able to
+								moderate all forums within the category
+							</small>
+							<xp:label value="Category Readers:"
+								id="label6" for="fld_ForumReaders" />
+							<xe:djextNameTextBox id="djextNameTextBox2"
+								multipleSeparator="," value="#{forumDocEdit.forum_Readers}">
+							</xe:djextNameTextBox>
+							<xe:namePicker id="namePicker4"
+								for="djextNameTextBox2" dialogTitle="Category Readers">
+								<xe:this.dataProvider>
+									<xe:namePickerAggregator>
+										<xe:this.dataProviders>
+											<xe:dominoNABNamePicker addressBookSel="all"></xe:dominoNABNamePicker>
+											<xe:dominoViewNamePicker label="Extended Access" labelColumn="Name"
+												viewName="lkp_ExtendedAccess">
+											</xe:dominoViewNamePicker>
+										</xe:this.dataProviders>
+									</xe:namePickerAggregator>
+								</xe:this.dataProvider>
+							</xe:namePicker>
+							<small>
+								Leave blank to block this category from
+								all users but the forum owner.
+							</small>
+							<small>
+								Use a '*' to grant access to this
+								category to all users.
+							</small>
+							<small>
+								Or select Names/Groups from the
+								addressbook to restrict access.
+							</small>
+						</fieldset>
+						<xp:panel
+							styleClass="lotusActionBar lotusBtnContainer" id="panel3">
+							<xp:link escape="true"
+								text="Update Forum Category" id="link8"
+								outerStyleClass="lotusBtn lotusBtnSpecial lotusRight">
+								<xp:eventHandler event="onclick"
+									submit="true" refreshMode="complete" id="eventHandler3">
+									<xp:this.action id="this.action3"><![CDATA[#{javascript:var catDoc:NotesDocument = forumDocEdit.getDocument(true);
+var faView:NotesView = database.getView("lkp_ForumAreas");
+
+var faVEColl:NotesViewEntryCollection = faView.getAllEntriesByKey(catDoc.getUniversalID());
+if (faVEColl.getCount() > 0){
+	var faEntry:NotesViewEntry = faVEColl.getFirstEntry();
+	while (faEntry != null){
+		var faDoc:NotesDocument = faEntry.getDocument();
+		faDoc.replaceItemValue("forumParent",catDoc.getItemValueString("forum_Name"));
+		faDoc.save();
+		var faEntry:NotesViewEntry = faVEColl.getNextEntry();
+	}
+}
+
+var forumOwner:NotesItem = catDoc.getFirstItem("forum_Owner");
+forumOwner.setReaders(true);
+var forumReaders:NotesItem = catDoc.getFirstItem("forum_Readers");
+forumReaders.setReaders(true);
+var forumDefaultReader:NotesItem = catDoc.replaceItemValue("Default_Reader","[ForumOwner]");
+forumDefaultReader.setReaders(true);
+
+catDoc.save();
+
+context.redirectToPage(context.getUrl().getPath() + context.getUrl().getQueryString());}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
+							<xp:link escape="true" text="cancel"
+								id="link4" outerStyleClass="lotusBtn lotusRight">
+								<xp:eventHandler event="onclick"
+									submit="true" refreshMode="complete" immediate="true">
+									<xp:this.action><![CDATA[#{javascript:var c = getComponent("forumCategoryEditDialog");
+c.hide();}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
+						</xp:panel>
+					</xp:panel>
+				</xe:dialog>
+</xp:view>

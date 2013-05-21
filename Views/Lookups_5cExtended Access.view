@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='852575D1004E0DF0'>
+<noteinfo noteid='1e86' unid='C51E2C33EB7A39BC852577BC0071C5E6' sequence='13'>
+<created><datetime dst='true'>20101014T164242,30-04</datetime></created>
+<modified><datetime dst='true'>20101014T170529,02-04</datetime></modified>
+<revised><datetime dst='true'>20101014T170529,01-04</datetime></revised>
+<lastaccessed><datetime>20121108T103127,15-05</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20101014T164243,46-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Declan Sciolla-Lynch/O=Imagination</name></updatedby>
+<wassignedby><name>CN=Declan Sciolla-Lynch/O=Imagination</name></wassignedby>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$TITLE' sign='true'><text>Lookups\Extended Access|lkp_ExtendedAccess</text></item>
+<item name='$Index' sign='true'><text/></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
+kgACABoABQBWYWx1ZQAFAAgAZXhfVmFsdWUDAAIAGAAEAE5hbWUFAAcAZXhfTmFtZQADAAUAJgAi
+AAQABQAEAAkABABWYWx1ZU5hbWUkQ29uZmxpY3QkUkVGBAAEAAAAJgAFAAQAZm9ybQEAEQBmbV9F
+eHRlbmRlZEFjY2VzcwAKAgMABwAOAAgACUwxUzJTM1M=
+</formula></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+EgABAABEgGYAAAAFAFZhbHVl
+</rawitemdata></item>
+<item name='$ViewFormat' summary='true' sign='true'>
+<rawitemdata type='5'>
+AQACAAIACAAAAFZDAQAFAAUAHAAAAHUAAQAACgAAAAAAAAAAAAICAAAAVkMAAAQABAAaAAAAnQAB
+AAAKAAAAAAAAAAAAAgIAAABWYWx1ZVZhbHVlHAACABoABQBWYWx1ZQAFAAgAZXhfVmFsdWUDAE5h
+bWVOYW1lGgACABgABABOYW1lBQAHAGV4X05hbWUAAwAmAAEAAAABAQAJAQAACgEBDgoAAAEArSsB
+AAEAAQAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAA
+AABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAQgAAAAAAAQD/
+//8ABQD///8AAQAAAAAAAAAAAAAAAAABAP///wABAP///wAAAAEAAAAAAAEAAAAAAAEAAAAAAAAA
+CAAAAAAAAQA=
+</rawitemdata></item>
+<item name='$Comment' sign='true'><text>xTalk V1.1.01</text></item>
+<item name='$Flags'><text>Y</text></item>
+<item name='$DesignerVersion'><text>8.5.2</text></item></note>
+

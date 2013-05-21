@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='852575D1004E0DF0'>
+<noteinfo noteid='1e0a' unid='2478A68F0B577B09852577B90079DDC6' sequence='13'>
+<created><datetime dst='true'>20101011T181106,30-04</datetime></created>
+<modified><datetime dst='true'>20101011T182826,51-04</datetime></modified>
+<revised><datetime dst='true'>20101011T182826,50-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20130521T091731,76-04</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20101011T181106,42-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Declan Sciolla-Lynch/O=Imagination</name></updatedby>
+<wassignedby><name>CN=Declan Sciolla-Lynch/O=Imagination</name></wassignedby>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$Index' sign='true'><text/></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
+XAAFACoAJQADAA4ACQAEAHRvcGljX1RvcGljVUlEJENvbmZsaWN0JFJFRgAEAAQAAAAiAAUABABm
+b3JtAQANAGNvbnRlbnRfVG9waWMACgIDAAcACgAEAAlMMVM=
+</formula></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+GwABAABEAGYAAAAOAHRvcGljX1RvcGljVUlE
+</rawitemdata></item>
+<item name='$ViewFormat' summary='true' sign='true'>
+<rawitemdata type='5'>
+AQABAAEACAAAAFZDAQAOAA4AAAAAAHAAAQAACgAAAAAAAAAAAAICAAAAdG9waWNfVG9waWNVSUR0
+b3BpY19Ub3BpY1VJRCYAAQAAAAEBAAkBAAAKAQEOCgAAAQCtKwEAAQABAAAAAAAAAAAAV0MBAQAJ
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAEIAAAAAAAEA////AAUA////
+AAEAAAAAAAAAAAAAAAAAAQD///8AAQD///8AAAABAAAAAAABAAAAAAABAAAAAAAAAAgAAAAAAAEA
+</rawitemdata></item>
+<item name='$Flags'><text>Y</text></item>
+<item name='$TITLE' sign='true'><text>Lookups\Topics|lkp_TopicsUID</text></item>
+<item name='$Comment' sign='true'><text>xTalk V1.1.01</text></item>
+<item name='$DesignerVersion' sign='true'><text>8.5.2</text></item></note>
+

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="852575D1004E0DF0" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="166" sequence="177" unid="1FF4D233584F93E78525756E005082D2">
+<created><datetime>20090303T093923,70-05</datetime></created>
+<modified><datetime dst="true">20101011T213017,09-04</datetime></modified>
+<revised><datetime dst="true">20101011T213017,08-04</datetime></revised>
+<lastaccessed><datetime dst="true">20101011T213017,08-04</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20090610T101235,49-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Declan Sciolla-Lynch/O=Imagination</name></updatedby>
+<wassignedby><name>CN=Declan Sciolla-Lynch/O=Imagination</name></wassignedby>
+<item name="$TITLE"><text>home.xsp</text></item>
+
+<item name="$Flags"><text>gC~K4</text></item>
+<item name="$PublicAccess" sign="true"><text>1</text></item>
+<item name="$Comment" sign="true"><text>xTalk V1.1</text></item>
+
+
+
+
+<item name="$FileNames" sign="true"><text>home.xsp</text></item>
+<item name="$DesignerVersion"><text>8.5</text></item>
+
+</note>

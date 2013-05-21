@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='852575D1004E0DF0'>
+<noteinfo noteid='1c16' unid='D90E93FA9F0B6BFE852576790009BF80' sequence='8'>
+<created><datetime>20091124T204628,48-05</datetime></created>
+<modified><datetime dst='true'>20101009T145532,85-04</datetime></modified>
+<revised><datetime dst='true'>20101009T145532,84-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20110330T020753,39-04</datetime></lastaccessed>
+<addedtofile><datetime>20091124T204628,51-05</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Declan Sciolla-Lynch/O=qtzar.com</name><name>CN=Figment/O=Imagination</name><name
+>CN=Declan Sciolla-Lynch/O=Imagination</name></updatedby>
+<wassignedby><name>CN=Declan Sciolla-Lynch/O=Imagination</name></wassignedby>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$TITLE' sign='true'><text>All Documents</text></item>
+<item name='$Index' sign='true'><text/></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
+YgACAAwAAgAkMWkAAwACAAwAAgAkMqQAAwACABQABABGb3JtBQAEAEZvcm0DAAUAKAAjAAUAAgAC
+AAQACQAEACQxJDJGb3JtJENvbmZsaWN0JFJFRgAEAAQAAAAIAGYAAwA=
+</formula></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+DwABAABEgGYAAAACACQx
+</rawitemdata></item>
+<item name='$ViewFormat' summary='true' sign='true'>
+<rawitemdata type='5'>
+AQADAAMACAAAAFZDAQACAAcADgAAAJEAAQAACgAAAAAAAAAAAAICAAAAVkMAAAIACAAOAAAAhwAB
+AAAKAAAAAAAAAAAAAgIAAABWQwAABAAEABYAAACdAAEAAAoAAAAAAAAAAAACAgAAACQxQ3JlYXRl
+ZA4AAgAMAAIAJDFpAAMAJDJNb2RpZmllZA4AAgAMAAIAJDKkAAMARm9ybUZvcm0WAAIAFAAEAEZv
+cm0FAAQARm9ybQMAJgABAAAAAQEACQEAAAoBAQ4KAAABAK0rAQABAAEAAAAAAAAAAABXQwEBAAkA
+AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAA
+AAAAAAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AP//AAAAAAAAAAAAAAAAAABCAAAAAAABAP///wAFAP///wABAAAAAAAAAAAAAAAAAAEA////AAEA
+////AAAAAQAAAAAAAQAAAAAAAQAAAAAAAAAIAAAAAAABAA==
+</rawitemdata></item>
+<item name='$Flags'><text>Y</text></item>
+<item name='$Comment' sign='true'><text>xTalk v1.0</text></item>
+<item name='$DesignerVersion' sign='true'><text>8.5</text></item></note>
+

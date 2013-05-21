@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+<xp:panel styleClass="lotusContent" id="lotusContent">
+		<xp:panel styleClass="xTalkForm" id="xTalkForm">
+			<fieldset>
+				<legend>Problem Detected</legend>
+				The forum or topic you have requested could not be found
+				<xp:br />
+				Or you do not have the access required to view it.
+				<xp:br />
+				<xp:link escape="true" text="Click here" id="link1" value="/home.xsp" />
+				 &#160;to go to the main forum page.
+			</fieldset>
+		</xp:panel>
+	</xp:panel>
+</xp:view>

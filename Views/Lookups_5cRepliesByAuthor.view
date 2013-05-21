@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='utf-8'?>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='852575D1004E0DF0'>
+<noteinfo noteid='1cda' unid='126B73649C402D518525768700634F08' sequence='10'>
+<created><datetime>20091209T130442,96-05</datetime></created>
+<modified><datetime dst='true'>20101014T201611,46-04</datetime></modified>
+<revised><datetime dst='true'>20101014T201611,45-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20110512T020440,46-04</datetime></lastaccessed>
+<addedtofile><datetime>20091209T130445,22-05</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Declan Sciolla-Lynch/O=Imagination</name></updatedby>
+<wassignedby><name>CN=Declan Sciolla-Lynch/O=Imagination</name></wassignedby>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$TITLE' sign='true'><text>Lookups\RepliesByAuthor|lkp_RepliesByAuthor</text></item>
+<item name='$Index' sign='true'><text/></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
+CAECACYAAgAkNAIABgAAAAAAAAAFAAwAdG9waWNfQXV0aG9ytAIDAAIAKAAOAHRvcGljX1RvcGlj
+VUlEBQAOAHRvcGljX1RvcGljVUlEAwAFAGAAXAAHAAIADgALAA4ACwANAAkAJDR0b3BpY19Ub3Bp
+Y1VJRHRvcGljX1RpdGxldG9waWNfRGF0ZVRpbWV0b3BpY19WaWV3c3RvcGljX1JlcGxpZXMkQ29u
+ZmxpY3QEAAQAAABCAAUABABmb3JtAQASAGNvbnRlbnRfVG9waWNSZXBseQoCBQARAHRvcGljX3Jl
+cGx5TWFzdGVyAGgBHgEcAgMABwASAAwACUwxUzJTM1M0UzVT
+</formula></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+DwABAABECGYHAAACACQ0
+</rawitemdata></item>
+<item name='$ViewFormat' summary='true' sign='true'>
+<rawitemdata type='5'>
+AQAGAAgACgAAAFZDAwACAAwANAAAAH4AAQAACgABAAAAAAAAAAICAAAAVkMAAA4ADgAqAAAAigAB
+AAAKAAAAAAAAAAAAAgIAAABWQwAACwALAAAAAACdAAEAAAoAAAAAAAAAAAACAgAAAFZDAAAOAA4A
+AAAAAIEAAQAACgAAAAAAAAAAAAICAAAAVkMAAAsACwAAAAAAUAABAAAKAAAAAAAAAAAAAgIAAABW
+QwAADQANAAAAAABQAAEAAAoAAAAAAAAAAAACAgAAACQ0dG9waWNfQXV0aG9yNAACACYAAgAkNAIA
+BgAAAAAAAAAFAAwAdG9waWNfQXV0aG9ytAIDAAcADAAFAAkwUzBFAHRvcGljX1RvcGljVUlEdG9w
+aWNfVG9waWNVSUQqAAIAKAAOAHRvcGljX1RvcGljVUlEBQAOAHRvcGljX1RvcGljVUlEAwB0b3Bp
+Y19UaXRsZXRvcGljX1RpdGxldG9waWNfRGF0ZVRpbWV0b3BpY19EYXRlVGltZXRvcGljX1ZpZXdz
+dG9waWNfVmlld3N0b3BpY19SZXBsaWVzdG9waWNfUmVwbGllcyYAAQAAAAEBAAkBAAAKAQEOCgAA
+AQCtKwEAAQABAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAAAAAAAA
+AAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEB
+AAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAA
+AAAAAAAAAAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQA
+AAAAAP//AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAA
+AAAAAAAAAAAAQgAAAAAAAQD///8ABQD///8AAQAAAAAAAAAAAAAAAAABAP///wABAP///wAAAAEA
+AAAAAAEAAAAAAAEAAAAAAAAACAAAAAAAAQA=
+</rawitemdata></item>
+<item name='$Comment' sign='true'><text>xTalk V1.0</text></item>
+<item name='$Flags'><text>Y</text></item>
+<item name='$DesignerVersion'><text>8.5.2</text></item></note>
+

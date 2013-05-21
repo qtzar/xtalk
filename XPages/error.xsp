@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	pageTitle="#{javascript:applicationScope.forumShortName}">
+	<xp:this.resources>
+		<xp:script src="/global.jss" clientSide="false" />
+		<xp:metaData name="generator"
+			content="IBM Lotus Domino - xTalk V1.1">
+		</xp:metaData>
+		<xp:metaData name="description"
+			content="#{javascript:applicationScope.forumName}">
+		</xp:metaData>
+		<xp:metaData name="title"
+			content="#{javascript:applicationScope.forumShortName}">
+		</xp:metaData>
+	</xp:this.resources>
+	<xp:this.beforePageLoad><![CDATA[#{javascript:if (applicationScope.containsKey("init") == false ){
+	initApplication();
+}
+
+if (sessionScope.containsKey("init") == false ){
+	initSession();
+}
+
+if (sessionScope.commonName != context.getUser().getCommonName()){
+	initSession();
+}
+
+checkBrowser();
+checkTheme(sessionScope.get("browserType"));
+
+sessionScope.currentPage = "home";
+sessionScope.topicUID = "";
+sessionScope.topicUNID = "";
+sessionScope.forumAreaUID = "";
+sessionScope.forumAreaUNID = "";
+sessionScope.forumUID = "";
+sessionScope.forumUNID = "";
+
+sessionScope.bcrumb1on = true;
+sessionScope.bcrumb1link = true;
+
+sessionScope.bcrumb2on = true;
+sessionScope.bcrumb2link = false;
+sessionScope.bcrumb2text = "Error Detected";
+sessionScope.remove("bcrumb2URL");
+
+sessionScope.bcrumb3on = false;
+sessionScope.remove("bcrumb3link");
+sessionScope.remove("bcrumb3text");
+sessionScope.remove("bcrumb3URL");
+
+sessionScope.bcrumb4on = false;
+sessionScope.remove("bcrumb4link");
+sessionScope.remove("bcrumb4text");
+sessionScope.remove("bcrumb4URL");
+
+sessionScope.bcrumb5on = false;
+sessionScope.remove("bcrumb5link");
+sessionScope.remove("bcrumb5text");
+sessionScope.remove("bcrumb5URL");
+
+sessionScope.bcrumb6on = false;
+sessionScope.remove("bcrumb6link");
+sessionScope.remove("bcrumb6text");
+sessionScope.remove("bcrumb6URL");}]]></xp:this.beforePageLoad>
+	<xp:include
+		pageName='${javascript:sessionScope.browserType + "_error.xsp"}'
+		id="include1">
+	</xp:include>
+</xp:view>

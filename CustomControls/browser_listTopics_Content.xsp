@@ -1,0 +1,668 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.data>
+		<xp:dominoView var="lkpTopics" viewName="lkp_TopicsByForumAreaUID"
+			categoryFilter="#{javascript:sessionScope.forumAreaUID}" />
+		<xp:dominoDocument var="forumAreaDoc" formName="content_ForumAreas"
+			action="openDocument" documentId="#{javascript:sessionScope.forumAreaUNID}" />
+
+	</xp:this.data>
+	<xp:this.beforePageLoad><![CDATA[#{javascript:viewScope.allowNewTopic = session.evaluate("@if(@name([Canonicalize];forum_allowNewTopic) *= @UserNamesList;@return(\"1\");@return(\"0\"))",forumAreaDoc.getDocument()).toString()}]]></xp:this.beforePageLoad>
+	<xp:panel styleClass="lotusContent">
+		<xp:panel styleClass="lotusActionBar lotusBtnContainer">
+			<xp:pager for="topicRepeat" id="replyPagerTop"
+				outerStyleClass="xTalkPager lotusRight" styleClass="xTalkPager">
+				<xp:pagerControl id="pagerControl2" type="Status"
+					value="Page {0} of {1}" styleClass="xTalkPagerItem" />
+				<xp:pagerControl id="pagerControl9" type="First"
+					styleClass="xTalkPagerItem">
+					<xp:this.value><![CDATA[<< First]]></xp:this.value>
+				</xp:pagerControl>
+				<xp:pagerControl id="pagerControl8" type="Previous"
+					styleClass="xTalkPagerItem">
+					<xp:this.value><![CDATA[< Prev]]></xp:this.value>
+				</xp:pagerControl>
+				<xp:pagerControl id="pagerControl1" type="Group"
+					currentStyleClass="xTalkPagerCurrent" styleClass="xTalkPagerItems" />
+				<xp:pagerControl id="pagerControl7" type="Next"
+					styleClass="xTalkPagerItem">
+					<xp:this.value><![CDATA[Next >]]></xp:this.value>
+				</xp:pagerControl>
+				<xp:pagerControl id="pagerControl5" type="Last"
+					styleClass="xTalkPagerItem">
+					<xp:this.value><![CDATA[Last >>]]></xp:this.value>
+				</xp:pagerControl>
+			</xp:pager>
+			<xp:link escape="true" text="Create Topic" id="newTopicLink"
+				outerStyleClass="lotusBtn lotusBtnSpecial lotusLeft" value="/newTopic.xsp"
+				title="Create Topic">
+				<xp:this.parameters>
+					<xp:parameter name="forumID">
+						<xp:this.value><![CDATA[#{javascript:forumAreaDoc.getItemValueString("forum_UID")}]]></xp:this.value>
+					</xp:parameter>
+				</xp:this.parameters>
+				<xp:this.rendered><![CDATA[#{javascript:if (context.getUser().isAnonymous() == true){
+	return false;
+}
+	
+if (forumAreaDoc.getItemValueString("forum_IsLocked") == "1"){
+	return false;
+}
+if (forumAreaDoc.getItemValueString("forum_allowNewTopic") == ""){
+	return true;
+}
+
+var pos = forumAreaDoc.getItemValue("forum_allowNewTopic").toString().indexOf(sessionScope.userCommon)
+if (pos > -1){
+	return true;
+} 
+
+if (viewScope.get("allowNewTopic") == "[1]"){
+	return true;
+}
+
+return false;}]]></xp:this.rendered>
+			</xp:link>
+		</xp:panel>
+		<xp:table styleClass="forumTable">
+			<tbody>
+				<xp:tr>
+					<xp:td styleClass="forumCategory">
+						<xp:link escape="true" title="Delete Forum" id="link2"
+							outerStyleClass="lotusBtn lotusBtnRight lotusRight" rendered="#{javascript:sessionScope.forumOwner}">
+							<xp:this.parameters>
+								<xp:parameter name="forumID">
+									<xp:this.value><![CDATA[#{javascript:forumAreaDoc.getDocument().getItemValueString("forum_UID")}]]></xp:this.value>
+								</xp:parameter>
+							</xp:this.parameters>
+							<xp:image id="image5" url="/delete.png" />
+							<xp:eventHandler event="onclick" submit="false">
+								<xp:this.script><![CDATA[XSP.openDialog('#{id:forumAreaDeleteDialog}')]]></xp:this.script>
+							</xp:eventHandler>
+						</xp:link>
+						<xp:link escape="true" title="Edit Forum" id="link1"
+							outerStyleClass="lotusBtn lotusBtnRight lotusRight">
+							<xp:this.rendered><![CDATA[#{javascript:var forumDoc:NotesDocument = database.getDocumentByUNID(sessionScope.forumUNID);
+if (
+		sessionScope.forumOwner
+		|| sessionScope.userCommon == forumDoc.getItemValueString("forum_Owner")
+		|| sessionScope.userCommon == forumAreaDoc.getItemValueString("forum_Owner")
+	){
+		return true;
+	} else {
+		return false;
+	}}]]></xp:this.rendered>
+							<xp:image id="image4" url="/edit.png" />
+							<xp:eventHandler event="onclick" submit="false">
+								<xp:this.script><![CDATA[XSP.openDialog('#{id:forumAreaEditDialog}')]]></xp:this.script>
+							</xp:eventHandler>
+						</xp:link>
+						<xp:link escape="true" title="Lock Forum" id="link3"
+							outerStyleClass="lotusBtn lotusBtnRight lotusRight">
+							<xp:this.rendered><![CDATA[#{javascript:var forumDoc:NotesDocument = database.getDocumentByUNID(sessionScope.forumUNID);
+if (sessionScope.forumOwner
+		|| sessionScope.userCommon == forumDoc.getItemValueString("forum_Owner")
+		|| sessionScope.userCommon == forumAreaDoc.getItemValueString("forum_Owner"))
+	{
+		if (forumAreaDoc.getItemValueString("forum_IsLocked") == "1"){
+			return false;
+		} else {
+			return true;
+		}
+	} else {
+		return false;
+}}]]></xp:this.rendered>
+							<xp:image id="image3" url="/lock_add.png" />
+							<xp:eventHandler event="onclick" submit="true"
+								refreshMode="complete" id="eventHandler2" immediate="true">
+								<xp:this.action id="this.action2"><![CDATA[#{javascript:forumAreaDoc.replaceItemValue("forum_IsLocked","1")
+forumAreaDoc.save();}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:link>
+						<xp:link escape="true" title="Unlock Forum" id="link4"
+							outerStyleClass="lotusBtn lotusBtnRight lotusRight">
+							<xp:this.rendered id="this.rendered1"><![CDATA[#{javascript:var forumDoc:NotesDocument = database.getDocumentByUNID(sessionScope.forumUNID);
+if (sessionScope.forumOwner
+		|| sessionScope.userCommon == forumDoc.getItemValueString("forum_Owner")
+		|| sessionScope.userCommon == forumAreaDoc.getItemValueString("forum_Owner"))
+	{
+		if (forumAreaDoc.getItemValueString("forum_IsLocked") == "0"){
+			return false;
+		} else {
+			return true;
+		}
+	} else {
+		return false;
+}}]]></xp:this.rendered>
+							<xp:image id="image2" url="/lock_delete.png" />
+							<xp:eventHandler event="onclick" submit="true"
+								refreshMode="complete" id="eventHandler1" immediate="true">
+								<xp:this.action id="this.action1"><![CDATA[#{javascript:forumAreaDoc.replaceItemValue("forum_IsLocked","0")
+forumAreaDoc.save();}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:link>
+						<xp:span styleClass="forumAreaTitle">
+							<xp:text escape="true" id="computedField1" value="#{forumAreaDoc.forumAreaName}" />
+						</xp:span>
+						<xp:panel styleClass="forumDesc">
+							<xp:text escape="true" id="computedField4" value="#{forumAreaDoc.forumAreaDesc}" />
+						</xp:panel>
+					</xp:td>
+				</xp:tr>
+			</tbody>
+		</xp:table>
+		<xp:repeat id="topicRepeat" var="topicData" indexVar="topicIndx"
+			value="#{lkpTopics}" rows="20">
+			<xp:this.facets>
+				<xp:text disableTheme="true" xp:key="header" escape="false">
+					<xp:this.value><![CDATA[<table class="forumTable">
+<thead>
+<tr>
+<th class="forumHeader" colspan="2" />
+<th class="forumHeader forumHeaderExpand">Thread/Thread Starter</th>
+<th class="forumHeader">Last Post</th>
+<th class="forumHeader forumCenterText">Replies</th>
+<th class="forumHeader forumCenterText">Views</th>
+</tr>
+</thead>
+<tbody>]]></xp:this.value>
+				</xp:text>
+				<xp:text disableTheme="true" xp:key="footer" escape="false">
+					<xp:this.value><![CDATA[</tbody>
+</table>]]></xp:this.value>
+				</xp:text>
+			</xp:this.facets>
+			<xp:panel>
+				<xp:this.data>
+					<xp:dominoDocument var="topicDoc" formName="content_Topic"
+						action="openDocument" documentId="#{javascript:topicData.getNoteID();}" />
+
+				</xp:this.data>
+				<xp:tr styleClass="forumTopicList">
+					<xp:td styleClass="forumCol1">
+						<xp:image id="forumStatus">
+							<xp:this.url><![CDATA[#{javascript:if (topicDoc.getItemValueString("topic_IsLocked") == "1"){
+	if (topicDoc.getItemValueString("topic_IsHot") == "1"){
+		return "thread_hot_lock.gif";
+	}else {
+		return "thread_lock.gif";
+	}
+} else {
+	if (topicDoc.getItemValueString("topic_IsHot") == "1"){
+		return "thread_hot.gif";
+	}else {
+		return "thread.gif";
+	}
+}}]]></xp:this.url>
+							<xp:this.alt><![CDATA[#{javascript:if (topicDoc.getItemValueString("topic_IsLocked") == "1"){
+	if (topicDoc.getItemValueString("topic_IsHot") == "1"){
+		return "Hot / Locked";
+	}else {
+		return "Locked";
+	}
+} else {
+	if (topicDoc.getItemValueString("topic_IsHot") == "1"){
+		return "Hot";
+	}else {
+		return "";
+	}
+}}]]></xp:this.alt>
+						</xp:image>
+					</xp:td>
+					<xp:td styleClass="forumCol2">
+						<xp:image id="image1">
+							<xp:this.url><![CDATA[#{javascript:if (topicDoc.getItemValueString("topic_IsSticky") == "1"){
+	return "/sticky.gif"
+} else {
+	return "/icon1.gif"
+}}]]></xp:this.url>
+							<xp:this.alt><![CDATA[#{javascript:if (topicDoc.getItemValueString("topic_IsSticky") == "1"){
+	return "Sticky Thread"
+} else {
+	return ""
+}}]]></xp:this.alt>
+						</xp:image>
+					</xp:td>
+					<xp:td styleClass="forumCol1">
+						<xp:panel id="topicTreadTitle">
+							<xp:link escape="true" title="Delete Topic" id="link5"
+								outerStyleClass="lotusBtn lotusBtnRight lotusRight" rendered="#{javascript:sessionScope.forumOwner}">
+								<xp:image id="image6" url="/delete.png" />
+								<xp:eventHandler event="onclick" submit="false">
+									<xp:this.script><![CDATA[XSP.openDialog('#{id:topicDeleteDialog}')]]></xp:this.script>
+								</xp:eventHandler>
+							</xp:link>
+							<xp:link escape="true" title="Lock Topic" id="link6"
+								outerStyleClass="lotusBtn lotusBtnRight lotusRight">
+								<xp:this.rendered><![CDATA[#{javascript:var forumDoc:NotesDocument = database.getDocumentByUNID(sessionScope.forumUNID);
+if (sessionScope.forumOwner
+		|| sessionScope.userCommon == forumDoc.getItemValueString("forum_Owner")
+		|| sessionScope.userCommon == forumAreaDoc.getItemValueString("forum_Owner"))
+	{
+		if (topicDoc.getItemValueString("topic_IsLocked") == "1"){
+			return false;
+		} else {
+			return true;
+		}
+	} else {
+		return false;
+}}]]></xp:this.rendered>
+								<xp:image id="image7" url="/lock_add.png" />
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="complete" id="eventHandler3" immediate="true">
+									<xp:this.action id="this.action3"><![CDATA[#{javascript:topicDoc.replaceItemValue("topic_IsLocked","1")
+topicDoc.save();
+context.redirectToPage("/listTopics?forumID=" + sessionScope.forumAreaUID)}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
+							<xp:link escape="true" title="Unlock Topic" id="link7"
+								outerStyleClass="lotusBtn lotusBtnRight lotusRight">
+								<xp:this.rendered id="this.rendered2"><![CDATA[#{javascript:var forumDoc:NotesDocument = database.getDocumentByUNID(sessionScope.forumUNID)
+if (sessionScope.forumOwner
+		|| sessionScope.userCommon == forumDoc.getItemValueString("forum_Owner")
+		|| sessionScope.userCommon == forumAreaDoc.getItemValueString("forum_Owner"))
+	{
+		if (topicDoc.getItemValueString("topic_IsLocked") == "0"){
+			return false;
+		} else {
+			return true;
+		}
+	} else {
+		return false;
+}}]]></xp:this.rendered>
+								<xp:image id="image8" url="/lock_delete.png" />
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="complete" id="eventHandler4" immediate="true">
+									<xp:this.action id="this.action4"><![CDATA[#{javascript:topicDoc.replaceItemValue("topic_IsLocked","0")
+topicDoc.save();
+context.redirectToPage("/listTopics?forumID=" + sessionScope.forumAreaUID)}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
+							<xp:link escape="true" title="Sticky Topic" id="link8"
+								outerStyleClass="lotusBtn lotusBtnRight lotusRight">
+								<xp:this.rendered><![CDATA[#{javascript:var forumDoc:NotesDocument = database.getDocumentByUNID(sessionScope.forumUNID)
+if (sessionScope.forumOwner
+		|| sessionScope.userCommon == forumDoc.getItemValueString("forum_Owner")
+		|| sessionScope.userCommon == forumAreaDoc.getItemValueString("forum_Owner"))
+	{
+		if (topicDoc.getItemValueString("topic_IsSticky") == "1"){
+			return false;
+		} else {
+			return true;
+		}
+	} else {
+		return false;
+}}]]></xp:this.rendered>
+								<xp:image id="image9" url="/sticky_add.png" />
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="complete" id="eventHandler5" immediate="true">
+									<xp:this.action id="this.action5"><![CDATA[#{javascript:topicDoc.replaceItemValue("topic_IsSticky","1")
+topicDoc.save();
+context.redirectToPage("/listTopics?forumID=" + sessionScope.forumAreaUID);}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
+							<xp:link escape="true" title="Unsticky Topic" id="link9"
+								outerStyleClass="lotusBtn lotusBtnRight lotusRight">
+								<xp:this.rendered id="this.rendered3"><![CDATA[#{javascript:var forumDoc:NotesDocument = database.getDocumentByUNID(sessionScope.forumUNID)
+if (sessionScope.forumOwner
+		|| sessionScope.userCommon == forumDoc.getItemValueString("forum_Owner")
+		|| sessionScope.userCommon == forumAreaDoc.getItemValueString("forum_Owner"))
+	{
+		if (topicDoc.getItemValueString("topic_IsSticky") == "0"){
+			return false;
+		} else {
+			return true;
+		}
+	} else {
+		return false;
+}}]]></xp:this.rendered>
+								<xp:image id="image10" url="/sticky_delete.gif" />
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="complete" id="eventHandler6" immediate="true">
+									<xp:this.action id="this.action6"><![CDATA[#{javascript:topicDoc.replaceItemValue("topic_IsSticky","0")
+topicDoc.save();
+context.redirectToPage("/listTopics?forumID=" + sessionScope.forumAreaUID)}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
+							<xp:link value="/viewTopic.xsp">
+								<xp:this.parameters>
+									<xp:parameter name="topicID">
+										<xp:this.value><![CDATA[#{javascript:topicDoc.getItemValueString("topic_TopicUID");}]]></xp:this.value>
+									</xp:parameter>
+								</xp:this.parameters>
+								<xp:this.text><![CDATA[#{javascript:var isSticky = topicDoc.getItemValueString("topic_IsSticky");
+
+if (isSticky == "1"){
+	return "STICKY : " + topicDoc.getItemValueString("topic_Title")
+} else {
+	topicDoc.getItemValueString("topic_Title")
+}}]]></xp:this.text>
+								<xp:this.styleClass><![CDATA[#{javascript:if (topicData.getDocument().getRead()){
+	return "lastPostLink"
+} else {
+	return "lastPostLinkUnread"
+}}]]></xp:this.styleClass>
+							</xp:link>
+						</xp:panel>
+						<xp:panel styleClass="smallfont" id="topicAuthor">
+							<xp:text escape="true" styleClass="lastPostAuthor">
+								<xp:this.value><![CDATA[#{javascript:@Name("[CN]",topicDoc.getItemValueString("topic_Author"))}]]></xp:this.value>
+							</xp:text>
+						</xp:panel>
+					</xp:td>
+					<xp:td styleClass="forumCol2 nowrap">
+						<xp:panel>
+							<xp:panel id="lastPostTitle" styleClass="lastPostTitle">
+								<xp:text escape="true" id="computedField7" value="#{topicDoc.topic_LastTitle}" />
+							</xp:panel>
+							<xp:panel id="lastPostAuthor">
+								by&#160;
+								<xp:text escape="true" id="computedField8" styleClass="lastPostAuthor">
+									<xp:this.value><![CDATA[#{javascript:@Name("[CN]",topicDoc.getItemValueString("topic_LastAuthor"))}]]></xp:this.value>
+								</xp:text>
+							</xp:panel>
+							<!--							<xp:panel-->
+							<!--								styleClass="lotusRight"-->
+							<!--								id="lastPostdate">-->
+							<!--								<xp:text-->
+							<!--									escape="true"-->
+							<!--									id="computedField9"-->
+							<!--									value="#{topicData.topic_LastDate}"-->
+							<!--									styleClass="lastPostDate">-->
+							<!--									<xp:this.converter>-->
+							<!--										<xp:convertDateTime type="both" />-->
+							<!--									</xp:this.converter>-->
+							<!--								</xp:text>-->
+							<!--							</xp:panel>-->
+							<xp:panel styleClass="lotusRight" id="lastPostdate">
+								<xp:text escape="true" id="computedField9" styleClass="lastPostDate" value="#{topicDoc.topic_LastDate}">
+									<xp:this.converter>
+										<xp:convertDateTime type="both" dateStyle="short" timeStyle="short"/>
+									</xp:this.converter>
+								</xp:text>
+							</xp:panel>
+						</xp:panel>
+					</xp:td>
+					<xp:td styleClass="forumCol1 forumCenterText">
+						<xp:text escape="true" id="computedField2" value="#{topicDoc.topic_Replies}">
+							<xp:this.converter>
+								<xp:convertNumber type="number" integerOnly="true"/>
+							</xp:this.converter>
+						</xp:text>
+					</xp:td>
+					<xp:td styleClass="forumCol1 forumCenterText">
+						<xp:text escape="true" id="computedField5" value="#{topicDoc.topic_Views}">
+							<xp:this.converter>
+								<xp:convertNumber type="number" integerOnly="true"/>
+							</xp:this.converter>
+						</xp:text>
+					</xp:td>
+				</xp:tr>
+				<xe:dialog id="topicDeleteDialog" title="Delete Topic">
+					<xp:panel styleClass="xTalkForm">
+						<xp:this.data>
+							<xp:dominoDocument var="topicDocDelete" action="openDocument" documentId="#{javascript:topicData.getNoteID()}"
+								formName="content_Topic"/>
+							
+						</xp:this.data>
+						<fieldset>
+							<legend>Delete Topic</legend>
+							<xp:panel style="text-align:center">
+								You have requested to delete the topic
+								<xp:br/>
+								<xp:br/>
+								<xp:text escape="true" id="computedField11" value="#{topicDocDelete.topic_Title}"
+									style="font-size:14pt;font-weight:bold"/>
+								
+								<xp:br/>
+								<xp:br/>
+								There are &#160;
+								<strong>
+									<xp:text escape="true" id="computedField12" value="#{topicDocDelete.topic_Replies}">
+										<xp:this.converter>
+											<xp:convertNumber type="number" integerOnly="true"/>
+										</xp:this.converter>
+									</xp:text>
+								</strong>
+								&#160;replies to this topic which will also be deleted.
+								<xp:br/>
+								<xp:br/>
+								<xp:span style="font-weight:bold">ARE YOU SURE? THIS ACTION IS UNRECOVERABLE</xp:span>
+								<xp:br/>
+								<xp:br/>
+							</xp:panel>
+						</fieldset>
+						<xp:panel styleClass="lotusActionBar">
+							<xp:link escape="true" text="Delete Topic" id="link14" outerStyleClass="lotusBtn lotusBtnSpecial lotusRight">
+								<xp:eventHandler event="onclick" submit="true" refreshMode="complete" id="eventHandler9">
+									<xp:this.action id="this.action9">
+										<xp:actionGroup>
+											<xp:confirm message="Are you really sure?"/>
+											<xp:executeScript>
+												<xp:this.script><![CDATA[#{javascript:var topDoc:NotesDocument = topicDocDelete.getDocument();
+var faDoc:NotesDocument = database.getDocumentByUNID(topicDocDelete.getItemValueString("topic_ForumUNID"));
+var topReplyColl:NotesDocumentCollection = topDoc.getResponses();
+topReplyColl.removeAll(true);
+
+// Update the Forum Area Document
+faDoc.replaceItemValue("forum_Threads",faDoc.getItemValueInteger("forum_Threads")-1);
+faDoc.replaceItemValue("forum_Posts",faDoc.getItemValueInteger("forum_Posts") - (topDoc.getItemValueInteger("topic_Replies")+1));
+faDoc.save();
+// TODO: check to see if the last posted topic was this one and adjust LAST fields accordingly
+
+//Delete the main topic Document And Redirect To the list of topics
+var originalForumArea = "/listTopics.xsp?forumID=" + topDoc.getItemValueString("topic_ForumUID");
+topDoc.removePermanently(true);
+context.redirectToPage(originalForumArea)}]]></xp:this.script>
+											</xp:executeScript>
+										</xp:actionGroup>
+									</xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
+							<xp:link escape="true" text="Cancel" id="link15" outerStyleClass="lotusBtn lotusRight">
+								<xp:eventHandler event="onclick" submit="true" refreshMode="complete" immediate="true">
+									<xp:this.action><![CDATA[#{javascript:var c = getComponent("topicDeleteDialog");
+c.hide();}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
+						</xp:panel>
+					</xp:panel>
+				</xe:dialog>
+			</xp:panel>
+		</xp:repeat>
+	</xp:panel>
+	<xe:dialog id="forumAreaDeleteDialog">
+		<xp:panel styleClass="xTalkForm">
+			<xp:this.data>
+				<xp:dominoDocument var="forumAreaDocDelete" action="editDocument" documentId="#{javascript:forumAreaDoc.getNoteID()}"
+					formName="content_ForumAreas"/>
+				
+			</xp:this.data>
+			<fieldset>
+				<legend>Delete Forum Area</legend>
+				<xp:panel style="text-align:center">
+					You have requested to delete the forum
+					<xp:br />
+					<xp:br />
+					<xp:text escape="true" id="computedField3" value="#{forumAreaDocDelete.forumAreaName}"
+						style="font-size:14pt;font-weight:bold" />
+					<xp:br />
+					<xp:br />
+					There are &#160;
+					<strong>
+						<xp:text escape="true" id="computedField6" value="#{forumAreaDocDelete.forum_Threads}">
+							<xp:this.converter>
+								<xp:convertNumber type="number"/>
+							</xp:this.converter>
+						</xp:text>
+					</strong>
+					&#160;Threads with&#160;
+					<strong>
+						<xp:text escape="true" id="computedField10" value="#{forumAreaDocDelete.forum_Posts}">
+							<xp:this.converter>
+								<xp:convertNumber type="number"/>
+							</xp:this.converter>
+						</xp:text>
+					</strong>
+					&#160;posts in this forum
+					<xp:br />
+					<xp:br />
+					THIS ACTION WILL DELETE ALL TOPICS AND REPLIES IN THE FORUM
+					<xp:br />
+					AND IS UNRECOVERABLE. ARE YOU SURE?
+					<xp:br />
+					<xp:br />
+				</xp:panel>
+			</fieldset>
+			<xp:panel styleClass="lotusActionBar">
+				<xp:link escape="true" text="Delete Forum Area" id="link10" outerStyleClass="lotusBtn lotusBtnSpecial lotusRight">
+					<xp:eventHandler event="onclick" submit="true" refreshMode="complete" id="eventHandler7">
+						<xp:this.action id="this.action7">
+							<xp:actionGroup>
+								<xp:confirm message="Are you really sure?" />
+								<xp:executeScript>
+									<xp:this.script><![CDATA[#{javascript:var faDoc:NotesDocument = forumAreaDocDelete.getDocument();
+var topicsView:NotesView = database.getView("lkp_TopicsByForumAreaUID");
+
+// Loop Through All the Topics In This Forum Area and delete The replies and then the topics
+var topicVEColl:NotesViewEntryCollection = topicsView.getAllEntriesByKey(faDoc.getItemValueString("forum_UID"));
+if (topicVEColl.getCount() > 0){
+	var topEntry:NotesViewEntry = topicVEColl.getFirstEntry();
+	while (topEntry != null){
+		var topDoc:NotesDocument = topEntry.getDocument();
+		var topReplyColl:NotesDocumentCollection = topDoc.getResponses();
+		topReplyColl.removeAll(true);
+		var topEntry:NotesViewEntry = topicVEColl.getNextEntry();
+	}
+	topicVEColl.removeAll(true);
+}
+
+//Delete the main topic Document And Redirect To the list of topics
+var originalForumArea = "/listForums.xsp?forumID=" + faDoc.getItemValueString("forum_ParentForumUID");
+faDoc.removePermanently(true);
+context.redirectToPage("/home.xsp")
+}]]></xp:this.script>
+								</xp:executeScript>
+							</xp:actionGroup>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:link>
+				<xp:link escape="true" text="Cancel" id="link11" outerStyleClass="lotusBtn lotusRight">
+					<xp:eventHandler event="onclick" submit="true" refreshMode="complete" immediate="true">
+						<xp:this.action><![CDATA[#{javascript:var c = getComponent("forumAreaDeleteDialog");
+c.hide();}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:link>
+			</xp:panel>
+		</xp:panel>
+	</xe:dialog>
+	<xe:dialog id="forumAreaEditDialog" title="Edit Forum Area">
+		<xp:panel>
+			<xp:this.data>
+				<xp:dominoDocument var="forumAreaDocEdit" formName="content_ForumAreas" ignoreRequestParams="true" action="editDocument"
+					documentId="#{javascript:forumAreaDoc.getNoteID()}" />
+			</xp:this.data>
+			<xp:panel styleClass="xTalkForm" id="panel1">
+				<fieldset>
+					<legend>Forum Area&#160;Details</legend>
+					<xp:label styleClass="required" value="Forum Name:" id="label5" for="fld_ForumName" />
+					<xp:inputText value="#{forumAreaDocEdit.forumAreaName}" id="inputText1" required="true"/>
+					<small>This is the name of the forum that will display in all views and breadcrumbs</small>
+					<xp:label value="Forum Description:" id="label6" for="fld_ForumDesc" />
+					<xp:inputText value="#{forumAreaDocEdit.forumAreaDesc}" id="inputText2" />
+					<small>This is the description of the forum that will display in all views.</small>
+				</fieldset>
+				<fieldset>
+					<legend>Forum Security</legend>
+					<xp:label styleClass="required" value="Forum Owner:" id="label7" for="djextNameTextBox1" />
+					<xe:djextNameTextBox id="djextNameTextBox1" value="#{forumAreaDocEdit.forum_Owner}" />
+					<xe:namePicker id="namePicker5" for="djextNameTextBox1" dialogTitle="Forum Area Owner">
+								<xe:this.dataProvider>
+									<xe:namePickerAggregator>
+										<xe:this.dataProviders>
+											<xe:dominoNABNamePicker addressBookSel="all" />
+											
+											
+										</xe:this.dataProviders>
+									</xe:namePickerAggregator>
+								</xe:this.dataProvider>
+					</xe:namePicker>
+					<small>The forum owner will be able to moderate all topics within the forum</small>
+					<xp:label value="Forum Readers:" id="label8" for="djextNameTextBox2" />
+					<xe:djextNameTextBox id="djextNameTextBox2" value="#{forumAreaDocEdit.forum_Readers}" multipleSeparator="," />
+					<xe:namePicker id="namePicker6" for="djextNameTextBox2" dialogTitle="Forum Area Readers">
+					<xe:this.dataProvider>
+									<xe:namePickerAggregator>
+										<xe:this.dataProviders>
+											<xe:dominoNABNamePicker addressBookSel="all"></xe:dominoNABNamePicker>
+											<xe:dominoViewNamePicker label="Extended Access" labelColumn="Name"
+												viewName="lkp_ExtendedAccess">
+											</xe:dominoViewNamePicker>
+										</xe:this.dataProviders>
+									</xe:namePickerAggregator>
+								</xe:this.dataProvider>
+					</xe:namePicker>
+					<small>Leave blank to block this forum area from all users.</small>
+					<small>Use a '*' to grant access to this forum area to all users.</small>
+					<small>Or select Names/Groups from the addressbook to restrict access to select people.</small>
+					<xp:label value="Create Topics:" id="label9" for="djextNameTextBox3" />
+					<xe:djextNameTextBox id="djextNameTextBox3" multipleSeparator="," value="#{forumAreaDocEdit.forum_allowNewTopic}" />
+					<xe:namePicker id="namePicker7" for="djextNameTextBox3" dialogTitle="Forum Area Topic Creators">
+								<xe:this.dataProvider>
+									<xe:namePickerAggregator>
+										<xe:this.dataProviders>
+											<xe:dominoNABNamePicker addressBookSel="all" />
+											
+											
+											
+										</xe:this.dataProviders>
+									</xe:namePickerAggregator>
+								</xe:this.dataProvider>
+					</xe:namePicker>
+					<small>Leave blank to allow all users to create new topics within the forum</small>
+					<xp:label value="Allowed Reply:" id="label10" for="djextNameTextBox4" />
+					<xe:djextNameTextBox id="djextNameTextBox4" value="#{forumAreaDocEdit.forum_allowReply}" multipleSeparator="," />
+					<xe:namePicker id="namePicker8" for="djextNameTextBox4" dialogTitle="Forum Area Allow Replies">
+								<xe:this.dataProvider>
+									<xe:namePickerAggregator>
+										<xe:this.dataProviders>
+											<xe:dominoNABNamePicker addressBookSel="all" />
+											
+											
+										</xe:this.dataProviders>
+									</xe:namePickerAggregator>
+								</xe:this.dataProvider>
+					</xe:namePicker>
+					<small>Leave blank to allow all users to reply to topics</small>
+				</fieldset>
+				<xp:panel styleClass="lotusActionBar lotusBtnContainer" id="panel2">
+					<xp:link escape="true" text="Update Forum Area" id="link12" outerStyleClass="lotusBtn lotusBtnSpecial lotusRight">
+						<xp:eventHandler event="onclick" submit="true" refreshMode="complete" id="eventHandler8">
+							<xp:this.action id="this.action8"><![CDATA[#{javascript:var faDoc:NotesDocument = forumAreaDocEdit.getDocument(true);
+
+var forumOwner:NotesItem = faDoc.getFirstItem("forum_Owner");
+forumOwner.setReaders(true);
+var forumReaders:NotesItem = faDoc.getFirstItem("forum_Readers");
+forumReaders.setReaders(true);
+
+var forumReaders:NotesItem = faDoc.getFirstItem("forum_allowNewTopic");
+forumReaders.setNames(true);
+var forumReaders:NotesItem = faDoc.getFirstItem("forum_allowReply");
+forumReaders.setNames(true);
+
+faDoc.save();
+context.redirectToPage("/listTopics.xsp?forumID=" + faDoc.getItemValueString("forum_UID"))}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+					<xp:link escape="true" text="Cancel" id="link13" outerStyleClass="lotusBtn lotusRight">
+						<xp:eventHandler event="onclick" submit="true" refreshMode="complete" immediate="true">
+							<xp:this.action><![CDATA[#{javascript:var c = getComponent("forumAreaEditDialog");
+c.hide();}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+				</xp:panel>
+			</xp:panel>
+		</xp:panel>
+	</xe:dialog>
+</xp:view>

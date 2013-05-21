@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='852575D1004E0DF0'>
+<noteinfo noteid='78a' unid='8CC77F8F0A60FED2852575D6005D870B' sequence='19'>
+<created><datetime dst='true'>20090615T130134,19-04</datetime></created>
+<modified><datetime dst='true'>20101013T211049,85-04</datetime></modified>
+<revised><datetime dst='true'>20101013T211049,84-04</datetime></revised>
+<lastaccessed><datetime>20121108T103127,43-05</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20090615T130134,48-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Declan Sciolla-Lynch/O=Imagination</name></updatedby>
+<wassignedby><name>CN=Declan Sciolla-Lynch/O=Imagination</name></wassignedby>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$Index' sign='true'><text/></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
+OAECACAACQB1c2VyX05hbWUABQAJAHVzZXJfTmFtZQADAAIALAAKAGNvbW1vbk5hbWUCAAYAAAAA
+AAAABQAJAHVzZXJfTmFtZQC0AgMAAgAkAAwAdXNlcl9SZXBsaWVzBQAMAHVzZXJfUmVwbGllcwMA
+AgAoAA0AdXNlcl9MYXN0RGF0ZQAFAA0AdXNlcl9MYXN0RGF0ZQADAAUAaABkAAgACQAKAAoADAAN
+AA0ACQAEAHVzZXJfTmFtZWNvbW1vbk5hbWV1c2VyX1Bvc3RzdXNlcl9SZXBsaWVzdXNlcl9MYXN0
+RGF0ZXVzZXJfSm9pbkRhdGUkQ29uZmxpY3QkUkVGBAAEAAAAKAAFAAQAZm9ybQEAEwBjb250ZW50
+X1VzZXJQcm9maWxlAAoCAwAHAAoABAAJTDFT
+</formula></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+JwACAABEAGYAAAAJAIBmAAkACgB1c2VyX05hbWVjb21tb25OYW1l
+</rawitemdata></item>
+<item name='$ViewFormat' summary='true' sign='true'>
+<rawitemdata type='5'>
+AQAGAAYACAAAAFZDAQAJAAkAIgAAANYAAQAACgAAAAAAAAAAAAICAAAAVkMBAAoACgA6AAAA0gAB
+AAAKAAAAAAAAAAAAAgIAAABWQwAACgAKAAAAAABQAAEAAAoAAAAAAAAAAAACAgAAAFZDAAAMAAwA
+JgAAAFAAAQAACgAAAAAAAAAAAAICAAAAVkMAAA0ADQAqAAAAUAABAAAKAAAAAAAAAAAAAgIAAABW
+QwAADQANAAAAAABQAAEAAAoAAAAAAAAAAAACAgAAAHVzZXJfTmFtZXVzZXJfTmFtZSIAAgAgAAkA
+dXNlcl9OYW1lAAUACQB1c2VyX05hbWUAAwBjb21tb25OYW1lY29tbW9uTmFtZToAAgAsAAoAY29t
+bW9uTmFtZQIABgAAAAAAAAAFAAkAdXNlcl9OYW1lALQCAwAHAAwABQAJMFMwRQB1c2VyX1Bvc3Rz
+dXNlcl9Qb3N0c3VzZXJfUmVwbGllc3VzZXJfUmVwbGllcyYAAgAkAAwAdXNlcl9SZXBsaWVzBQAM
+AHVzZXJfUmVwbGllcwMAdXNlcl9MYXN0RGF0ZXVzZXJfTGFzdERhdGUqAAIAKAANAHVzZXJfTGFz
+dERhdGUABQANAHVzZXJfTGFzdERhdGUAAwB1c2VyX0pvaW5EYXRldXNlcl9Kb2luRGF0ZSYAAQAA
+AAEBAAkBAAAKAQEOCgAAAQCtKwEAAQABAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAA
+AAAAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAA
+V0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQEACQAAAAAA
+AAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAA
+AAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAQgAAAAAAAQD///8ABQD///8AAQAAAAAAAAAAAAAAAAAB
+AP///wABAP///wAAAAEAAAAAAAEAAAAAAAEAAAAAAAAACAAAAAAAAQA=
+</rawitemdata></item>
+<item name='$Flags'><text>Y</text></item>
+<item name='$Comment' sign='true'><text>xTalk V1.1</text></item>
+<item name='$TITLE' sign='true'><text>Lookups\UserProfiles|lkp_UserProfiles</text></item>
+<item name='$DesignerVersion' sign='true'><text>8.5.2</text></item></note>
+

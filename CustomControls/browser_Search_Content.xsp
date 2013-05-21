@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.data>
+		<xp:dominoView var="lkpTopics" viewName="lkp_TopicsUID" search="#{javascript:param.s}" />
+	</xp:this.data>
+	<xp:panel styleClass="lotusContent">
+		<xp:panel styleClass="lotusActionBar lotusBtnContainer">
+			<xp:pager for="searchRepeat" id="replyPagerTop" outerStyleClass="xTalkPager lotusRight" styleClass="xTalkPager">
+				<xp:pagerControl id="pagerControl2" type="Status" value="Page {0} of {1}" styleClass="xTalkPagerItem" />
+				<xp:pagerControl id="pagerControl9" type="First" styleClass="xTalkPagerItem">
+					<xp:this.value><![CDATA[<< First]]></xp:this.value>
+				</xp:pagerControl>
+				<xp:pagerControl id="pagerControl8" type="Previous" styleClass="xTalkPagerItem">
+					<xp:this.value><![CDATA[< Prev]]></xp:this.value>
+				</xp:pagerControl>
+				<xp:pagerControl id="pagerControl1" type="Group" currentStyleClass="xTalkPagerCurrent" styleClass="xTalkPagerItems" />
+				<xp:pagerControl id="pagerControl7" type="Next" styleClass="xTalkPagerItem">
+					<xp:this.value><![CDATA[Next >]]></xp:this.value>
+				</xp:pagerControl>
+				<xp:pagerControl id="pagerControl5" type="Last" styleClass="xTalkPagerItem">
+					<xp:this.value><![CDATA[Last >>]]></xp:this.value>
+				</xp:pagerControl>
+			</xp:pager>
+		</xp:panel>
+		<xp:table styleClass="forumTable">
+			<tbody>
+				<xp:tr>
+					<xp:td styleClass="forumCategory">
+						<xp:span styleClass="forumAreaTitle">Search Results</xp:span>
+						<xp:panel styleClass="forumDesc">
+							Keywords :
+							<xp:text escape="true" id="computedField4" value="#{javascript:param.s}" />
+						</xp:panel>
+					</xp:td>
+				</xp:tr>
+			</tbody>
+		</xp:table>
+		<xp:repeat id="searchRepeat" var="searchData" indexVar="searchIndx" value="#{lkpTopics}" rows="50">
+			<xp:this.facets>
+				<xp:text disableTheme="true" xp:key="header" escape="false">
+					<xp:this.value><![CDATA[<table class="forumTable">
+<thead>
+<tr>
+<th class="forumHeader forumHeaderExpand">Thread/Thread Starter</th>
+<th class="forumHeader">Author</th>
+<th class="forumHeader">Date</th>
+<th class="forumHeader">Forum</th>
+</tr>
+</thead>
+<tbody>]]></xp:this.value>
+				</xp:text>
+				<xp:text disableTheme="true" xp:key="footer" escape="false">
+					<xp:this.value><![CDATA[</tbody>
+</table>]]></xp:this.value>
+				</xp:text>
+			</xp:this.facets>
+			<xp:panel>
+				<xp:this.data>
+					<xp:dominoDocument var="searchDoc" formName="content_Topic" action="openDocument"
+						documentId="#{javascript:searchData.getNoteID();}">
+					</xp:dominoDocument>
+				</xp:this.data>
+				<xp:tr styleClass="forumTopicList">
+					<xp:td styleClass="forumCol1">
+						<xp:link escape="true" id="link1" value="/viewTopic.xsp">
+							<xp:this.parameters>
+								<xp:parameter name="topicID">
+									<xp:this.value><![CDATA[#{javascript:var sDoc:NotesDocument = searchData.getDocument();
+sDoc.getItemValueString("topic_TopicUID");}]]></xp:this.value>
+								</xp:parameter>
+							</xp:this.parameters>
+						<xp:this.text><![CDATA[#{javascript:var sDoc:NotesDocument = searchData.getDocument();
+sDoc.getItemValueString("topic_Title");}]]></xp:this.text></xp:link>
+					</xp:td>
+					<xp:td styleClass="forumCol2 nowrap">
+						<xp:panel styleClass="searchAuthor">
+							<xp:text escape="true" id="computedField1">
+								<xp:this.value><![CDATA[#{javascript:var sDoc:NotesDocument = searchData.getDocument();
+@Name("[CN]",sDoc.getItemValueString("topic_Author"));}]]></xp:this.value>
+							</xp:text>
+						</xp:panel>
+					</xp:td>
+					<xp:td styleClass="forumCol1 searchDate">
+						<xp:panel styleClass="searchDate">
+							<xp:text escape="true" id="computedField3" value="#{searchDoc.topic_DateTime}" styleClass="searchDate"><xp:this.converter><xp:convertDateTime type="both" dateStyle="short" timeStyle="short"></xp:convertDateTime></xp:this.converter></xp:text>
+						</xp:panel>
+					</xp:td>
+					<xp:td styleClass="forumCol2">
+						<xp:panel styleClass="searchForum">
+							<xp:link escape="true" id="link2" value="/listTopics.xsp">
+								<xp:this.text><![CDATA[#{javascript:var sDoc:NotesDocument = searchData.getDocument();
+;
+
+var forumAreasView:NotesView = database.getView("lkp_ForumAreasUID");
+var forumAreaDoc:NotesDocument = forumAreasView.getDocumentByKey(sDoc.getItemValueString("topic_forumUID"));
+return forumAreaDoc.getItemValueString("forumAreaName")}]]></xp:this.text>
+								<xp:this.parameters>
+									<xp:parameter name="forumID">
+										<xp:this.value><![CDATA[#{javascript:var sDoc:NotesDocument = searchData.getDocument();
+sDoc.getItemValueString("topic_ForumUID");}]]></xp:this.value>
+									</xp:parameter>
+								</xp:this.parameters>
+							</xp:link>
+						</xp:panel>
+					</xp:td>
+				</xp:tr>
+			</xp:panel>
+		</xp:repeat>
+	</xp:panel>
+</xp:view>

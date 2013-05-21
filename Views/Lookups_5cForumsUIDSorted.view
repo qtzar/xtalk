@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='utf-8'?>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='852575D1004E0DF0'>
+<noteinfo noteid='3da' unid='EA61852EC6CEC082852575D1005108CA' sequence='38'>
+<created><datetime dst='true'>20090610T104506,66-04</datetime></created>
+<modified><datetime dst='true'>20101013T225541,16-04</datetime></modified>
+<revised><datetime dst='true'>20101013T225541,15-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20130514T021043,23-04</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20090610T104506,96-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Declan Sciolla-Lynch/O=Imagination</name></updatedby>
+<wassignedby><name>CN=Declan Sciolla-Lynch/O=Imagination</name></wassignedby>
+<item name='$FormatNote' summary='true' sign='true'>
+<rawitemdata type='4'>
+AQD3s91nJmrKFyfsWADJdSWF
+</rawitemdata></item>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$TITLE' sign='true'><text>Lookups\ForumsUIDSorted|lkp_ForumsUIDSorted</text></item>
+<item name='$PublicAccess'><text>1</text></item>
+<item name='$Index' sign='true'><text>/O</text></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
+ZgAFADAALAAEAAoACQAJAAQAZm9ydW1fU29ydGZvcnVtX1VJRCRDb25mbGljdCRSRUYEAAQAAAAi
+AAUABABGb3JtAQANAGNvbnRlbnRfRm9ydW0ACgIDAAcADgAIAAlMMVMyUzNT
+</formula></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+FwABAABEgGYAAAAKAGZvcnVtX1NvcnQ=
+</rawitemdata></item>
+<item name='$ViewFormat' summary='true' sign='true'>
+<rawitemdata type='5'>
+AQACAEAAqXwAAFZDAQAKAAoAAAAAAFAAAQAACgAAAAAAAAAAAAICAAAAVkMAAAkACQAAAAAAUAAB
+AAAKAAAAAAAAAAAAAgIAAABmb3J1bV9Tb3J0Zm9ydW1fU29ydGZvcnVtX1VJRGZvcnVtX1VJRCYA
+AQAAAAEBAAkBAAAKAQEOCgAALwCtKwEBAQABAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAA
+AAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//
+AAAAAAAAAAAAAAAAAABCABAAAAABAP///wABAPf39wABAAAAAAAAAAAAAAAAAAEAAAAAAAEAoKDF
+AAAAAQAAAAAAAQCAgIAAAQAAAAAAAAAIAAAAAAABAA==
+</rawitemdata></item>
+<item name='$Comment' sign='true'><text>xTalk V1.1.01</text></item>
+<item name='$FrameInfo' sign='true'><textlist><text>MailFS</text><text>NotesView</text></textlist></item>
+<item name='$Flags'><text>Y</text></item>
+<item name='$WebFlags'><text>S</text></item>
+<item name='$DesignerVersion'><text>8.5.2</text></item>
+<item name='$ViewGlobalScript' summary='false' sign='true'><text>'++LotusScript Development Environment:2:5:(Options):0:74
+Option Public
+
+'++LotusScript Development Environment:2:5:(Forward):0:1
+
+'++LotusScript Development Environment:2:5:(Declarations):0:2
+
+<break/></text></item>
+<item name='$V5ACTIONS' sign='true'>
+<rawitemdata type='1'>
+vRzpAAAAAQABAAAAwRgAAAAAAAACAAAJGAAFAHn/bAABAGBgmAABAAAAAAABAAAAAAABANbX7wAD
+ACIAAAABAIIAAAADAAAAAgAACQAAAAAAAAAAE0AFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAPz/OgAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAEAAAAAAAAAAAAAAAAAAAA=
+</rawitemdata></item>
+<item name='$ViewGlobalScript_O' sign='true'>
+<rawitemdata type='14'>
+AQAAAkxTT0IDABQIZW4AAAQAAAADAAAAAAAEAJgAAAAAAAAAAAAAAAAAAAA0AP//KAAAAP////9k
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAEABQBMb3R1cyBQcm9kdWN0AAAAVjAuMAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAwAAAAAAAAAEAAAAmAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA
+AAMAAABXMzJJJQMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAwCcAAAAAABIABEAJABWAEkARQBXAEcATABPAEIAQQBMAFMAQwBSAEkAUABUAAAAfAADAE4A
+RQBXAAAAkAAGAEQARQBMAEUAVABFAAAAAAD//woASQBOAEkAVABJAEEATABJAFoARQAAAAAA//8J
+AFQARQBSAE0ASQBOAEEAVABFAAAA//8GAE8AQgBKAEUAQwBUAAAAAAD//wAAAAAAAAUACAAAAAAA
+8CtknwQABwAAAAAAHQAAAgAAABEAEAAAAAAA//8BAAMABAAAAAYACgAAANc=
+</rawitemdata></item></note>
+

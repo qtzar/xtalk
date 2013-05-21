@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.data>
+		<xp:dominoDocument var="mainTopicDoc" formName="content_Topic" action="openDocument"
+			documentId="#{javascript:sessionScope.topicUNID}">
+		</xp:dominoDocument>
+		<xp:dominoView var="replyView" viewName="lkp_RepliesUID" categoryFilter="#{javascript:sessionScope.topicUID}" />
+	</xp:this.data>
+	<xp:panel styleClass="lotusContent">
+		<xp:pager for="topicReplyRepeat" id="replyPagerTop" outerStyleClass="xTalkPager lotusRight" styleClass="xTalkPager">
+			<xp:pagerControl id="pagerControl2" type="Status" value="Page {0} of {1}" styleClass="xTalkPagerItem" />
+			<xp:pagerControl id="pagerControl9" type="First" styleClass="xTalkPagerItem">
+				<xp:this.value><![CDATA[<< First]]></xp:this.value>
+			</xp:pagerControl>
+			<xp:pagerControl id="pagerControl8" type="Previous" styleClass="xTalkPagerItem">
+				<xp:this.value><![CDATA[< Prev]]></xp:this.value>
+			</xp:pagerControl>
+			<xp:pagerControl id="pagerControl1" type="Group" currentStyleClass="xTalkPagerCurrent" styleClass="xTalkPagerItems" />
+			<xp:pagerControl id="pagerControl7" type="Next" styleClass="xTalkPagerItem">
+				<xp:this.value><![CDATA[Next >]]></xp:this.value>
+			</xp:pagerControl>
+			<xp:pagerControl id="pagerControl5" type="Last" styleClass="xTalkPagerItem">
+				<xp:this.value><![CDATA[Last >>]]></xp:this.value>
+			</xp:pagerControl>
+		</xp:pager>
+		<xp:panel styleClass="lotusForum">
+			<xp:repeat id="topicReplyRepeat" rows="15" var="topicReplyData" indexVar="topicReplyIndx" value="#{replyView}">
+				<xp:panel id="forumReply">
+					<xp:this.data>
+						<xp:dominoDocument var="topicReplyDoc" formName="content_TopicReply" action="openDocument"
+							documentId="#{javascript:topicReplyData.getNoteID();}" ignoreRequestParams="true">
+						</xp:dominoDocument>
+					</xp:this.data>
+					<xp:this.styleClass><![CDATA[#{javascript:var thisDoc:NotesDocument = topicReplyData.getDocument();
+
+if (thisDoc.getItemValueString("topic_Author") == mainTopicDoc.getItemValueString("topic_Author")){
+	return "lotusPost";
+} else {
+	return "lotusForumReply";
+}}]]></xp:this.styleClass>
+					<xp:panel styleClass="lotusPostAuthorInfo">
+						<xp:panel styleClass="lotusPostAvatar">
+							<xp:image id="image9" style="height:45px;width:45px">
+								<xp:this.url><![CDATA[#{javascript:importPackage(com.xtalk.util)
+
+var profileView:NotesView = database.getView("lkp_UserProfiles");
+var profileDoc:NotesDocument = profileView.getDocumentByKey(topicReplyDoc.getItemValueString("topic_Author"));
+if (profileDoc == null) {
+	return "/profileNoPhoto.png";
+} else {
+	return "http://www.gravatar.com/avatar/" + HashMaster.md5(profileDoc.getItemValueString("user_eMail")) +"?d=wavatar"
+}}]]></xp:this.url>
+							</xp:image>
+						</xp:panel>
+						<xp:panel styleClass="lotusPostName">
+							<xp:link escape="true" id="link1" value="/viewProfile.xsp">
+								<xp:this.parameters>
+									<xp:parameter name="profileID">
+										<xp:this.value><![CDATA[#{javascript:var profileView:NotesView = database.getView("lkp_UserProfiles");
+var profileDoc:NotesDocument = profileView.getDocumentByKey(topicReplyDoc.getItemValueString("topic_Author"));
+if (profileDoc == null) {
+	return "";
+} else {
+	return profileDoc.getUniversalID();
+}}]]></xp:this.value>
+									</xp:parameter>
+								</xp:this.parameters>
+								<xp:this.text><![CDATA[#{javascript:@Name("[CN]",topicReplyDoc.getItemValueString("topic_Author"));}]]></xp:this.text>
+							</xp:link>
+						</xp:panel>
+						<xp:panel styleClass="lotusMeta">
+							<xp:text escape="true" id="numPosts">
+								<xp:this.value><![CDATA[#{javascript:var profileView:NotesView = database.getView("lkp_UserProfiles");
+var profileDoc:NotesDocument = profileView.getDocumentByKey(topicReplyDoc.getItemValueString("topic_Author"));
+if (profileDoc == null) {
+	return "";
+} else {
+	return profileDoc.getItemValueInteger("user_Posts") + " Posts"
+}
+}]]></xp:this.value>
+							</xp:text>
+						</xp:panel>
+					</xp:panel>
+					<xp:panel styleClass="lotusPostContent">
+						<h4>
+							<xp:text escape="true" id="computedField6" value="#{topicReplyDoc.topic_Title}" />
+						</h4>
+						<xp:panel styleClass="lotusMeta">
+							<xp:text escape="true" id="computedField4" value="#{topicReplyDoc.topic_DateTime}">
+								<xp:this.converter>
+									<xp:convertDateTime type="both" dateStyle="short" timeStyle="short"></xp:convertDateTime>
+								</xp:this.converter>
+							</xp:text>
+						</xp:panel>
+						<xp:panel styleClass="lotusPostDetails">
+							<xp:text escape="false" id="computedField3" value="#{topicReplyDoc.topic_Body}"></xp:text>
+						</xp:panel>
+						<xp:panel styleClass="lotusMeta">
+							Last Edited By&#160;
+							<xp:this.rendered><![CDATA[#{javascript:if (topicReplyDoc.getItemValueInteger("topic_editDetected") == "1"){
+	return true
+} else {
+	return false
+}}]]></xp:this.rendered>
+							<xp:text escape="true" id="computedField1">
+								<xp:this.value><![CDATA[#{javascript:topicReplyDoc.getItemValueString("topic_editAuthor");}]]></xp:this.value>
+							</xp:text>
+							&#160;on&#160;
+							<xp:text escape="true" id="computedField2">
+								<xp:this.value><![CDATA[#{javascript:topicReplyDoc.getItemValue("topic_editDateTime");}]]></xp:this.value>
+							</xp:text>
+							.
+						</xp:panel>
+						<xp:panel styleClass="lotusActions">
+							<xp:link escape="true" id="EditPost" title="Edit This Message" outerStyleClass="lotusBtn lotusRight">
+								<xp:this.rendered><![CDATA[#{javascript:var replyDateTime = topicReplyDoc.getItemValueDateTime("topic_DateTime").toJavaDate();
+var currentDateTime = @Now();
+
+if(topicReplyDoc.getItemValueString("topic_Author") == sessionScope.fullName){
+	if(currentDateTime - replyDateTime < 600000 ){
+		return true;
+	}else{
+		return false;
+	}
+} else {
+	return false;
+}}]]></xp:this.rendered>
+								<xp:image id="image13" url="/edit.png" alt="Insert Quote" />
+								<xp:eventHandler event="onclick" submit="false">
+									<xp:this.script><![CDATA[XSP.openDialog("#{id:editReplyDialog}");]]></xp:this.script>
+								</xp:eventHandler>
+							</xp:link>
+						</xp:panel>
+					</xp:panel>
+				</xp:panel>
+				<xe:dialog id="editReplyDialog" title="Edit Reply">
+					<xp:panel styleClass="xTalkNewTopic">
+						<xp:this.data>
+							<xp:dominoDocument var="topicReplyDocEdit" action="editDocument"
+								documentId="#{javascript:topicReplyData.getNoteID()}" formName="content_TopicReply">
+							</xp:dominoDocument>
+						</xp:this.data>
+						<fieldset>
+							<legend>Post Reply</legend>
+							<xp:table style="width:100.0%">
+								<xp:tr>
+									<xp:td>
+										<xp:inputText id="inputText1" value="#{topicReplyDocEdit.topic_Title}" required="true"
+											style="width:100%">
+											<xp:this.defaultValue><![CDATA[#{javascript:mainTopicDoc.getItemValueString("topic_Title")}]]></xp:this.defaultValue>
+										</xp:inputText>
+									</xp:td>
+								</xp:tr>
+								<xp:tr>
+									<xp:td>
+										<xp:inputRichText id="inputRichText1" value="#{topicReplyDocEdit.topic_Body}"></xp:inputRichText>
+									</xp:td>
+								</xp:tr>
+							</xp:table>
+						</fieldset>
+						<xp:panel styleClass="lotusActionbar">
+							<xp:link escape="true" text="Update Reply" id="link2" styleClass="lotusBtn lotusBtnSpecial lotusRight"></xp:link>
+							<xp:link escape="true" text="Cancel" id="link3" styleClass="lotusbtn lotusRight">
+								<xp:eventHandler event="onclick" submit="true" refreshMode="complete" immediate="true"></xp:eventHandler>
+							</xp:link>
+						</xp:panel>
+					</xp:panel>
+				</xe:dialog>
+			</xp:repeat>
+		</xp:panel>
+		<xp:pager for="topicReplyRepeat" id="pager1" outerStyleClass="xTalkPager lotusRight" styleClass="xTalkPager">
+			<xp:pagerControl id="pagerControl3" type="Status" value="Page {0} of {1}" styleClass="xTalkPagerItem" />
+			<xp:pagerControl id="pagerControl4" type="First" styleClass="xTalkPagerItem">
+				<xp:this.value><![CDATA[<< First]]></xp:this.value>
+			</xp:pagerControl>
+			<xp:pagerControl id="pagerControl6" type="Previous" styleClass="xTalkPagerItem">
+				<xp:this.value><![CDATA[< Prev]]></xp:this.value>
+			</xp:pagerControl>
+			<xp:pagerControl id="pagerControl10" type="Group" currentStyleClass="xTalkPagerCurrent" styleClass="xTalkPagerItems" />
+			<xp:pagerControl id="pagerControl11" type="Next" styleClass="xTalkPagerItem">
+				<xp:this.value><![CDATA[Next >]]></xp:this.value>
+			</xp:pagerControl>
+			<xp:pagerControl id="pagerControl12" type="Last" styleClass="xTalkPagerItem">
+				<xp:this.value><![CDATA[Last >>]]></xp:this.value>
+			</xp:pagerControl>
+		</xp:pager>
+		<xp:panel id="postQuickReply" styleClass="xTalkNewTopic">
+			<xp:this.data>
+				<xp:dominoDocument var="newTopicReply" formName="content_TopicReply" parentId="#{javascript:sessionScope.topicID}" />
+			</xp:this.data>
+			<xp:this.rendered><![CDATA[#{javascript:if (context.getUser().isAnonymous() == true){
+	return false;
+}
+	
+if (mainTopicDoc.getItemValueString("topic_IsLocked") == "1"){
+	return false;
+}
+
+var forumDoc:NotesDocument = database.getDocumentByUNID(sessionScope.forumUNID);
+var allowReply = session.evaluate("@if(@name([Canonicalize];forum_allowReply) *= @UserNamesList;@return(\"1\");@return(\"0\"))",forumDoc).toString()
+
+if (forumDoc.getItemValueString("forum_IsLocked") == "1"){
+	return false;
+}
+
+if (forumDoc.getItemValueString("forum_allowReply") == ""){
+	return true;
+}
+
+if (allowReply == "[1]"){
+	return true;
+}
+return false;}]]></xp:this.rendered>
+			<fieldset>
+				<legend>Post Reply</legend>
+				<xp:table style="width:100.0%">
+					<xp:tr>
+						<xp:td>
+							<xp:inputText id="topic_Title" value="#{newTopicReply.topic_Title}" required="true" style="width:100%">
+								<xp:this.defaultValue><![CDATA[#{javascript:mainTopicDoc.getItemValueString("topic_Title")}]]></xp:this.defaultValue>
+								<xp:this.validators>
+									<xp:validateRequired message="The reply title must be completed." />
+								</xp:this.validators>
+							</xp:inputText>
+						</xp:td>
+					</xp:tr>
+					<xp:tr>
+						<xp:td>
+							<xp:inputRichText id="topic_Body" value="#{newTopicReply.topic_Body}"></xp:inputRichText>
+						</xp:td>
+					</xp:tr>
+				</xp:table>
+			</fieldset>
+			<xp:link escape="true" text="Save Reply" id="saveTopicLink" outerStyleClass="lotusBtn lotusBtnSpecial lotusRight">
+				<xp:eventHandler event="onclick" submit="true" refreshMode="complete" id="eventHandler1">
+					<xp:this.action id="this.action1"><![CDATA[#{javascript:var replyDoc:NotesDocument = newTopicReply.getDocument(true);
+
+// Get the current DateTime to set across All Docs
+var curDate = session.createDateTime("Today");
+curDate.setNow();
+
+// Update the reply document
+var replyUID = @Unique();
+replyDoc.replaceItemValue("form","content_TopicReply");
+replyDoc.replaceItemValue("topic_replyUID",replyUID);
+replyDoc.replaceItemValue("topic_Author",context.getUser().getDistinguishedName());
+replyDoc.replaceItemValue("topic_DateTime",curDate);
+replyDoc.replaceItemValue("topic_ForumUNID",sessionScope.forumAreaUNID);
+replyDoc.replaceItemValue("topic_ForumUID",sessionScope.forumAreaUID);
+replyDoc.replaceItemValue("topic_TopicUNID",sessionScope.topicUNID);
+replyDoc.replaceItemValue("topic_TopicUID",sessionScope.topicUID);
+replyDoc.replaceItemValue("CGI_RemoteAddr",facesContext.getExternalContext().getRequest().request.getRemoteAddr());
+replyDoc.replaceItemValue("CGI_RemoteHost",facesContext.getExternalContext().getRequest().request.getRemoteHost());
+replyDoc.replaceItemValue("HTTP_Referer",facesContext.getExternalContext().getRequest().request.getHeader("Referer"));
+replyDoc.replaceItemValue("HTTP_UserAgent",facesContext.getExternalContext().getRequest().request.getHeader("User-Agent"));
+replyDoc.save();
+
+// Update the main topic document : 8.5.2 sessionAsSigner Enhanced
+var thisDB = sessionAsSigner.getDatabase(session.getServerName(),session.getCurrentDatabase().getFilePath());
+var topDoc:NotesDocument = thisDB.getDocumentByUNID(sessionScope.topicUNID);
+topDoc.replaceItemValue("topic_LastTitle",getComponent("topic_Title").getValue());
+topDoc.replaceItemValue("topic_LastAuthor",context.getUser().getDistinguishedName());
+topDoc.replaceItemValue("topic_LastDate",curDate);
+var topReplies = topDoc.getItemValueInteger("topic_Replies")
+topDoc.replaceItemValue("topic_Replies",topReplies + 1);
+topDoc.save();
+
+// Update the ForumArea document : 8.5.2 sessionAsSigner Enhanced
+var faDoc:NotesDocument = thisDB.getDocumentByUNID(sessionScope.forumAreaUNID);
+faDoc.replaceItemValue("forum_LastTitle",topDoc.getItemValueString("topic_Title"));
+faDoc.replaceItemValue("forum_LastAuthor",context.getUser().getDistinguishedName());
+faDoc.replaceItemValue("forum_LastDate",curDate);
+faDoc.replaceItemValue("forum_LastTopicUID",sessionScope.topicUID);
+var faPosts = faDoc.getItemValueInteger("forum_Posts")
+faDoc.replaceItemValue("forum_Posts",faPosts + 1);
+faDoc.save();
+
+// Increase The Posters 'New Topic' count by one.
+var userView:NotesView = database.getView("lkp_UserProfiles");
+var userDoc:NotesDocument = userView.getDocumentByKey(sessionScope.commonName);
+var userPosts = userDoc.getItemValueInteger("user_Posts");
+userDoc.replaceItemValue("user_Posts",userPosts + 1);
+var userReplies = userDoc.getItemValueInteger("user_Replies");
+userDoc.replaceItemValue("user_Replies",userReplies + 1);
+userDoc.save();
+
+context.redirectToPage("/viewTopic.xsp?topicID=" + sessionScope.topicUID);}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:link>
+		</xp:panel>
+	</xp:panel>
+</xp:view>

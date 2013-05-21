@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:this.data>
+		<xp:dominoDocument var="replyDoc" formName="content_Topic"
+			action="editDocument">
+			<xp:this.documentId><![CDATA[#{javascript:session.evaluate("@middle(@password(\"" + param.replyID + "\");1;32)").elementAt(0)}]]></xp:this.documentId>
+		</xp:dominoDocument>
+	</xp:this.data>
+	<xp:this.resources>
+		<xp:styleSheet href="/forms.css" />
+		<xp:script src="/BBCodeEditor.js" clientSide="true" />
+
+	</xp:this.resources>
+	<xp:panel styleClass="lotusContent">
+		<xp:panel styleClass="xTalkForm2">
+			<fieldset>
+				<legend>
+					<xp:text escape="true" id="computedField1">
+						<xp:this.value><![CDATA[#{javascript:if(replyDoc.getItemValueInteger("topic_replyMaster") == 1){
+	return "Edit Topic"
+} else {
+	return "Edit Reply"
+}}]]></xp:this.value>
+					</xp:text>
+				</legend>
+				<xp:label styleClass="required" value="Title" id="label1"
+					for="topic_Title" />
+				<xp:inputText id="topic_Title" value="#{replyDoc.topic_Title}"
+					required="true" htmlFilter="striptags">
+					<xp:this.validators>
+						<xp:validateRequired
+							message="You must supply a title for your discussion topic." />
+
+					</xp:this.validators>
+				</xp:inputText>
+				<small>&#160;</small>
+
+				<xp:label styleClass="required extraHeight" value="Message"
+					id="label2" for="topic_Body" />
+
+				<xp:link escape="true" id="Editor_Bold" title="Bold"
+					outerStyleClass="lotusBtn lotusLeft">
+					<xp:image id="image1" url="/text_bold.png" alt="Bold" />
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[doAddTags('[b]','[/b]','#{id:topic_Body}')]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:link>
+				<xp:link escape="true" id="Editor_Italics" title="Italics"
+					outerStyleClass="lotusBtn lotusLeft">
+					<xp:image id="image2" url="/text_italic.png" alt="Italics" />
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[doAddTags('[i]','[/i]','#{id:topic_Body}')]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:link>
+				<xp:link escape="true" id="Editor_Underline" title="Underline"
+					outerStyleClass="lotusBtn lotusLeft">
+					<xp:image id="image3" url="/text_underline.png" alt="Underline" />
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[doAddTags('[u]','[/u]','#{id:topic_Body}')]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:link>
+				<xp:link escape="true" id="Editor_StrikeThrough" title="Strike Through"
+					outerStyleClass="lotusBtn lotusLeft">
+					<xp:image id="image4" url="/text_strikethrough.png" alt="Strike Through" />
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[doAddTags('[s]','[/s]','#{id:topic_Body}')]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:link>
+				<xp:link escape="true" id="Editor_email" title="eMail"
+					outerStyleClass="lotusBtn lotusLeft">
+					<xp:image id="image5" url="/email.png" alt="eMail" />
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[doEmail('#{id:topic_Body}')]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:link>
+				<xp:link escape="true" id="Editor_Link" title="URL"
+					outerStyleClass="lotusBtn lotusLeft">
+					<xp:image id="image6" url="/link.png" alt="URL" />
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[doURL('#{id:topic_Body}')]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:link>
+				<xp:link escape="true" id="Editor_Image" title="Image"
+					outerStyleClass="lotusBtn lotusLeft">
+					<xp:image id="image7" url="/photos.png" alt="Image" />
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[doImage('#{id:topic_Body}')]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:link>
+				<xp:span id="editorColor" styleClass="lotusBtn lotusLeft">
+					<xp:image id="image14" url="/color_swatch.png" alt="Text Color" />
+					<xp:comboBox id="colorCombo" defaultValue="black">
+						<xp:selectItem itemLabel="Black" itemValue="black" />
+
+						<xp:selectItem itemLabel="Brown" itemValue="brown" />
+
+						<xp:selectItem itemLabel="Maroon" itemValue="maroon" />
+
+						<xp:selectItem itemLabel="Red" itemValue="red" />
+
+						<xp:selectItem itemLabel="Orange" itemValue="orange" />
+
+						<xp:selectItem itemLabel="Yellow" itemValue="yellow" />
+
+						<xp:selectItem itemLabel="Olive" itemValue="olive" />
+
+						<xp:selectItem itemLabel="Lime" itemValue="lime" />
+
+						<xp:selectItem itemLabel="Green" itemValue="green" />
+
+						<xp:eventHandler event="onchange" submit="false">
+							<xp:this.script><![CDATA[doColor('#{id:colorCombo}','#{id:topic_Body}');]]></xp:this.script>
+						</xp:eventHandler>
+						<xp:selectItem itemLabel="Teal" itemValue="teal" />
+
+						<xp:selectItem itemLabel="Aqua" itemValue="aqua" />
+
+						<xp:selectItem itemLabel="Blue" itemValue="blue" />
+
+						<xp:selectItem itemLabel="Navy" itemValue="navy" />
+
+						<xp:selectItem itemLabel="Purple" itemValue="purple" />
+
+						<xp:selectItem itemLabel="Fuchsia" itemValue="fuchsia" />
+
+						<xp:selectItem itemLabel="Grey" itemValue="grey" />
+
+						<xp:selectItem itemLabel="Silver" itemValue="silver" />
+
+						<xp:selectItem itemLabel="White" itemValue="white" />
+
+					</xp:comboBox>
+
+				</xp:span>
+				<xp:span id="span1" styleClass="lotusBtn lotusLeft">
+					<xp:image id="image8" url="/font.png" alt="Text Size" />
+					<xp:comboBox id="fontCombo" defaultValue="14">
+						<xp:selectItem itemLabel="4" />
+						<xp:selectItem itemLabel="6" />
+						<xp:selectItem itemLabel="8" />
+						<xp:selectItem itemLabel="10" />
+						<xp:selectItem itemLabel="12" />
+						<xp:selectItem itemLabel="16" />
+						<xp:selectItem itemLabel="14" />
+						<xp:selectItem itemLabel="20" />
+						<xp:selectItem itemLabel="24" />
+						<xp:selectItem itemLabel="32" />
+						<xp:selectItem itemLabel="48" />
+						<xp:selectItem itemLabel="72" />
+						<xp:eventHandler event="onchange" submit="false">
+							<xp:this.script><![CDATA[doSize('#{id:fontCombo}','#{id:topic_Body}');]]></xp:this.script>
+						</xp:eventHandler>
+
+					</xp:comboBox>
+
+				</xp:span>
+
+				<xp:link escape="true" id="Editor_Code" title="Insert Code"
+					outerStyleClass="lotusBtn lotusLeft">
+					<xp:image id="image11" url="/note.png" alt="Insert Code" />
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[doAddTags('[code]','[/code]','#{id:topic_Body}')]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:link>
+				<xp:link escape="true" id="Editor_Quote" title="Insert Quote"
+					outerStyleClass="lotusBtn lotusLeft">
+					<xp:image id="image10" url="/comment.png" alt="Insert Quote" />
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[doAddTags('[quote]','[/quote]','#{id:topic_Body}')]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:link>
+				<xp:inputTextarea id="topic_Body" value="#{replyDoc.topic_Body}" />
+				<small>BBCode Is Enabled</small>
+			</fieldset>
+
+			<xp:link escape="true" id="saveTopicLink"
+				outerStyleClass="lotusBtn lotusBtnSpecial lotusRight">
+
+				<xp:this.text><![CDATA[#{javascript:if(replyDoc.getItemValueInteger("topic_replyMaster") == 1){
+	return "Update Topic"
+} else {
+	return "Update Reply"
+}}]]></xp:this.text>
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete" id="eventHandler1">
+					<xp:this.action id="this.action1"><![CDATA[#{javascript:var curDate = session.createDateTime("Today");
+curDate.setNow();
+
+replyDoc.setValue("topic_editDetected",1);
+replyDoc.setValue("topic_editAuthor",@UserName());
+replyDoc.setValue("topic_editDateTime",curDate);
+replyDoc.save();
+
+if(replyDoc.getItemValueInteger("topic_replyMaster") ==  1){
+	var topDoc:NotesDocument = database.getDocumentByUNID(replyDoc.getItemValueString("topic_TopicUNID"));
+	topDoc.replaceItemValue("topic_Title",replyDoc.getItemValueString("topic_Title"));
+	topDoc.save();
+}
+
+// Redirect to the new Topic page.
+context.redirectToPage("/listTopics.xsp?forumID=" + replyDoc.getItemValueString("topic_ForumUID"));}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:link>
+		</xp:panel>
+	</xp:panel>
+</xp:view>

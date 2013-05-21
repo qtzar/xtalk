@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<note class='form' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='852575D1004E0DF0'>
+<noteinfo noteid='8ea' unid='CCDCC4B526E8EEF4852575E7004D5065' sequence='8'>
+<created><datetime dst='true'>20090702T100428,53-04</datetime></created>
+<modified><datetime dst='true'>20101009T145554,41-04</datetime></modified>
+<revised><datetime dst='true'>20101009T145554,40-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20101009T145554,40-04</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20090702T100429,10-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Declan Sciolla-Lynch/O=qtzar.com</name><name>CN=grumpy/O=qtzar.com</name><name
+>CN=Declan Sciolla-Lynch/O=qtzar.com</name><name>CN=Figment/O=Imagination</name><name
+>CN=Declan Sciolla-Lynch/O=Imagination</name></updatedby>
+<wassignedby><name>CN=Declan Sciolla-Lynch/O=Imagination</name></wassignedby>
+<item name='$HTMLCode' sign='true'>
+<rawitemdata type='1'>
+X/8QAAIADwAHAAAAAAAAAA==
+</rawitemdata></item>
+<item name='$TITLE'><text>$$SearchTemplateDefault</text></item>
+<item name='$Info' sign='true'>
+<rawitemdata type='1'>
+hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
+</rawitemdata></item>
+<item name='$Flags'><text/></item>
+<item name='$Comment' sign='true'><text>xTalk V1.0</text></item>
+<item name='$DesignerVersion' sign='true'><text>8.5</text></item>
+<item name='$$ScriptName' summary='false' sign='true'><text>$$SearchTemplateDefault</text></item>
+<item name='$Body' sign='true'>
+<rawitemdata type='1'>
+gQKC/1oAAQAAAAAAAAAAAKAFAACgBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAABAAAAAJSHAAAAAAAAAAAAAAAAAQAAAAQAAACDBAEAhf8VAAEAAApBY2Nlc3MgRGVu
+aWVkAA==
+</rawitemdata></item></note>
+

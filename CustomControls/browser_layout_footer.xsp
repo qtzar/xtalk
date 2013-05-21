@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:panel styleClass="lotusFooter">
+		<xp:panel styleClass="lotusRightCorner">
+			<xp:panel styleClass="lotusInner">
+				<xp:text escape="true" id="footerText" value="#{applicationScope.blogFooter}" styleClass="lotusRight"></xp:text>
+			</xp:panel>
+		</xp:panel>
+	</xp:panel>
+	
+</xp:view>

@@ -1,0 +1,14 @@
+<theme extends="oneuiv2_red">
+	<resource>
+		<content-type>text/css</content-type>
+		<href>browser.css</href>
+	</resource>
+	<resource>
+		<content-type>text/css</content-type>
+		<href>browser_forums.css</href>
+	</resource>
+	<resource>
+		<content-type>text/css</content-type>
+		<href>CustomBranding.css</href>
+	</resource>
+</theme>

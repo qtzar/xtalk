@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="852575D1004E0DF0" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="836" sequence="7" unid="08FC58D0F1002C8F852575D7005B62ED">
+<created><datetime dst="true">20090616T123811,01-04</datetime></created>
+<modified><datetime dst="true">20101009T145551,13-04</datetime></modified>
+<revised><datetime dst="true">20101009T145551,12-04</datetime></revised>
+<lastaccessed><datetime dst="true">20101009T145551,12-04</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20090616T123811,38-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Declan Sciolla-Lynch/O=qtzar.com</name><name>CN=Figment/O=Imagination</name><name>CN=Declan Sciolla-Lynch/O=Imagination</name></updatedby>
+<wassignedby><name>CN=Declan Sciolla-Lynch/O=Imagination</name></wassignedby>
+<item name="$Flags"><text>345CgQ</text></item>
+<item name="$FlagsExt" sign="true"><text>D</text></item>
+
+<item name="$FileModDT" sign="true"><datetime dst="true">20090616T123131,04-04</datetime></item>
+
+<item name="$FileNames" sign="true"><text>pushpin_green.png</text></item>
+<item name="$TITLE" sign="true"><text>sticky_add.png</text></item>
+<item name="$Comment" sign="true"><text>(c) 2009 FamFamFam - Licensed Under CC-A</text></item>
+<item name="$DesignerVersion" sign="true"><text>8.5</text></item></note>

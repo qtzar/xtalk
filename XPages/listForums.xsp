@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	pageTitle="#{javascript:applicationScope.forumShortName}">
+	<xp:this.resources>
+		<xp:script src="/global.jss" clientSide="false" />
+		<xp:metaData name="generator"
+			content="IBM Lotus Domino - xTalk V1.1">
+		</xp:metaData>
+		<xp:metaData name="description"
+			content="#{javascript:applicationScope.forumName}">
+		</xp:metaData>
+		<xp:metaData name="title"
+			content="#{javascript:applicationScope.forumShortName}">
+		</xp:metaData>
+	</xp:this.resources>
+
+
+	<xp:this.beforePageLoad><![CDATA[#{javascript:// Check the applicationScope and sessionScope
+if (!(applicationScope.containsKey("init"))) initApplication();
+if (!(sessionScope.containsKey("init"))) initSession();
+if (sessionScope.commonName != context.getUser().getCommonName()) initSession();
+
+checkBrowser();
+checkTheme(sessionScope.get("browserType"));
+
+sessionScope.currentPage = "listForums";
+sessionScope.topicUID = "";
+sessionScope.topicUNID = "";
+sessionScope.forumAreaUID = "";
+sessionScope.forumAreaUNID = "";
+
+if (!(param.containsKey("forumID")))context.redirectToPage("/home.xsp");
+
+var bcForumView:NotesView = database.getView("lkp_ForumsUID");
+var bcForumDoc:NotesDocument = bcForumView.getDocumentByKey(param.forumID);
+if (!(bcForumDoc.hasItem("forum_UID"))){
+	context.redirectToPage("/notAuthorized.xsp")
+}
+sessionScope.forumUID = bcForumDoc.getItemValueString("forum_UID");
+sessionScope.forumUNID = bcForumDoc.getUniversalID();
+
+
+
+
+sessionScope.bcrumb1on = true;
+sessionScope.bcrumb1link = true;
+
+sessionScope.bcrumb2on = true;
+sessionScope.bcrumb2link = true;
+sessionScope.bcrumb2text = bcForumDoc.getItemValueString("forum_Name");
+sessionScope.remove("bcrumb2URL");
+
+sessionScope.bcrumb3on = false;
+sessionScope.remove("bcrumb3link");
+sessionScope.remove("bcrumb3text");
+sessionScope.remove("bcrumb3URL");
+
+sessionScope.bcrumb4on = false;
+sessionScope.remove("bcrumb4link");
+sessionScope.remove("bcrumb4text");
+sessionScope.remove("bcrumb4URL");
+
+sessionScope.bcrumb5on = false;
+sessionScope.remove("bcrumb5link");
+sessionScope.remove("bcrumb5text");
+sessionScope.remove("bcrumb5URL");
+
+sessionScope.bcrumb6on = false;
+sessionScope.remove("bcrumb6link");
+sessionScope.remove("bcrumb6text");
+sessionScope.remove("bcrumb6URL");}]]></xp:this.beforePageLoad>
+	<xp:include
+		pageName='${javascript:sessionScope.browserType + "_listForums.xsp"}'
+		id="include1">
+	</xp:include>
+</xp:view>

@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:this.data>
+		<xp:dominoDocument
+			var="profileDoc"
+			formName="content_UserProfile"
+			action="openDocument">
+			<xp:this.documentId><![CDATA[#{javascript:context.getUrlParameter("profileID")}]]></xp:this.documentId>
+		</xp:dominoDocument>
+		<xp:dominoView var="TopicsByAuthor" viewName="lkp_TopicsByAuthor">
+			<xp:this.categoryFilter><![CDATA[#{javascript:@Name("[CN]",profileDoc.getItemValueString("user_Name"));}]]></xp:this.categoryFilter>
+		</xp:dominoView>
+		<xp:dominoView var="RepliesByAuthor" viewName="lkp_RepliesByAuthor">
+			<xp:this.categoryFilter><![CDATA[#{javascript:@Name("[CN]",profileDoc.getItemValueString("user_Name"));}]]></xp:this.categoryFilter>
+		</xp:dominoView>
+	</xp:this.data>
+	<xp:panel
+		styleClass="lotusContent"
+		id="lotusContent">
+		<xp:table>
+			<xp:tr>
+				<xp:td>
+					<xp:image id="image9">
+						<xp:this.url><![CDATA[#{javascript:importPackage(com.xtalk.util)
+
+if (profileDoc == null) {
+	return "/profileNoPhoto.png";
+} else {
+	return "http://www.gravatar.com/avatar/" + HashMaster.md5(profileDoc.getItemValueString("user_eMail")) +"?d=wavatar"
+}
+}]]></xp:this.url>
+					</xp:image>
+				</xp:td>
+				<xp:td>
+					<xp:text
+						escape="true"
+						id="computedField1">
+					<xp:this.value><![CDATA[#{javascript:@Name("[CN]",profileDoc.getItemValueString("user_Name"));}]]></xp:this.value></xp:text>
+				</xp:td>
+			</xp:tr>
+			
+		</xp:table>
+		<xp:tabbedPanel
+			containerStyleClass="lotusTabContainer"
+			styleClass="lotusTabs"
+			selectedTab="tabAbout"
+			id="profileDetails">
+			<xp:tabPanel
+				label="About"
+				id="tabAbout"
+				selectedTabStyleClass="lotusSelected"
+				contentStyleClass="lotusTabContent">
+				Coming Soon!
+			</xp:tabPanel>
+			<xp:tabPanel
+				label="Statistics"
+				id="tabStats"
+				selectedTabStyleClass="lotusSelected"
+				contentStyleClass="lotusTabContent">
+				Coming Soon!
+			</xp:tabPanel>
+			<xp:tabPanel
+				label="Main Topics"
+				id="tabMainTopics"
+				selectedTabStyleClass="lotusSelected"
+				contentStyleClass="lotusTabContent">
+				<xp:panel
+					styleClass="lotusActionBar lotusBtnContainer">
+					<xp:pager
+						for="MainTopicsRepeat"
+						id="replyPagerTop"
+						outerStyleClass="xTalkPager lotusRight"
+						styleClass="xTalkPager"
+						partialRefresh="true">
+						<xp:pagerControl
+							id="pagerControl2"
+							type="Status"
+							value="Page {0} of {1}"
+							styleClass="xTalkPagerItem" />
+						<xp:pagerControl
+							id="pagerControl9"
+							type="First"
+							styleClass="xTalkPagerItem">
+							<xp:this.value><![CDATA[<< First]]></xp:this.value>
+						</xp:pagerControl>
+						<xp:pagerControl
+							id="pagerControl8"
+							type="Previous"
+							styleClass="xTalkPagerItem">
+							<xp:this.value><![CDATA[< Prev]]></xp:this.value>
+						</xp:pagerControl>
+						<xp:pagerControl
+							id="pagerControl1"
+							type="Group"
+							currentStyleClass="xTalkPagerCurrent"
+							styleClass="xTalkPagerItems" />
+						<xp:pagerControl
+							id="pagerControl7"
+							type="Next"
+							styleClass="xTalkPagerItem">
+							<xp:this.value><![CDATA[Next >]]></xp:this.value>
+						</xp:pagerControl>
+						<xp:pagerControl
+							id="pagerControl5"
+							type="Last"
+							styleClass="xTalkPagerItem">
+							<xp:this.value><![CDATA[Last >>]]></xp:this.value>
+						</xp:pagerControl>
+					</xp:pager>
+				</xp:panel>
+				<table class="forumTable">
+					<tbody>
+						<tr>
+							<td class="forumCategory">
+								<span class="forumAreaTitle">
+									Main Topics By&#160;
+									<xp:text
+										escape="true"
+										id="computedField7">
+									<xp:this.value><![CDATA[#{javascript:@Name("[CN]",profileDoc.getItemValueString("user_Name"));}]]></xp:this.value></xp:text>
+								</span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<xp:repeat
+					id="MainTopicsRepeat"
+					rows="10"
+					value="#{TopicsByAuthor}"
+					var="varTopics"
+					indexVar="indxTopics">
+					<xp:this.facets>
+						<xp:text
+							disableTheme="true"
+							xp:key="header"
+							escape="false">
+							<xp:this.value><![CDATA[<table class="forumTable">
+<thead>
+<tr>
+<th class="forumHeader forumHeaderExpand">Thread Title</th>
+<th class="forumHeader profileDatePosted">Date Posted</th>
+<th class="forumHeader forumCenterText">Replies</th>
+<th class="forumHeader forumCenterText">Views</th>
+</tr>
+</thead>
+<tbody>]]></xp:this.value>
+						</xp:text>
+						<xp:text
+							disableTheme="true"
+							xp:key="footer"
+							escape="false">
+							<xp:this.value><![CDATA[</tbody>
+</table>]]></xp:this.value>
+						</xp:text>
+					</xp:this.facets>
+					<xp:tr styleClass="forumTopicList">
+						<xp:td styleClass="forumCol1">
+							<xp:text
+								escape="true"
+								id="computedField3"
+								value="#{varTopics.topic_Title}">
+							</xp:text>
+						</xp:td>
+						<xp:td styleClass="forumCol1">
+							<xp:text
+								escape="true"
+								id="computedField4"
+								value="#{varTopics.topic_DateTime}"
+								styleClass="profileDatePosted">
+								<xp:this.converter>
+									<xp:convertDateTime type="both"></xp:convertDateTime>
+								</xp:this.converter>
+							</xp:text>
+						</xp:td>
+						<xp:td styleClass="forumCol2">
+							<xp:text
+								escape="true"
+								id="computedField5"
+								value="#{varTopics.topic_Replies}">
+								<xp:this.converter>
+									<xp:convertNumber
+										type="number"
+										integerOnly="true">
+									</xp:convertNumber>
+								</xp:this.converter>
+							</xp:text>
+						</xp:td>
+						<xp:td styleClass="forumCol2">
+							<xp:text
+								escape="true"
+								id="computedField6"
+								value="#{varTopics.topic_Views}">
+								<xp:this.converter>
+									<xp:convertNumber
+										type="number"
+										integerOnly="true">
+									</xp:convertNumber>
+								</xp:this.converter>
+							</xp:text>
+						</xp:td>
+					</xp:tr>
+				</xp:repeat>
+			</xp:tabPanel>
+			<xp:tabPanel
+				label="Replies"
+				id="tabReplies"
+				selectedTabStyleClass="lotusSelected"
+				contentStyleClass="lotusTabContent">
+				<xp:panel
+					styleClass="lotusActionBar lotusBtnContainer">
+					<xp:pager
+						for="repliesRepeat"
+						id="pager1"
+						outerStyleClass="xTalkPager lotusRight"
+						styleClass="xTalkPager"
+						partialRefresh="true">
+						<xp:pagerControl
+							id="pagerControl3"
+							type="Status"
+							value="Page {0} of {1}"
+							styleClass="xTalkPagerItem" />
+						<xp:pagerControl
+							id="pagerControl4"
+							type="First"
+							styleClass="xTalkPagerItem">
+							<xp:this.value><![CDATA[<< First]]></xp:this.value>
+						</xp:pagerControl>
+						<xp:pagerControl
+							id="pagerControl6"
+							type="Previous"
+							styleClass="xTalkPagerItem">
+							<xp:this.value><![CDATA[< Prev]]></xp:this.value>
+						</xp:pagerControl>
+						<xp:pagerControl
+							id="pagerControl10"
+							type="Group"
+							currentStyleClass="xTalkPagerCurrent"
+							styleClass="xTalkPagerItems" />
+						<xp:pagerControl
+							id="pagerControl11"
+							type="Next"
+							styleClass="xTalkPagerItem">
+							<xp:this.value><![CDATA[Next >]]></xp:this.value>
+						</xp:pagerControl>
+						<xp:pagerControl
+							id="pagerControl12"
+							type="Last"
+							styleClass="xTalkPagerItem">
+							<xp:this.value><![CDATA[Last >>]]></xp:this.value>
+						</xp:pagerControl>
+					</xp:pager>
+				</xp:panel>
+				<table class="forumTable">
+					<tbody>
+						<tr>
+							<td class="forumCategory">
+								<span class="forumAreaTitle">
+									Replies By&#160;
+									<xp:text
+										escape="true"
+										id="computedField8">
+									<xp:this.value><![CDATA[#{javascript:@Name("[CN]",profileDoc.getItemValueString("user_Name"));}]]></xp:this.value></xp:text>
+								</span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<xp:repeat
+					id="repliesRepeat"
+					rows="10"
+					value="#{RepliesByAuthor}"
+					var="varReplies"
+					indexVar="indxReplies">
+					<xp:this.facets>
+						<xp:text
+							disableTheme="true"
+							xp:key="header"
+							escape="false">
+							<xp:this.value><![CDATA[<table class="forumTable">
+<thead>
+<tr>
+<th class="forumHeader forumHeaderExpand">Thread Title</th>
+<th class="forumHeader profileDatePosted">Date Posted</th>
+<th class="forumHeader forumCenterText">Replies</th>
+<th class="forumHeader forumCenterText">Views</th>
+</tr>
+</thead>
+<tbody>]]></xp:this.value>
+						</xp:text>
+						<xp:text
+							disableTheme="true"
+							xp:key="footer"
+							escape="false">
+							<xp:this.value><![CDATA[</tbody>
+</table>]]></xp:this.value>
+						</xp:text>
+					</xp:this.facets>
+					<xp:tr styleClass="forumTopicList">
+						<xp:td styleClass="forumCol1">
+							<xp:text
+								escape="true"
+								id="computedField9"
+								value="#{varReplies.topic_Title}">
+							</xp:text>
+						</xp:td>
+						<xp:td styleClass="forumCol1">
+							<xp:text
+								escape="true"
+								id="computedField10"
+								value="#{varReplies.topic_DateTime}"
+								styleClass="profileDatePosted">
+								
+							</xp:text>
+						</xp:td>
+						<xp:td styleClass="forumCol2">
+							<xp:text
+								escape="true"
+								id="computedField11"
+								value="#{varReplies.topic_Views}">
+								
+							</xp:text>
+						</xp:td>
+						<xp:td styleClass="forumCol2">
+							<xp:text
+								escape="true"
+								id="computedField12"
+								value="#{varReplies.topic_Replies}">
+								
+							</xp:text>
+						</xp:td>
+					</xp:tr>
+				</xp:repeat>
+			</xp:tabPanel>
+		</xp:tabbedPanel>
+	</xp:panel>
+</xp:view>

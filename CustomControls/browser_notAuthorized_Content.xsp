@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:this.resources>
+		<xp:styleSheet href="/forms.css" />
+	</xp:this.resources>
+	<xp:panel styleClass="lotusContent" id="lotusContent">
+		<xp:panel styleClass="xTalkForm" id="xTalkForm">
+			<fieldset>
+				<legend>Not Authorized</legend>
+				You are not authorized to perform the requested action.
+				<xp:br />
+				<xp:br />
+				<xp:link escape="true" text="Click here" id="link1" value="/home.xsp" />
+				 &#160;to go to the main forum page.
+			</fieldset>
+		</xp:panel>
+	</xp:panel>
+</xp:view>

@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	styleClass="lotusLogin">
+	<xp:this.resources>
+		<xp:dojoModule name="dojo.cookie" />
+	</xp:this.resources>
+	<xp:this.beforePageLoad><![CDATA[#{javascript:sessionScope.resetPassword = 0}]]></xp:this.beforePageLoad>
+	<xp:panel styleClass="lotusLoginBox">
+		<xp:panel styleClass="lotusLoginContent">
+			<xp:panel styleClass="lotusLogo">
+				<xp:span styleClass="lotusAltText">xTalk V1.1</xp:span>
+			</xp:panel>
+			<xp:image url="/appLogo.png" style="height:175px;width:175px" id="appLogo" />
+			<xp:panel styleClass="lotusLoginForm">
+				<xp:text escape="true" id="computedField1" tagName="h1" value="#{applicationScope.forumShortName}" />
+				<xp:text escape="true" id="computedField2" value="#{applicationScope.forumName}" tagName="h2" />
+				<xp:panel id="cc_login_panel_login_content">
+					<xp:table style="width:100.0%">
+						<xp:tr>
+							<xp:td>User Name</xp:td>
+							<xp:td>
+								<xp:inputText id="cc_login_panel_login_username" title="username"
+									value="#{sessionScope.cc_login_panel_login_username}" />
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td>Password</xp:td>
+							<xp:td>
+								<xp:inputText id="cc_login_panel_login_password" password="true" title="password"
+									value="#{sessionScope.cc_login_panel_login_password}" />
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td>Remember Me</xp:td>
+							<xp:td>
+								<xp:checkBox text="" id="checkBox1" defaultChecked="true"
+									value="#{sessionScope.cc_login_panel_login_remember}" />
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td />
+							<xp:td>
+								<xp:link escape="true" text="Login" id="link1" outerStyleClass="lotusBtn lotusBtnSpecial lotusRight">
+									<xp:eventHandler event="onclick" submit="false">
+										<xp:this.script><![CDATA[dojo.style("#{id:cc_login_panel_login_content}","display","none");
+dojo.style("#{id:cc_login_panel_login_wait}","display","block");
+
+dojo.xhrPost({ 
+                url: '/names.nsf?login', 
+                content: {
+					"username" : dojo.byId("#{id:cc_login_panel_login_username}").value,
+					"password" : dojo.byId("#{id:cc_login_panel_login_password}").value,
+					"RedirectTo": "\\icons\\view.gif"    
+					}, 
+                load: function (data) {
+                if( String(data).substring(0,3) == "GIF") 
+                        { 
+                                dojo.style("#{id:cc_login_panel_login_wait}","display","none");
+								dojo.style("#{id:cc_login_panel_login_success}","display","block");
+                                window.location = "#{javascript:sessionScope.entryPage}"
+                        } else { 
+                                if ( dojo.cookie('DomAuthSessId') != null || dojo.cookie('LtpaToken') != null ) 
+                                { 
+                                        dojo.style("#{id:cc_login_panel_login_wait}","display","none");
+										dojo.style("#{id:cc_login_panel_login_notauth}","display","block");
+                                        dojo.cookie('DomAuthSessId', null, { path: '/', domain: 'czarnowski.com' }); 
+                                        dojo.cookie('LtpaToken', null, { path: '/', domain: 'czarnowski.com' }); 
+                                } else { 
+										dojo.style("#{id:cc_login_panel_login_wait}","display","none");
+										dojo.style("#{id:cc_login_panel_login_failed}","display","block");
+                                } 
+                        } 
+                        }, 
+                error: function (error) { 
+                        console.error ('Error: ', error);
+   						//IE Has An Issue with returning binary data in AJAX so just reload the page.
+   						// If the user did not log in correctly then they will be redirected here.
+   						console.error ('Possibly Running IE - Reloading Page Anyway');
+   						window.location = "#{javascript:sessionScope.entryPage}" 
+                        } 
+                }); 
+]]></xp:this.script>
+									</xp:eventHandler>
+								</xp:link>
+								<xp:link escape="true" text="Forgot Password" id="link4" outerStyleClass="lotusBtn lotusRight">
+									<xp:eventHandler event="onclick" submit="false">
+										<xp:this.script><![CDATA[XSP.openDialog("#{id:resetPasswordDialog}")]]></xp:this.script>
+									</xp:eventHandler>
+								</xp:link>
+							</xp:td>
+						</xp:tr>
+					</xp:table>
+				</xp:panel>
+				<xp:panel id="cc_login_panel_login_wait" style="display:none">
+					<center>
+						<xp:image url="/res_login_Check.png" id="image5" style="height:64px;width:64px" />
+						<xp:br />
+						Checking...
+						<xp:br />
+						<xp:br />
+					</center>
+				</xp:panel>
+				<xp:panel id="cc_login_panel_login_failed" style="display:none">
+					<center>
+						<xp:image url="/res_login_Invalid.png" id="image2" style="height:64px;width:64px" />
+						<xp:br />
+						Invalid Username Or Password
+					</center>
+					<xp:br />
+					<xp:link escape="true" text="Please Try Again" id="link2" outerStyleClass="lotusBtn lotusBtnSpecial lotusRight">
+						<xp:eventHandler event="onclick" submit="false">
+							<xp:this.script><![CDATA[dojo.style("#{id:cc_login_panel_login_failed}","display","none");
+dojo.style("#{id:cc_login_panel_login_content}","display","block");   ]]></xp:this.script>
+						</xp:eventHandler>
+					</xp:link>
+				</xp:panel>
+				<xp:panel id="cc_login_panel_login_notauth" style="display:none">
+					<center>
+						<xp:image url="/res_login_NotAuth.png" id="image3" style="height:64px;width:64px" />
+						<xp:br />
+						Not Authorized For Access
+					</center>
+					<xp:br />
+					<xp:link escape="true" text="Please Try Again" id="link3" outerStyleClass="lotusBtn lotusBtnSpecial lotusRight">
+						<xp:eventHandler event="onclick" submit="false">
+							<xp:this.script><![CDATA[dojo.style("#{id:cc_login_panel_login_notauth}","display","none");
+dojo.style("#{id:cc_login_panel_login_content}","display","block");   ]]></xp:this.script>
+						</xp:eventHandler>
+					</xp:link>
+				</xp:panel>
+				<xp:panel id="cc_login_panel_login_success" style="display:none">
+					<center>
+						<xp:image url="/res_login_Accept.png" id="image4" style="height:64px;width:64px" />
+						<xp:br />
+						Access Granted
+						<br />
+						Loading....
+					</center>
+				</xp:panel>
+			</xp:panel>
+			<xp:panel styleClass="lotusDescription">
+				<xp:text escape="true" id="computedField3" value="#{applicationScope.loginMarketTitle}" tagName="h2" />
+				<xp:text escape="true" id="computedField4" value="#{applicationScope.loginMarketText}" tagName="p" />
+			</xp:panel>
+		</xp:panel>
+		<table cellspacing="0" role="presentation" class="lotusLegal">
+			<tbody>
+				<tr>
+					<td class="lotusLicense">
+						<xp:text escape="true" id="computedField5" value="#{applicationScope.loginLegal1}" />
+					</td>
+				</tr>
+				<tr>
+					<td class="lotusLicense">
+						<xp:text escape="true" id="computedField6" value="#{applicationScope.loginLegal2}" />
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</xp:panel>
+	<xe:dialog id="resetPasswordDialog" title="Reset Password">
+	<xp:panel id="resetPasswordRefresh">
+	<xp:panel styleClass="xTalkForm" id="resetPasswordStage1">
+		<xp:this.style><![CDATA[#{javascript:if (sessionScope.resetPassword == 0){
+	return;
+} else {
+	return "display:none";
+}}]]></xp:this.style>
+		<fieldset>
+			<legend>Reset Password</legend>
+			<xp:label styleClass="required" value="eMail Address:" id="label1" for="fld_RegEMail" />
+			<xp:inputText value="#{sessionScope.resetPasswordEMail}" id="fld_RegEmail" required="true"></xp:inputText>
+			<small>Please Enter The eMail Address You Used To Register On The Forums.</small>
+		</fieldset>
+		<xp:panel styleClass="lotusActionBar">
+			<xp:link escape="true" text="Reset Password" id="btnSave" outerStyleClass="lotusBtn lotusBtnSpecial lotusRight">
+				<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="resetPasswordRefresh">
+					<xp:this.script><![CDATA[dojo.style("#{id:resetPasswordStage1}","display","none");
+dojo.style("#{id:resetPasswordStage2}","display","block");]]></xp:this.script>
+					<xp:this.action><![CDATA[#{javascript:// Get Access To Databases with sessionAsSigner
+var thisDB:NotesDatabase = sessionAsSigner.getDatabase(session.getServerName(),session.getCurrentDatabase().getFilePath());
+var nabDB:NotesDatabase = sessionAsSigner.getDatabase(session.getServerName(),"names.nsf");
+if (applicationScope.AppRegDB != ""){
+	var extDB:NotesDatabase = sessionAsSigner.getDatabase(session.getServerName(),applicationScope.AppRegDB);
+}
+
+// Find The Person Document With This Email Address
+if (applicationScope.AppRegDB != ""){
+	var extDBView:NotesView = extDB.getView("($Users)");
+	var extDBPersonDoc:NotesDocument = extDBView.getDocumentByKey(sessionScope.resetPasswordEMail);
+}
+var nabDBView:NotesView = nabDB.getView("($Users)");
+var nabDBPersonDoc:NotesDocument = nabDBView.getDocumentByKey(sessionScope.resetPasswordEMail);
+
+if (extDBPersonDoc == null && nabDBPersonDoc == null){
+	// the person document was not found.
+	sessionScope.resetPassword = 1
+	return;
+}
+
+// Set The person Doc to a single var so we don't have to code the rest twice.
+if (extDBPersonDoc != null){
+	var finalPersonDoc:NotesDocument = extDBPersonDoc;
+} else {
+	var finalPersonDoc:NotesDocument = nabDBPersonDoc;
+}
+
+// Set the new password on the finalPersonDoc
+var newPassword = @Unique();
+finalPersonDoc.replaceItemValue("HTTPPassword",newPassword);
+finalPersonDoc.save(true,false);
+
+// Send An eMail To the Person With the New Password
+var userProfileView:NotesView = thisDB.getView("lkp_UserProfiles");
+var userProfileDoc:NotesDocument = userProfileView.getDocumentByKey(finalPersonDoc.getItemValueString("fullname"));
+var mailDoc = thisDB.createDocument();
+mailDoc.replaceItemValue("Form","Memo")
+mailDoc.replaceItemValue("Subject",applicationScope.forumName + " : Password Reset Details");
+var bodyItem:NotesRichTextItem = mailDoc.createRichTextItem("Body");
+bodyItem.appendText(userProfileDoc.getItemValueString("FirstName") + ",");
+bodyItem.addNewLine(2);
+bodyItem.appendText("Your password has been reset on " + applicationScope.forumName);
+bodyItem.addNewLine(2);
+bodyItem.addTab(1);
+bodyItem.appendText("User Name :");
+bodyItem.addTab(1);
+bodyItem.appendText(userProfileDoc.getItemValueString("UserName"));
+bodyItem.addNewLine(1);
+bodyItem.addTab(1);
+bodyItem.appendText("Password :");
+bodyItem.addTab(1);
+bodyItem.appendText(newPassword);
+bodyItem.addNewLine(2);
+bodyItem.appendText("You are advised to change your password once you log in.");
+mailDoc.send(false,sessionScope.resetPasswordEMail);
+sessionScope.resetPassword = 2;}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:link>
+			<xp:link escape="true" text="Cancel" id="link5" outerStyleClass="lotusBtn lotusRight">
+				<xp:eventHandler event="onclick" submit="true" refreshMode="complete" immediate="true">
+					<xp:this.action><![CDATA[#{javascript:sessionScope.resetPassword = 0;
+sessionScope.resetPasswordEMail = "";
+getComponent("resetPasswordDialog").hide();
+context.redirectToPage("/login.xsp");}]]></xp:this.action>
+				</xp:eventHandler></xp:link>
+		</xp:panel>
+	</xp:panel>
+	<xp:panel styleClass="xTalkForm" id="resetPasswordStage2" style="display:none">
+		<fieldset>
+			<legend>Reset Password</legend><xp:div>
+			Please Wait : Looking Up Account
+		</xp:div></fieldset>
+	</xp:panel>
+	<xp:panel styleClass="xTalkForm" id="resetPasswordStage3">
+		<xp:this.style><![CDATA[#{javascript:if (sessionScope.resetPassword == 0){
+	return "display:none";
+} else {
+	return;
+}}]]></xp:this.style>
+		<fieldset>
+			<legend>Reset Password</legend>
+			<xp:text escape="true" id="computedField7" style="text-align:center">
+				<xp:this.value><![CDATA[#{javascript:switch(sessionScope.resetPassword){
+	case 1:
+		var msg = "The email address provided did not match any of the registered accounts."
+		break;
+	case 2:
+		var msg = "Your password has been reset and a new password has been sent to the email address provided."
+		break;
+	default:
+		var msg = "An unknown error has occured. Please contact the system administrator."
+}
+
+return msg;}]]></xp:this.value>
+			</xp:text>
+		</fieldset>
+		<xp:panel styleClass="lotusActionBar">
+			<xp:link escape="true" text="Try Again" id="link6" outerStyleClass="lotusBtn lotusBtnSpecial lotusRight"
+				rendered="#{javascript:sessionScope.resetPassword != 2}">
+				<xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="resetPasswordRefresh">
+					<xp:this.action><![CDATA[#{javascript:sessionScope.resetPassword = 0}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:link>
+			<xp:link escape="true" text="Cancel" id="link7" outerStyleClass="lotusBtn lotusRight"
+				rendered="#{javascript:sessionScope.resetPassword != 2}">
+				<xp:eventHandler event="onclick" submit="true" refreshMode="complete" immediate="true">
+					<xp:this.action><![CDATA[#{javascript:sessionScope.resetPassword = 0;
+sessionScope.resetPasswordEMail = "";
+getComponent("resetPasswordDialog").hide();
+context.redirectToPage("/login.xsp");}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:link>
+			<xp:link escape="true" text="Done" id="link8" outerStyleClass="lotusBtn lotusBtnSpecial lotusRight"
+				rendered="#{javascript:sessionScope.resetPassword == 2}">
+				<xp:eventHandler event="onclick" submit="true" refreshMode="complete" immediate="true">
+					<xp:this.action><![CDATA[#{javascript:sessionScope.remove("resetPassword");
+sessionScope.remove("resetPasswordEMail");
+getComponent("resetPasswordDialog").hide();
+context.redirectToPage("/login.xsp");}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:link>
+		</xp:panel>
+	</xp:panel>
+	</xp:panel>
+	</xe:dialog>
+	
+</xp:view>

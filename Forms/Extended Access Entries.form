@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<note class='form' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='852575D1004E0DF0'>
+<noteinfo noteid='1e82' unid='E9FD2DBB2DE13325852577BC006F0ACA' sequence='3'>
+<created><datetime dst='true'>20101014T161252,58-04</datetime></created>
+<modified><datetime dst='true'>20101014T164833,26-04</datetime></modified>
+<revised><datetime dst='true'>20101014T164833,23-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20101014T164833,25-04</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20101014T161252,84-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Declan Sciolla-Lynch/O=Imagination</name></updatedby>
+<wassignedby><name>CN=Declan Sciolla-Lynch/O=Imagination</name></wassignedby>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$HTMLCode' sign='true'>
+<rawitemdata type='1'>
+X/8QAAIADwAHAAAAAAAAAA==
+</rawitemdata></item>
+<item name='$TITLE'><textlist><text>Extended Access Entries</text><text>fm_ExtendedAccess</text></textlist></item>
+<item name='$Info' sign='true'>
+<rawitemdata type='1'>
+hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
+</rawitemdata></item>
+<item name='$Flags'><text/></item>
+<item name='$DesignerVersion'><text>8.5.2</text></item>
+<item name='$$ScriptName' summary='false' sign='true'><text>fm_ExtendedAccess</text></item>
+<item name='ex_Name' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='ex_Value' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='$Fields'><textlist><text>ex_Value</text><text>ex_Name</text></textlist></item>
+<item name='$Body' sign='true'>
+<rawitemdata type='1'>
+gQKC/1oAAQAAAAAAAAAAAKAFAACgBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAABAAAAAJSHAAAAAAAAAAAAAAAAAQAAAAQAAACDBAEAhf8IAAEAAArdBgAAiv/+/1AA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AHgAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAIr/LACKAAAFADACAAAAAAAAAgEAAAoAAAAAAAAAAAcAAAAAAGV4
+X05hbWUAYg4BAIQAAAAAAAAAAADeBgAAiv+F/wgAAQAACt0GAACK//7/UAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAHgAeAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAiv8sAIoAAAUAMAIAAAAAAAACAQAACgAAAAAAAAAACAAAAAAAZXhfVmFsdWViDgEAhAAA
+AAAAAAAAAN4GAACK/4X/CAABAAAK
+</rawitemdata></item></note>
+

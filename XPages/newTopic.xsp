@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	pageTitle="#{javascript:applicationScope.forumShortName}">
+	<xp:this.resources>
+		<xp:script src="/global.jss" clientSide="false" />
+		<xp:metaData name="generator"
+			content="IBM Lotus Domino - xTalk V1.1">
+		</xp:metaData>
+		<xp:metaData name="description"
+			content="#{javascript:applicationScope.forumName}">
+		</xp:metaData>
+		<xp:metaData name="title"
+			content="#{javascript:applicationScope.forumShortName}">
+		</xp:metaData>
+	</xp:this.resources>
+	<xp:this.beforePageLoad><![CDATA[#{javascript:// Check the applicationScope and sessionScope
+if (!(applicationScope.containsKey("init"))) initApplication();
+if (!(sessionScope.containsKey("init"))) initSession();
+if (sessionScope.commonName != context.getUser().getCommonName()) initSession();
+
+checkBrowser();
+checkTheme(sessionScope.get("browserType"));
+
+sessionScope.currentPage = "newTopic";
+
+sessionScope.topicUID = "";
+sessionScope.topicUNID = "";
+
+if (!(param.containsKey("forumID")))context.redirectToPage("/home.xsp");
+
+var bcForumAreaView:NotesView = database.getView("lkp_ForumAreasUID");
+var bcForumAreaDoc:NotesDocument = bcForumAreaView.getDocumentByKey(param.forumID);
+if (!(bcForumAreaDoc.hasItem("forum_ParentUID"))){
+	context.redirectToPage("/notAuthorized.xsp")
+}
+sessionScope.forumAreaUID = bcForumAreaDoc.getItemValueString("forum_UID");
+sessionScope.forumAreaUNID = bcForumAreaDoc.getUniversalID();
+
+var bcForumView:NotesView = database.getView("lkp_ForumsUID");
+var bcForumDoc:NotesDocument = bcForumView.getDocumentByKey(bcForumAreaDoc.getItemValueString("forum_ParentUID"));
+if (!(bcForumDoc.hasItem("forum_UID"))){
+	context.redirectToPage("/notAuthorized.xsp")
+}
+sessionScope.forumUID = bcForumDoc.getItemValueString("forum_UID");
+sessionScope.forumUNID = bcForumDoc.getUniversalID();
+
+
+sessionScope.bcrumb1on = true;
+sessionScope.bcrumb1link = true;
+
+sessionScope.bcrumb2on = true;
+sessionScope.bcrumb2link = true;
+sessionScope.bcrumb2text = bcForumDoc.getItemValueString("forum_Name");
+sessionScope.bcrumb2url = "listForums.xsp?forumID=" + sessionScope.forumUID;
+
+sessionScope.bcrumb3on = true;
+sessionScope.bcrumb3link = true;
+sessionScope.bcrumb3text = bcForumAreaDoc.getItemValueString("forumAreaName");
+sessionScope.bcrumb3url = "listTopics.xsp?forumID=" + sessionScope.forumAreaUID;
+
+sessionScope.bcrumb4on = true;
+sessionScope.bcrumb4link = false;
+sessionScope.bcrumb4text = "New Topic";
+
+sessionScope.bcrumb5on = false;
+sessionScope.remove("bcrumb5link");
+sessionScope.remove("bcrumb5text");
+sessionScope.remove("bcrumb5URL");
+
+sessionScope.bcrumb6on = false;
+sessionScope.remove("bcrumb6link");
+sessionScope.remove("bcrumb6text");
+sessionScope.remove("bcrumb6URL");
+}]]></xp:this.beforePageLoad>
+	<xp:include
+		pageName='${javascript:sessionScope.browserType + "_newTopic.xsp"}'
+		id="include1">
+	</xp:include>
+</xp:view>

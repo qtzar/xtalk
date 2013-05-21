@@ -1,0 +1,662 @@
+.lotusForum{
+	clear:both;
+	padding-top:1px;
+	}
+
+.forumOwnerOptions {
+	margin-top: 5px;
+	margin-right: 5px;
+}
+
+.forumTable {
+	clear: both;
+	width: 100%;
+	border-collapse: collapse;
+	line-height:1.2em;
+}
+
+th.forumHeader {
+	font-weight: bold;
+	padding: 4px;
+	border-width: 1px;
+	border-color: #000000;
+	border-style: solid;
+}
+
+th.forumHeaderExpand {
+	text-align: left;
+	width: 100%
+}
+
+.forumCenterText {
+	text-align: center;
+}
+
+td.forumCategory {
+	font-weight: bold;
+	background: #6794CB;
+	color: #FFFFFF;
+	padding: 6px;
+	border-width: 1px;
+	border-color: #000000;
+	border-style: solid;
+}
+
+a:link .forumCategoryLink,a:visited .forumCategoryLink,a:hover
+	.forumCategoryLink {
+	color: #000000;
+	text-decoration: none;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.forumDesc {
+	font-size: 11px;
+	color: #ffffff;
+	font-weight: normal;
+}
+
+.forumArea td,.forumTopicList td {
+	padding: 5px;
+	border-width: 1px;
+	border-color: #000000;
+	border-style: solid;
+}
+
+a:link .forumAreaLink,a:visited .forumAreaLink,a:hover .forumAreaLink {
+	color: #05386B;
+	text-decoration: none;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+a:link .forumAreaLinkUnread,a:visited .forumAreaLinkUnread,a:hover
+	.forumAreaLinkUnread {
+	color: #990000;
+	text-decoration: none;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.forumAreaTitle {
+	color: #000000;
+	text-decoration: none;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.forumAreaDesc {
+	font-size: 12px;
+	color: #000000;
+	font-weight: normal;
+}
+
+td.nowrap {
+	white-space: nowrap;
+}
+
+td.forumCol1,th.forumCol1,.forumCol1 {
+	background: #F5F5FF none repeat scroll 0 0;
+	color: #003366;
+}
+
+td.forumCol2,th.forumCol1,.forumCol2 {
+	background: #FFFFCC none repeat scroll 0 0;
+	color: #003366;
+}
+
+.topic {
+	background: #FFFFFF;
+	color: #000000;
+	margin-bottom: 5px;
+	clear: both;
+}
+
+.topicTable {
+	width: 100%;
+	border-collapse: collapse;
+	border-width: 1px;
+	border-color: #000000;
+	border-style: solid;
+}
+
+th.topicHeaderLeft {
+	font-weight: bold;
+	padding: 4px;
+	text-align: left;
+	width: 175px;
+	border-top: 1px;
+	border-left: 1px;
+	border-right: 0px;
+	border-bottom: 1px;
+	border-color: #000000;
+	border-style: solid;
+}
+
+th.topicHeaderRight {
+	font-weight: bold;
+	padding: 4px;
+	text-align: right;
+	border-top: 1px;
+	border-left: 0px;
+	border-right: 1px;
+	border-bottom: 1px;
+	border-color: #000000;
+	border-style: solid;
+}
+
+.topic td {
+	padding: 10px;
+}
+
+.topicTitle {
+	font-weight: bold;
+	color: #05386B;
+}
+
+a:link .topicTitle,a:visited .topicTitle,a:hover .topicTitle {
+	color: #05386B;
+	text-decoration: none;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+a:link .topicTitleUnread,a:visited .topicTitleUnread,a:hover
+	.topicTitleUnread {
+	color: #990000;
+	text-decoration: none;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+td.rightBorder {
+	border-right: 1px;
+	border-left: 0px;
+	border-top: 0px;
+	border-bottom: 0px;
+	border-color: #000000;
+	border-style: solid;
+}
+
+td.pushRight {
+	text-align: right;
+}
+
+.lastPostTitle {
+	width: 300px;
+	overflow: hidden;
+	color: #05386B;
+	text-decoration: none;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.lastPostAuthor {
+	color: #05386B;
+	text-decoration: none;
+	font-size: 12px;
+	font-weight: normal;
+}
+
+.lastPostDate {
+	color: #05386B;
+	text-decoration: none;
+	font-size: 12px;
+	font-weight: normal;
+}
+
+a:link .lastPostLink,a:visited .lastPostLink,a:hover .lastPostLink {
+	color: #05386B;
+	text-decoration: none;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+a:link .lastPostLinkUnread,a:visited .lastPostLinkUnread,a:hover
+	.lastPostLinkUnread {
+	color: #990000;
+	text-decoration: none;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.pagerOutline {
+	margin-left: 5px;
+	background: #F5F5FF;
+	padding: 2px;
+	border-width: 1px;
+	border-color: #000000;
+	border-style: solid;
+}
+
+a.pager {
+	margin-left: 2px;
+	margin-right: 2px;
+	color: #000000;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.quotebox {
+	padding: 4px;
+	border: 1px;
+	border-color: #000000;
+	border-style: solid;
+	background-color: #EBEBEB;
+}
+
+.midbox {
+	vertical-align: top;
+}
+
+.tborder {
+	background: #006699 none repeat scroll 0 0;
+	border: 1px solid #0B198C;
+	color: #003366;
+}
+
+.tcat a:link,.tcat_alink {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.tcat a:visited,.tcat_avisited {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.tcat a:hover,.tcat a:active,.tcat_ahover {
+	color: #FFFF66;
+	text-decoration: underline;
+}
+
+.thead {
+	-x-system-font: none;
+	background: #F5F5F5;
+	color: #003366;
+}
+
+.thead a:link,.thead_alink {
+	color: #003366;
+	text-decoration: none;
+}
+
+.thead a:visited,.thead_avisited {
+	color: #003366;
+	text-decoration: none;
+}
+
+.thead a:hover,.thead a:active,.thead_ahover {
+	color: #6699CC;
+}
+
+.tfoot {
+	background: #003366 none repeat scroll 0 0;
+	color: #E0E0F6;
+	font-size: 8pt;
+}
+
+.tfoot a:link,.tfoot_alink {
+	color: #E0E0F6;
+}
+
+.tfoot a:visited,.tfoot_avisited {
+	color: #E0E0F6;
+}
+
+.tfoot a:hover,.tfoot a:active,.tfoot_ahover {
+	color: #0099FF;
+}
+
+.alt1,.alt1Active {
+	background: #F5F5FF none repeat scroll 0 0;
+	color: #003366;
+}
+
+.alt2,.alt2Active {
+	background: #FFFFCC none repeat scroll 0 0;
+	color: #003366;
+}
+
+.inlinemod {
+	background: #FFFFCC none repeat scroll 0 0;
+	color: #000000;
+}
+
+.smallfont {
+	-x-system-font: none;
+	font-family: verdana, geneva, lucida, 'lucida grande', arial, helvetica,
+		sans-serif;
+	font-size: 11px;
+	font-size-adjust: none;
+	font-stretch: normal;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	line-height: normal;
+}
+
+.time {
+	color: #666686;
+}
+
+.navbar {
+	-x-system-font: none;
+	font-family: verdana, geneva, lucida, 'lucida grande', arial, helvetica,
+		sans-serif;
+	font-size: 11px;
+	font-size-adjust: none;
+	font-stretch: normal;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	line-height: normal;
+}
+
+.highlight {
+	color: #FF0000;
+	font-weight: bold;
+}
+
+.fjsel {
+	background: #3399CC none repeat scroll 0 0;
+	color: #E0E0F6;
+}
+
+.fjdpth0 {
+	background: #F7F7F7 none repeat scroll 0 0;
+	color: #000000;
+}
+
+.panel {
+	background: #E4E7F5 url("images/gradients/gradient_panel.gif") repeat-x
+		scroll left top;
+	border: 2px outset;
+	color: #003366;
+	padding: 10px;
+}
+
+.panelsurround {
+	background: #D1D4E0 url("images/gradients/gradient_panelsurround.gif")
+		repeat-x scroll left top;
+	color: #003366;
+}
+
+legend {
+	-x-system-font: none;
+	color: #003366;
+	font-family: tahoma, verdana, geneva, lucida, 'lucida grande', arial,
+		helvetica, sans-serif;
+	font-size: 11px;
+	font-size-adjust: none;
+	font-stretch: normal;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	line-height: normal;
+}
+
+.bigusername {
+	font-size: 14pt;
+}
+
+td.thead,th.thead,div.thead {
+	padding: 4px;
+}
+
+.pagenav a {
+	text-decoration: none;
+}
+
+.pagenav td {
+	padding: 2px 4px;
+}
+
+.shade,a.shade:link,a.shade:visited {
+	color: #777777;
+	text-decoration: none;
+}
+
+a.shade:active,a.shade:hover {
+	color: #FF4400;
+	text-decoration: underline;
+}
+
+.tcat .shade,.thead .shade,.tfoot .shade {
+	color: #DDDDDD;
+}
+
+.fieldset {
+	margin-bottom: 6px;
+}
+
+.fieldset,.fieldset td,.fieldset p,.fieldset li {
+	font-size: 11px;
+}
+
+.crumbs {
+	width: 100%;
+	margin: 0 auto;
+	padding: 0;
+	line-height: 3em;
+	background: #fdfdfd;
+	border: 1px solid #dedede;
+}
+
+.crumbs a {
+	text-decoration: none;
+	margin: 0 5px 0 0;
+	padding: 10px 15px 10px 6px;
+	background: #fdfdfd url(crumbs.gif) no-repeat right center;
+}
+
+.crumbs span.house {
+	margin: 0 5px 0 0;
+	padding: 10px 15px 10px 6px;
+	background: #fdfdfd url(crumbs.gif) no-repeat right center;
+}
+
+.crumbs img.house {
+	margin: 0 5px 0 0;
+	padding: 10px 15px 10px 6px;
+	background: #fdfdfd url(crumbs.gif) no-repeat right center;
+}
+
+.crumbs img {
+	margin: 0 0px 0 0;
+	padding: 10px 0px 10px 0px;
+}
+
+div.busyBox {
+	background-image: url(ajax-loader.gif);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: black;
+}
+
+/* xTalk Pager Styles */
+
+.xTalkPager {
+	clear: both;
+	font-family: "Bitstream Vera Sans", Verdana, Helvetica;
+	font-size: 10px;
+}
+
+.xTalkPagerItem,.xTalkPagerItems span span{
+	padding: 2px 5px;
+	margin: 0px 0.25em 0px 0.25em;
+	background: #dfedf7;
+	border: 1px solid #90c2e1;
+	-moz-border-radius: 2px;
+	color: #333333;
+	text-decoration: none;
+}
+
+.xTalkPagerItem a,.xTalkPagerItems span span a{
+	color: #333333;
+	text-decoration: none;
+	}
+	
+.xTalkPagerItems span span.xTalkPagerCurrent {
+	padding: 2px 5px;
+	margin: 0px 0.25em 0px 0.25em;
+	background: #7DB8DB;
+	border: 1px solid #90c2e1;
+	-moz-border-radius: 2px;
+	color: #333333;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.searchAuthor{
+	min-width: 175px;
+	overflow: hidden;
+	color: #05386B;
+	text-decoration: none;
+	font-size: 12px;
+}
+
+.searchDate{
+	min-width: 100px;
+	overflow: hidden;
+	color: #05386B;
+	text-decoration: none;
+	font-size: 12px;
+}
+
+.searchForum{
+	min-width: 300px;
+	overflow: hidden;
+	color: #05386B;
+	text-decoration: none;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.profileDatePosted{
+		min-width: 175px;
+}
+
+.xTalkNewTopic{
+	font:100% verdana,arial,sans-serif;
+	margin: 0 auto;
+	padding: 0;
+	width: 75%;
+	}
+
+.xTalkNewTopic fieldset{
+	clear: both;
+	border-color: #000;
+	border-width: 1px;
+	border-style: solid;
+	padding: 10px;
+ 	margin: 5px;
+	}
+
+.xTalkNewTopic legend{
+	font-size:1.5em;
+	}
+
+
+
+
+
+
+
+
+
+
+.xTalkForm, .xTalkForm2 {
+  font:100% verdana,arial,sans-serif;
+  margin: 0 auto;
+  padding: 0;
+  width: 750px;
+}
+
+
+.xTalkForm2 {
+  width: 880px;
+}
+
+.xTalkForm fieldset,.xTalkForm2 fieldset {
+  clear: both;
+  border-color: #000;
+  border-width: 1px;
+  border-style: solid;
+  padding: 10px;
+  margin: 5px;
+}
+
+.xTalkForm fieldset legend,.xTalkForm2 fieldset legend {
+	font-size:1.5em;
+}
+
+.xTalkForm label , .xTalkForm2 label{ 
+	display: block;  /* block float the labels to left column, set a width */
+	float: left; 
+	width: 150px; 
+	padding: 0; 
+	margin: 5px 0 0; /* set top margin same as form input - textarea etc. elements */
+	text-align: right; 
+}
+
+
+.xTalkForm input, .xTalkForm select, .xTalkForm2 input{
+	
+	width:500px;      /* set width of form elements to auto-size, otherwise watch for wrap on resize */
+	margin:5px 0 0 10px; /* set margin on left of form elements rather than right of
+                              label aligns textarea better in IE */
+}
+
+.xTalkForm2 span{
+	margin:0px 0 0 10px; /* set margin on left of form elements rather than right of
+                              label aligns textarea better in IE */
+}
+
+.xTalkForm2 textarea{
+	
+	width:650px;      /* set width of form elements to auto-size, otherwise watch for wrap on resize */
+	height:300px;
+	margin:5px 0 0 10px; /* set margin on left of form elements rather than right of
+                              label aligns textarea better in IE */
+}
+
+.xTalkForm input#reset {
+	margin-left:0px; /* set margin-left back to zero on reset button (set above) */
+}
+
+textarea { overflow: auto; }
+
+.xTalkForm small, .xTalkForm2 small {
+	display: block;
+	margin: 0 0 5px 160px; /* instructions/comments left margin set to align w/ right column inputs */
+	padding: 1px 3px;
+	font-size: 88%;
+}
+
+.xTalkForm .required{font-weight:bold;} /* uses class instead of div, more efficient */
+
+.xTalkForm br {
+	clear:left; /* setting clear on inputs didn't work consistently, so brs added for degrade */
+}
+
+.xTalkForm2 .required{
+	font-weight:bold;
+	display: block;  /* block float the labels to left column, set a width */
+	float: left; 
+	width: 150px; 
+	padding: 0; 
+	margin: 5px 0 0; /* set top margin same as form input - textarea etc. elements */
+	text-align: right; 
+}
+
+.xTalkForm2 .extraHeight{
+height:40px;
+}
+
+span.lotusBtn select{
+background-color:#FFFFFF;
+background-image:url(./images/btnBkgd.png);
+border-color:#FEFEFE;
+color:#0084FF;
+}

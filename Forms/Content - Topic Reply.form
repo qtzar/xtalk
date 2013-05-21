@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='utf-8'?>
+<note class='form' xmlns='http://www.lotus.com/dxl' version='9.0' replicaid='852575D1004E0DF0'>
+<noteinfo noteid='672' unid='37FC5366CDEDDA8B852575D1006FB9AF' sequence='12'>
+<created><datetime dst='true'>20090610T162020,31-04</datetime></created>
+<modified><datetime dst='true'>20101011T000829,95-04</datetime></modified>
+<revised><datetime dst='true'>20101011T000829,94-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20101011T000829,94-04</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20090610T162024,06-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Declan Sciolla-Lynch/O=Imagination</name></updatedby>
+<wassignedby><name>CN=Declan Sciolla-Lynch/O=Imagination</name></wassignedby>
+<item name='$HTMLCode' sign='true'>
+<rawitemdata type='1'>
+X/8QAAIADwAHAAAAAAAAAA==
+</rawitemdata></item>
+<item name='$TITLE'><textlist><text>Content - Topic Reply</text><text>content_TopicReply</text></textlist></item>
+<item name='$Comment' sign='true'><text>xTalk V1.0</text></item>
+<item name='$Info' sign='true'>
+<rawitemdata type='1'>
+hhgBAIgAAAAAgAAAAQABAP///wAQAAAA
+</rawitemdata></item>
+<item name='$Flags'><text/></item>
+<item name='$DesignerVersion'><text>8.5.2</text></item>
+<item name='$$ScriptName' summary='false' sign='true'><text>content_TopicReply</text></item>
+<item name='topic_ForumUNID' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='topic_Author' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='topic_Title' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='topic_Body' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='topic_DateTime' summary='false'>
+<rawitemdata type='400'>
+AAAAAAAAAAA=
+</rawitemdata></item>
+<item name='topic_Replies' summary='false'><number>0</number></item>
+<item name='topic_Views' summary='false'><number>0</number></item>
+<item name='topic_LastTitle' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='topic_LastAuthor' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='topic_LastDate' summary='false'>
+<rawitemdata type='400'>
+AAAAAAAAAAA=
+</rawitemdata></item>
+<item name='topic_IsSticky' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='topic_IsLocked' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='topic_IsHot' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='$Fields'><textlist><text>topic_IsHot</text><text>topic_IsLocked</text><text
+>topic_IsSticky</text><text>topic_LastDate</text><text>topic_LastAuthor</text><text
+>topic_LastTitle</text><text>topic_Views</text><text>topic_Replies</text><text
+>topic_DateTime</text><text>topic_Body</text><text>topic_Title</text><text
+>topic_Author</text><text>topic_ForumUNID</text></textlist></item>
+<item name='$Body' sign='true'>
+<rawitemdata type='1'>
+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
+</rawitemdata></item></note>
+

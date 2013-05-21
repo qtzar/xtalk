@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="852575D1004E0DF0" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="152" sequence="192" unid="82BD0E74BD59F4358525756E0051CDEF">
+<created><datetime>20090303T095331,35-05</datetime></created>
+<modified><datetime dst="true">20101009T145541,06-04</datetime></modified>
+<revised><datetime dst="true">20101009T145541,05-04</datetime></revised>
+<lastaccessed><datetime dst="true">20101009T145541,05-04</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20090610T101235,01-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Declan Sciolla-Lynch/O=qtzar.com</name><name>CN=grumpy/O=qtzar.com</name><name>CN=Declan Sciolla-Lynch/O=qtzar.com</name><name>CN=Figment/O=Imagination</name><name>CN=Declan Sciolla-Lynch/O=Imagination</name></updatedby>
+<wassignedby><name>CN=Declan Sciolla-Lynch/O=Imagination</name></wassignedby>
+<item name="$TITLE"><text>custom.css</text></item>
+<item name="$MimeType" sign="true"><text>text/css</text></item>
+<item name="$Flags"><text>34C=Q</text></item>
+<item name="$Comment" sign="true"><text>xTalk V1.0</text></item>
+<item name="$DesignerVersion" sign="true"><text>8.5</text></item>
+
+
+<item name="$FileNames" sign="true"><text>custom.css</text></item></note>

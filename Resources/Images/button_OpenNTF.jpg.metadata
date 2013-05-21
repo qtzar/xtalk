@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="852575D1004E0DF0" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="176" sequence="13" unid="9C8A52A799761DDB85257578006F4303">
+<created><datetime dst="true">20090313T161516,51-04</datetime></created>
+<modified><datetime dst="true">20101009T145536,06-04</datetime></modified>
+<revised><datetime dst="true">20101009T145536,05-04</datetime></revised>
+<lastaccessed><datetime dst="true">20101009T145536,05-04</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20090610T101235,80-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Declan Sciolla-Lynch/O=qtzar.com</name><name>CN=grumpy/O=qtzar.com</name><name>CN=Figment/O=Imagination</name><name>CN=Declan Sciolla-Lynch/O=Imagination</name></updatedby>
+<wassignedby><name>CN=Declan Sciolla-Lynch/O=Imagination</name></wassignedby>
+<item name="$TITLE"><text>button_OpenNTF.jpg</text></item>
+<item name="$FlagsExt" sign="true"><text>D</text></item>
+<item name="$ImagesWide" sign="true"><number>1</number></item>
+<item name="$ImagesHigh" sign="true"><number>1</number></item>
+<item name="$ImagesColorize" sign="true"><number>0</number></item>
+
+
+<item name="$MimeType" sign="true"><text>image/jpeg</text></item>
+<item name="$FileModDT" sign="true"><datetime>20090224T115119,00-05</datetime></item>
+<item name="$ImageNames" sign="true"><text>button_OpenNTF.jpg</text></item>
+<item name="$Flags"><text>34CiQ</text></item>
+<item name="$Comment" sign="true"><text>(c) 2009 OpenNTF - Licensed Under APL V2</text></item>
+<item name="$DesignerVersion" sign="true"><text>8.5</text></item></note>
